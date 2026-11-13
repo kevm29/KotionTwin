@@ -11,6 +11,6 @@ avec Haxe 3.4.7, sans l'outil `lime`/`openfl` :
   et `gen_assets.py`, qui intègre au SWF les images, XML, JSON et polices d'un dossier d'assets.
 - `mt-stubs/` : classes de la bibliothèque Motion Twin absentes de l'archive, reconstituées ou neutralisées
   (`mt.net.Codec`, `mt.device.*`, `mt.Worker`, `mt.Assets`, `mt.Console`…).
-- La compatibilité avec l'API 2014-2015 de `libs-haxe3` est générée par `src/uppercup-football/mkcompat.py`.
+- La compatibilité avec l'API 2014-2015 de `libs-haxe3` est générée par `src/mt-haxe3-compat/mkcompat.py`.
 
 Ruffle doit utiliser le moteur `wgpu-webgl` (Stage3D).

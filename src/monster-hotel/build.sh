@@ -13,7 +13,7 @@ mkdir -p "$B"; rm -rf "$B/game" "$B/compat" "$B/gen"
 LIBS="$B/libs" sh "$T/fetch-libs.sh"
 cp -r "$WGA/MonsterHotel" "$B/game"
 (cd "$B/game" && patch -p1 < "$HERE/kotiontwin.patch")
-python3 "$ROOT/src/uppercup-football/mkcompat.py" "$WGA/libs-haxe3" "$B/compat"
+python3 "$ROOT/src/mt-haxe3-compat/mkcompat.py" "$WGA/libs-haxe3" "$B/compat"
 mkdir -p "$B/gen" "$B/bin"; echo 1 > "$B/bin/.build"
 cp "$HERE/KtMain.hx" "$B/gen/"
 python3 "$T/openfl-flash/gen_assets.py" "$B/gen/KtAssets.hx" assets="$B/game/client/assets" \
