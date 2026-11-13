@@ -40,8 +40,8 @@
    "source": "KadoKado/Games/abcrevolution",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -49,9 +49,27 @@
     "images": 6,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-abcrevolution/",
+    "flashvars": {
+     "swf": "kkrev.swf",
+     "gid": "kk-abcrevolution",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-abcrevolution/thumb.png",
+   "description": "Des lettres tombent sur les étagères du nounours : tapez au clavier les mots qui se forment avant qu'ils ne s'empilent. Une faute coûte des points.",
+   "controls": "Clavier : tapez les lettres des mots (M aussi sur , et ;).",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-alchimie",
@@ -61,8 +79,8 @@
    "source": "KadoKado/Games/alchimie",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -70,9 +88,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-alchimie/",
+    "flashvars": {
+     "swf": "koins.swf",
+     "gid": "kk-alchimie",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-alchimie/thumb.png",
+   "description": "Des fioles de potion tombent par deux : regroupez les potions identiques pour les fusionner en élixirs de plus grande valeur (1, 3, 10, 30, 100…).",
+   "controls": "Flèches gauche/droite pour déplacer, Haut pour tourner, Bas pour accélérer, Espace pour lâcher.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-alchimie2",
@@ -166,8 +202,8 @@
    "source": "KadoKado/Games/bactery",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -175,9 +211,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-bactery/",
+    "flashvars": {
+     "swf": "monsters.swf",
+     "gid": "kk-bactery",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-bactery/thumb.png",
+   "description": "Grille de bactéries colorées : cliquez sur les groupes de cellules de même couleur pour les faire disparaître et enchaîner les combos.",
+   "controls": "Souris : clic sur un groupe.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-binary",
@@ -208,8 +262,8 @@
    "source": "KadoKado/Games/cerealpunk",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -217,9 +271,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-cerealpunk/",
+    "flashvars": {
+     "swf": "cuistot.swf",
+     "gid": "kk-cerealpunk",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-cerealpunk/thumb.jpg",
-   "description": ""
+   "description": "Le petit cuisinier doit ranger les légumes qui tombent dans sa cuisine : alignez-les avant que la grille ne déborde.",
+   "controls": "Flèches pour déplacer et faire tourner les légumes.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-chakras",
@@ -355,8 +427,8 @@
    "source": "KadoKado/Games/Cyclopean",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire. Le niveau est généré au démarrage, ce qui peut prendre quelques secondes.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -364,9 +436,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-cyclopean/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-cyclopean",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-cyclopean/thumb.gif",
-   "description": ""
+   "description": "Un œil rose roule dans un marécage magique : poussez-le pour ramasser les orbes et éviter les pièges du niveau généré au hasard.",
+   "controls": "Flèches pour diriger, Espace pour l'action ; la souris sert aussi à viser.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-digestomax",
@@ -419,7 +509,7 @@
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "notes": "Seul gfx.swf est présent dans l'archive : ni code compilé ni sources, le jeu n'est pas récupérable en l'état.",
    "stats": {
     "swf": 1,
     "hx": 0,
@@ -439,8 +529,8 @@
    "source": "KadoKado/Games/drakhan",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 5,
     "hx": 0,
@@ -448,9 +538,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-drakhan/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-drakhan",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-drakhan/thumb.png",
+   "description": "Billes colorées en cercle sur l'assiette du dragon : lancez la bille suivante pour former des groupes de trois de la même couleur.",
+   "controls": "Souris pour viser, clic ou Espace pour tirer ; Gauche/Droite pour tourner le lanceur.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-electrolink",
@@ -481,8 +589,8 @@
    "source": "KadoKado/Games/ellon",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 4,
     "hx": 0,
@@ -490,9 +598,27 @@
     "images": 9,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-ellon/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-ellon",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-ellon/thumb.png",
+   "description": "Shoot'em up horizontal : le héros vole au-dessus de la ville et affronte des vagues de bestioles, dragons et boss.",
+   "controls": "Flèches pour se déplacer, Espace ou Ctrl pour tirer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-f1champion",
@@ -502,8 +628,8 @@
    "source": "KadoKado/Games/f1champion",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -511,9 +637,27 @@
     "images": 12,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-f1champion/",
+    "flashvars": {
+     "swf": "korridor.swf",
+     "gid": "kk-f1champion",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-f1champion/thumb.png",
+   "description": "Course de voiture vue de dessus sur un circuit sans fin : évitez les autres véhicules et gardez l'accélérateur enfoncé pour marquer le plus de points.",
+   "controls": "Haut pour accélérer, Gauche/Droite pour tourner.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-flushee",
@@ -523,8 +667,8 @@
    "source": "KadoKado/Games/flushee",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -532,9 +676,27 @@
     "images": 25,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-flushee/",
+    "flashvars": {
+     "swf": "labygems.swf",
+     "gid": "kk-flushee",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-flushee/thumb.png",
+   "description": "Grille de gemmes : cliquez pour faire disparaître les groupes de même couleur, les gemmes au-dessus tombent et remplissent les trous.",
+   "controls": "Souris : clic sur un groupe.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-fragocytoz",
@@ -607,8 +769,8 @@
    "source": "KadoKado/Games/hypercube",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -616,9 +778,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-hypercube/",
+    "flashvars": {
+     "swf": "kubik.swf",
+     "gid": "kk-hypercube",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-hypercube/thumb.png",
+   "description": "Des pièces tombent dans un puits vu de dessus : faites-les tourner et placez-les pour compléter des couches entières.",
+   "controls": "Souris pour déplacer et tourner les pièces, Espace ou Ctrl pour les faire descendre.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-interwheel",
@@ -628,8 +808,8 @@
    "source": "KadoKado/Games/Interwheel",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -637,9 +817,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-interwheel/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-interwheel",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-interwheel/thumb.jpg",
-   "description": ""
+   "description": "Le héros roule sur des roues dans le désert : passez de roue en roue au bon moment pour aller le plus loin possible.",
+   "controls": "Espace, Entrée ou clic pour sauter d'une roue à l'autre.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-invasion",
@@ -649,8 +847,8 @@
    "source": "KadoKado/Games/invasion",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -658,9 +856,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-invasion/",
+    "flashvars": {
+     "swf": "invasion.swf",
+     "gid": "kk-invasion",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-invasion/thumb.png",
+   "description": "Duel tactique sur une grille : posez vos guerriers tour à tour avec les monstres, puis attaquez les rangées ennemies quand vos alignements sont plus forts.",
+   "controls": "Souris : clic sur une case pour poser un guerrier ou attaquer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-iron-chouquette",
@@ -670,8 +886,8 @@
    "source": "KadoKado/Games/Iron Chouquette",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 6,
     "hx": 0,
@@ -679,9 +895,27 @@
     "images": 14,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-iron-chouquette/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-iron-chouquette",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-iron-chouquette/thumb.jpg",
-   "description": ""
+   "description": "Shoot'em up spatial : la chouquette de fer abat des vagues d'ennemis et ramasse des bonus d'armes.",
+   "controls": "Flèches pour se déplacer, Espace ou Ctrl pour tirer, Maj pour l'arme spéciale.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-judo-commando",
@@ -712,8 +946,8 @@
    "source": "KadoKado/Games/Julianus",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -721,9 +955,27 @@
     "images": 4,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-julianus/",
+    "flashvars": {
+     "swf": "bulloz.swf",
+     "gid": "kk-julianus",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-julianus/thumb.png",
+   "description": "Julianus fait éclater les bulles qui flottent dans le ciel en lançant son harpon depuis le sol.",
+   "controls": "Flèches ou souris pour se déplacer, Espace ou clic pour tirer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kanji",
@@ -733,8 +985,8 @@
    "source": "KadoKado/Games/kanji",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -742,9 +994,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-kanji/",
+    "flashvars": {
+     "swf": "ppjump.swf",
+     "gid": "kk-kanji",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-kanji/thumb.png",
+   "description": "Le petit ninja grimpe de plateforme en plateforme dans la forêt de bambous en ramassant les bonus.",
+   "controls": "Flèches pour se déplacer, Haut ou Espace pour sauter.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kanji-gaiden",
@@ -796,8 +1066,8 @@
    "source": "KadoKado/Games/KanjiNightmare",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 4,
     "hx": 0,
@@ -805,9 +1075,27 @@
     "images": 20,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-kanjinightmare/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-kanjinightmare",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-kanjinightmare/thumb.png",
+   "description": "Suite de Kanji : le ninja affronte les monstres de son cauchemar en sautant de plateforme en plateforme et en s'accrochant avec son grappin.",
+   "controls": "Flèches pour se déplacer, Espace pour sauter, Ctrl ou clic pour le grappin.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kaskade",
@@ -817,8 +1105,8 @@
    "source": "KadoKado/Games/kaskade",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire. SWF final absent de l'archive : reconstruit depuis code.swf et gfx.swf (src/kk-kaskade).",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -826,9 +1114,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-kaskade/",
+    "flashvars": {
+     "swf": "kaskade.swf",
+     "gid": "kk-kaskade",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-kaskade/thumb.png",
+   "description": "Losange de billes colorées : cliquez sur les groupes pour les faire tomber en cascade, la gravité change de côté.",
+   "controls": "Souris : clic sur un groupe.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kaskade2",
@@ -838,8 +1144,8 @@
    "source": "KadoKado/Games/kaskade2",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -847,9 +1153,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-kaskade2/",
+    "flashvars": {
+     "swf": "kaskade2.swf",
+     "gid": "kk-kaskade2",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-kaskade2/thumb.png",
+   "description": "Suite de Kaskade avec de nouveaux niveaux et billes spéciales.",
+   "controls": "Souris : clic sur un groupe.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kavern",
@@ -859,8 +1183,8 @@
    "source": "KadoKado/Games/kavern",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -868,9 +1192,27 @@
     "images": 4,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-kavern/",
+    "flashvars": {
+     "swf": "ppdigger.swf",
+     "gid": "kk-kavern",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-kavern/thumb.png",
+   "description": "Le piou piou creuse vers le bas dans une caverne de blocs : choisissez votre chemin et évitez d'être écrasé.",
+   "controls": "Flèches gauche/droite pour se déplacer, Bas pour creuser.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-killbulle",
@@ -880,8 +1222,8 @@
    "source": "KadoKado/Games/killbulle",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -889,9 +1231,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-killbulle/",
+    "flashvars": {
+     "swf": "kpang.swf",
+     "gid": "kk-killbulle",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-killbulle/thumb.png",
+   "description": "Des bulles rebondissent dans le décor : tirez votre grappin pour les découper en bulles plus petites jusqu'à les faire disparaître.",
+   "controls": "Flèches gauche/droite pour se déplacer, Espace pour tirer le grappin.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-kinker-surprise",
@@ -921,9 +1281,9 @@
    "year": null,
    "source": "KadoKado/Games/kslash",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
-   "plan": "ruffle-shim",
+   "plan": "portage",
    "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "notes": "Seuls les graphismes (gfx.swf, decor.swf) et les sources MotionTypes (.mt) subsistent ; le compilateur MotionTypes n'existe plus. Récupérable seulement par réécriture (portage des .mt).",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -985,8 +1345,8 @@
    "source": "KadoKado/Games/magmax",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -994,9 +1354,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-magmax/",
+    "flashvars": {
+     "swf": "gaunt.swf",
+     "gid": "kk-magmax",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-magmax/thumb.png",
+   "description": "Le héros traverse une grotte de lave en abattant les monstres qui surgissent de toutes parts.",
+   "controls": "Flèches pour se déplacer, Espace ou Ctrl pour tirer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-manda",
@@ -1006,8 +1384,8 @@
    "source": "KadoKado/Games/manda",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -1015,9 +1393,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-manda/",
+    "flashvars": {
+     "swf": "snake.swf",
+     "gid": "kk-manda",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-manda/thumb.png",
+   "description": "Serpent qui grandit en mangeant des fruits dans un jardin : ne vous mordez pas la queue.",
+   "controls": "Gauche/Droite pour tourner, Haut pour accélérer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-memopsy",
@@ -1027,8 +1423,8 @@
    "source": "KadoKado/Games/memopsy",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1036,9 +1432,27 @@
     "images": 13,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-memopsy/",
+    "flashvars": {
+     "swf": "memo.swf",
+     "gid": "kk-memopsy",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-memopsy/thumb.png",
+   "description": "Jeu de mémoire : retournez les cartes deux par deux pour retrouver les paires le plus vite possible.",
+   "controls": "Souris : clic sur une carte.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-mini-race",
@@ -1090,8 +1504,8 @@
    "source": "KadoKado/Games/Opalus",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1099,9 +1513,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-opalus/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-opalus",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-opalus/thumb.png",
+   "description": "Un anneau de billes tourne au centre : tirez la bille du milieu pour former des groupes de même couleur.",
+   "controls": "Souris : clic pour tirer ; Espace aussi.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-opalus2",
@@ -1111,8 +1543,8 @@
    "source": "KadoKado/Games/Opalus2",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1120,9 +1552,27 @@
     "images": 5,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-opalus2/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-opalus2",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-opalus2/thumb.png",
+   "description": "Suite d'Opalus avec de nouveaux décors et des billes spéciales.",
+   "controls": "Souris : clic pour tirer ; Espace aussi.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-opalusfactory",
@@ -1153,8 +1603,8 @@
    "source": "KadoKado/Games/Oursouinvader",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 5,
     "hx": 0,
@@ -1162,9 +1612,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-oursouinvader/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-oursouinvader",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-oursouinvader/thumb.png",
+   "description": "Version KadoKado des envahisseurs de l'espace : abattez les vagues de pieuvres qui descendent.",
+   "controls": "Flèches gauche/droite pour se déplacer, Espace pour tirer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-pacifik",
@@ -1195,8 +1663,8 @@
    "source": "KadoKado/Games/paradice",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 4,
     "hx": 0,
@@ -1204,9 +1672,27 @@
     "images": 4,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-paradice/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-paradice",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-paradice/thumb.png",
+   "description": "Casse-briques tropical : renvoyez la balle pour briser les gemmes et récupérer les pouvoirs spéciaux.",
+   "controls": "Flèches gauche/droite pour déplacer la raquette, Espace ou Haut pour lancer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-pioupiou",
@@ -1216,8 +1702,8 @@
    "source": "KadoKado/Games/pioupiou",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -1225,9 +1711,27 @@
     "images": 1,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-pioupiou/",
+    "flashvars": {
+     "swf": "blocks.swf",
+     "gid": "kk-pioupiou",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-pioupiou/thumb.png",
+   "description": "Le piou piou saute de bloc en bloc dans une tour qui se remplit : ne vous laissez pas enfermer.",
+   "controls": "Flèches gauche/droite pour se déplacer et pousser les blocs.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-pioutch",
@@ -1237,8 +1741,8 @@
    "source": "KadoKado/Games/Pioutch",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Le symbole « shock » (effet visuel de la furie) manque déjà dans le gfx d'origine : l'effet ne s'affiche pas.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1246,9 +1750,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-pioutch/",
+    "flashvars": {
+     "swf": "pioucanon.swf",
+     "gid": "kk-pioutch",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-pioutch/thumb.png",
+   "description": "Canon à pious : propulsez le piou le plus loin possible en profitant des bonus.",
+   "controls": "Gauche/Droite pour viser, Espace pour tirer puis pour la furie.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-popcorn",
@@ -1258,8 +1780,8 @@
    "source": "KadoKado/Games/popcorn",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1267,9 +1789,27 @@
     "images": 3,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-popcorn/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-popcorn",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-popcorn/thumb.jpg",
-   "description": ""
+   "description": "Le piou grimpe dans une marmite de pop-corn en sautant sur les grains qui éclatent, en évitant le gros pop-corn.",
+   "controls": "Flèches gauche/droite pour se déplacer, Espace pour sauter.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-punchin",
@@ -1321,8 +1861,8 @@
    "source": "KadoKado/Games/quadrikolor",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -1330,9 +1870,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-quadrikolor/",
+    "flashvars": {
+     "swf": "taupebille.swf",
+     "gid": "kk-quadrikolor",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-quadrikolor/thumb.png",
+   "description": "Billard magnétique : lancez la bille pour toucher les taupes de la bonne couleur.",
+   "controls": "Souris pour viser et tirer, Espace pour changer de couleur.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-razor",
@@ -1363,8 +1921,8 @@
    "source": "KadoKado/Games/Red Raid",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 5,
     "hx": 0,
@@ -1372,9 +1930,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-red-raid/",
+    "flashvars": {
+     "swf": "temple.swf",
+     "gid": "kk-red-raid",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": "games/kk-red-raid/thumb.gif",
-   "description": ""
+   "description": "Défense de base : posez vos unités (marines, tanks, médecins…) et repoussez l'invasion extraterrestre.",
+   "controls": "Souris : clic pour choisir et placer les unités.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-safari",
@@ -1384,8 +1960,8 @@
    "source": "KadoKado/Games/safari",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1393,9 +1969,27 @@
     "images": 30,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-safari/",
+    "flashvars": {
+     "swf": "jungle.swf",
+     "gid": "kk-safari",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-safari/thumb.png",
+   "description": "Safari photo dans la jungle : faites défiler le décor et repérez les animaux qui se cachent.",
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-schizofuzz",
@@ -1467,9 +2061,9 @@
    "year": null,
    "source": "KadoKado/Games/starfang",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
-   "plan": "recompilation",
+   "plan": "portage",
    "status": "a-restaurer",
-   "notes": "Aucun SWF compilé : recompiler les sources.",
+   "notes": "Aucun SWF dans l'archive, seulement les sources MotionTypes (.mt) et des images PNG ; récupérable seulement par réécriture.",
    "stats": {
     "swf": 0,
     "hx": 0,
@@ -1594,8 +2188,8 @@
    "source": "KadoKado/Games/toymaniak",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -1603,9 +2197,27 @@
     "images": 4,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-toymaniak/",
+    "flashvars": {
+     "swf": "toymania.swf",
+     "gid": "kk-toymaniak",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-toymaniak/thumb.png",
+   "description": "Des jouets roulent sur des rails : aiguillez-les vers la bonne caisse.",
+   "controls": "Souris : clic sur les aiguillages.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "kk-train",
@@ -1698,9 +2310,9 @@
    "year": null,
    "source": "KadoKado/Games/xianxiang",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
-   "plan": "ruffle-shim",
+   "plan": "portage",
    "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "notes": "Seul gfx.swf et les sources MotionTypes (.mt) subsistent ; récupérable seulement par réécriture.",
    "stats": {
     "swf": 1,
     "hx": 0,
@@ -1720,8 +2332,8 @@
    "source": "KadoKado/Games/zipzap",
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF compilés (code/temple/gfx) : fournir l'API KadoKado historique via un loader de remplacement.",
+   "status": "jouable",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 2,
     "hx": 0,
@@ -1729,9 +2341,27 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/kadokado/loader.swf",
+    "width": 300,
+    "height": 320,
+    "scale": 2,
+    "base": "games/kk-zipzap/",
+    "flashvars": {
+     "swf": "zipzap.swf",
+     "gid": "kk-zipzap",
+     "mt": "1"
+    },
+    "bgcolor": "#ffffff",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/kk-zipzap/thumb.png",
+   "description": "Le héros attrape les ballons qui s'envolent en se déplaçant dans tout l'écran.",
+   "controls": "Flèches pour se déplacer, Espace ou clic pour attraper.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-animoz",
