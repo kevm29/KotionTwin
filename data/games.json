@@ -4450,8 +4450,8 @@
    "source": "Naturalchimie2",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf (code) absent : recompiler fla/game/src avec gfx.swf/sound.swf.",
+   "status": "jouable",
+   "notes": "Code du jeu recompilé depuis les sources (Haxe 2.07, Flash 8) et assemblé avec les graphismes et les 17 bruitages d'origine. Un faux serveur intégré lance une « partie libre » (12 premiers éléments, dynamite et Alchimoth) : pas de carte, de quêtes, de PNJ ni de sauvegarde du personnage. Les graphismes des éléments viennent de la version KadoKado (Alchimie 2), car le fichier objectMc.swf du site n'est pas dans l'archive. Le décor de fond et la musique manquent aussi (fond remplacé par un dégradé, pas de musique). Score du site = score de la partie, envoyé à la fin.",
    "stats": {
     "swf": 37,
     "hx": 138,
@@ -4459,9 +4459,31 @@
     "images": 73,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/naturalchimie-2/game.swf",
+    "base": "games/naturalchimie-2/",
+    "flashvars": {
+     "n": "1",
+     "sid": "kotion",
+     "k": "kotion",
+     "u": ".",
+     "ud": ".",
+     "ui": "2",
+     "d": "kotion"
+    },
+    "width": 300,
+    "height": 356,
+    "scale": 2,
+    "bgcolor": "#1c2733",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/naturalchimie-2/thumb.jpg",
+   "description": "Le jeu d'alchimie de Motion Twin : faites tomber les éléments par paires dans l'alambic, alignez-en trois identiques pour les transmuter en un élément plus rare, et utilisez les artefacts avant que tout ne déborde.",
+   "controls": "Flèches gauche/droite pour déplacer, flèche haut pour tourner, flèche bas pour poser, P pour la pause. Cliquez d'abord dans le jeu.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "pioupiouz",

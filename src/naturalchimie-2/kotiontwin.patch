@@ -1,0 +1,55 @@
+diff --git a/fla/game/src/Game.hx b/fla/game/src/Game.hx
+index 85b7c35..4ba7e1b 100644
+--- a/fla/game/src/Game.hx
++++ b/fla/game/src/Game.hx
+@@ -139,8 +139,6 @@ class Game {
+ 		pRight = false ;
+ 
+ 
+-		var g = new Array() ;
+-		g.
+ 		
+ 		rdm = new mt.DepthManager(root) ;
+ 		this.mc = rdm.empty(3) ;
+diff --git a/fla/game/src/Loader.hx b/fla/game/src/Loader.hx
+index 2472af4..37df5af 100644
+--- a/fla/game/src/Loader.hx
++++ b/fla/game/src/Loader.hx
+@@ -420,6 +420,7 @@ class Loader implements Load {
+ 	
+ 	
+ 	function checkDomain(dom : String) {
++		return true ; // KotionTwin : pas de vérification de domaine
+ 		var c = new mt.net.Codec(DOMAIN_K) ;
+ 		for(d in DOMAINS) {
+ 			var d = StringTools.urlDecode(d) ;
+diff --git a/fla/game/src/StageObject.hx b/fla/game/src/StageObject.hx
+index eb5fb13..3587935 100644
+--- a/fla/game/src/StageObject.hx
++++ b/fla/game/src/StageObject.hx
+@@ -168,11 +168,7 @@ class StageObject {
+ 				return new artefact.Pumpkin(id, dm, d, noOmc, withBmp, sc) ;
+ 			case _NowelBall : 
+ 				return new artefact.NowelBall(dm, d, noOmc, null, withBmp, sc) ;
+-			case _Slide(level) : 
+-				return new artefact.Slide(level, dm, d, noOmc, withBmp, sc) ; 
+-			case _Skater : 
+-				return new artefact.Skater(dm, d, noOmc, withBmp, sc) ;
+-			case _Pa, _Stamp, _Joker, _GodFather, _Unknown, _Gift : 
++			case _Pa, _Stamp, _Joker, _GodFather, _Unknown, _Gift, _Slide(_), _Skater : 
+ 				//trace("invalid stageObject : " + a) ;
+ 				return null ;
+ 			case _Surprise(level)  : 
+@@ -259,11 +255,7 @@ class StageObject {
+ 				c = new artefact.Pumpkin(id, dm, depth, null, omc.getBmp(), omc.initScale) ;
+ 			case _NowelBall : 
+ 				c = new artefact.NowelBall(dm, depth, null, (cast this).rid, omc.getBmp(), omc.initScale) ;
+-			case _Slide(l) : 
+-				c = new artefact.Slide(l, dm, depth, null, omc.getBmp(), omc.initScale) ; 
+-			case _Skater : 
+-				c =  new artefact.Skater(dm, depth, null, omc.getBmp(), omc.initScale) ;
+-			case _Pa, _Stamp, _Joker, _Unknown, _Gift : 
++			case _Pa, _Stamp, _Joker, _Unknown, _Gift, _Slide(_), _Skater : 
+ 				trace("invalid stageObject : " + id) ;
+ 				return null ;
+ 			case _Surprise(level) : 
