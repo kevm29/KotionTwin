@@ -4396,7 +4396,7 @@
    "tech": "Haxe 3 + OpenFL/h3d",
    "plan": "recompilation",
    "status": "jouable",
-   "notes": "Client recompilé depuis les sources (Haxe 3.4.7, moteur h3d de Motion Twin en Stage3D, cible Flash) et joué en mode hors ligne : la logique du serveur (Solver) tourne dans le navigateur et l'hôtel est sauvegardé localement. Les 76 bruitages sont intégrés, les 5 musiques chargées à la demande. Les polices d'origine manquent dans l'archive (remplacées par DejaVu Sans Bold) ; amis, boîte de réception, Facebook et achats sont inactifs. Score du site = niveau de l'hôtel, envoyé à chaque niveau gagné.",
+   "notes": "Client recompilé depuis les sources (Haxe 3.4.7, moteur h3d de Motion Twin en Stage3D, cible Flash) et joué en mode hors ligne : la logique du serveur (Solver) tourne dans le navigateur et l'hôtel est sauvegardé localement. Les 76 bruitages sont intégrés, les 5 musiques chargées à la demande. Les polices d'origine manquent dans l'archive (remplacées par DejaVu Sans Bold) ; amis, boîte de réception, Facebook et achats sont inactifs. Score du site = niveau de l'hôtel, envoyé à chaque niveau gagné. Il est lancé avec une version de Ruffle corrigée par KotionTwin (cache des shaders Stage3D, voir src/ruffle-stage3d), sans laquelle le jeu ramait fortement.",
    "stats": {
     "swf": 0,
     "hx": 114,
@@ -4414,7 +4414,8 @@
     "bgcolor": "#1a0d1f",
     "config": {
      "preferredRenderer": "wgpu-webgl"
-    }
+    },
+    "ruffle": "assets/ruffle-stage3d/ruffle.js"
    },
    "thumb": null,
    "description": "Gestion d'un hôtel pour monstres : construisez des chambres, placez chaque client selon ses goûts et ses voisins (bruit, odeurs, froid…), faites grandir l'hôtel et satisfaites les patrons exigeants.",
