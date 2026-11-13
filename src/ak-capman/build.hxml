@@ -1,0 +1,12 @@
+# Capman (Arkadeo) - port Haxe 3 de KotionTwin. Depuis ce dossier : haxe build.hxml (Haxe 3.4.7)
+-cp src
+-cp stub
+-cp lib
+-D bumdum
+-swf ../../games/ak-capman/game.swf
+-swf-header 600:480:40:FFFFFF
+-swf-version 11.8
+-swf-lib res/gameResources.swf
+-swf-lib res/gfx.swf
+-swf-lib res/bumdum.swf
+Game

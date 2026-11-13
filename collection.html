@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Collection · KotionTwin</title>
+<meta name="description" content="Une collection de jeux web Motion Twin restaurés sur KotionTwin.">
+<meta name="theme-color" content="#14112a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>try{var t=JSON.parse(localStorage.getItem('kotiontwin:v1')||'{}').theme;if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body class="collection-page">
+<a class="skip" href="#catalogue">Aller aux jeux</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="./" aria-label="KotionTwin, accueil"><span class="logo" aria-hidden="true">KT</span><span>KotionTwin</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="./#collections">Collections</a>
+      <a href="./#catalogue">Catalogue</a>
+    </nav>
+    <button id="theme" class="icon-btn" type="button" aria-label="Changer de thème">☾</button>
+  </div>
+</header>
+
+<header class="coll-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Fil d'Ariane"><a href="./">Accueil</a> <span aria-hidden="true">›</span> <a href="./#collections">Collections</a> <span aria-hidden="true">›</span> <span id="crumb" aria-current="page"></span></nav>
+    <div class="coll-hero-in">
+      <span class="coll-glyph big" id="c-glyph" aria-hidden="true"></span>
+      <div>
+        <h1 id="c-title">Chargement…</h1>
+        <p class="coll-years" id="c-years"></p>
+        <p class="lead" id="c-about"></p>
+        <p class="tagline" id="c-tagline"></p>
+      </div>
+    </div>
+    <div id="hero-progress"></div>
+    <div class="others" id="others" aria-label="Autres collections"></div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div id="shelves"></div>
+    <section id="catalogue" class="section" aria-labelledby="h-cat" tabindex="-1">
+      <h2 id="h-cat" class="section-title">Les jeux de la collection</h2>
+      <div class="toolbar" role="search">
+        <label class="search">
+          <span class="sr">Rechercher un jeu</span>
+          <input id="q" type="search" placeholder="Rechercher dans la collection… (touche /)" autocomplete="off">
+        </label>
+        <label class="select"><span class="sr">Trier par</span>
+          <select id="sort">
+            <option value="title">De A à Z</option>
+            <option value="status">Jouables d'abord</option>
+            <option value="year">Par année</option>
+          </select>
+        </label>
+        <div class="seg" id="statuses" role="group" aria-label="État de restauration"></div>
+        <button class="chip fav-toggle" id="favs" type="button" aria-pressed="false">★ Favoris</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div id="groups"></div>
+      <div id="empty" class="empty" hidden>
+        <p>Aucun jeu ne correspond à ces filtres.</p>
+        <button class="btn ghost" id="reset" type="button">Réinitialiser les filtres</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p>Jeux, graphismes, sons et sources © <strong>Motion Twin</strong>, publiés sous licence
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a> dans
+      <a href="https://github.com/motion-twin/WebGamesArchives">motion-twin/WebGamesArchives</a>.
+      Projet de fan non commercial, non affilié à Motion Twin.</p>
+    <p><a href="https://github.com/kevm29/KotionTwin/blob/main/CREDITS.md">Crédits</a> · Émulation Flash : <a href="https://ruffle.rs">Ruffle</a></p>
+  </div>
+</footer>
+<script src="assets/js/catalog.js" type="module"></script>
+</body>
+</html>
