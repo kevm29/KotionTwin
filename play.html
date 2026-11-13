@@ -20,7 +20,9 @@
     <nav class="nav" aria-label="Navigation principale">
       <a href="./#collections">Collections</a>
       <a href="./#catalogue">Catalogue</a>
+      <a href="settings.html">Paramètres</a>
     </nav>
+    <div id="player" class="player"></div>
     <button id="theme" class="icon-btn" type="button" aria-label="Changer de thème">☾</button>
   </div>
 </header>
@@ -72,6 +74,11 @@
       <ol class="scores" id="scores"></ol>
       <p class="muted small" id="scores-empty">Aucun score enregistré pour l'instant. Les scores restent sur cet appareil.</p>
       <button class="link-btn" id="scores-clear" type="button" hidden>Effacer mes scores</button>
+    </section>
+    <section class="panel" id="online-panel" hidden>
+      <h2>Classement en ligne</h2>
+      <ol class="scores" id="online"></ol>
+      <p class="muted small" id="online-msg"></p>
     </section>
     <section class="panel span2">
       <h2>Fiche technique</h2>

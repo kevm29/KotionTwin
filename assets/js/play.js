@@ -1,5 +1,6 @@
-import { loadCatalog, STATUS, PLAN, styleOf, coverSrc, store, el, fmtScore, fmtDate } from './data.js';
-import { shelf, gameUrl, collectionUrl, sortGames } from './ui.js';
+import { loadCatalog, STATUS, PLAN, styleOf, coverSrc, store, el, fmtScore, fmtDate, pseudoError } from './data.js';
+import { submitOnline, topOnline, onlineEnabled } from './online.js';
+import { shelf, gameUrl, collectionUrl, sortGames, renderPlayerChip } from './ui.js';
 
 // Version de Ruffle épinglée (voir README) ; un dossier vendor/ruffle local est utilisé s'il existe.
 const RUFFLE_CDN = 'https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@0.7.1/ruffle.js';
@@ -92,6 +93,7 @@ function installScoreApi(g) {
     const r = store.addScore(g.id, score, extra && typeof extra === 'object' ? extra : {});
     if (!r) return false;
     renderScores(g);
+    submitOnline(g.id, store.pseudo, r.entry.score).then(ok => { if (ok) renderOnline(g); }).catch(() => {});
     if (r.rank === 1 && store.scores(g.id).length > 1) toast(`Nouveau record : ${fmtScore(r.entry.score)} !`);
     else if (r.rank <= 10) toast(`Score enregistré : ${fmtScore(r.entry.score)} (n° ${r.rank})`);
     return true;
@@ -101,10 +103,12 @@ function installScoreApi(g) {
     submitScore: submit,
     getBest: () => store.best(g.id)?.score ?? null,
     getScores: () => store.scores(g.id).map(s => s.score),
+    getPlayer: () => store.pseudo,
   };
   window.KotionTwin = api;
   window.ktSubmitScore = submit;
   window.ktGetBest = api.getBest;
+  window.ktGetPlayer = api.getPlayer;
   addEventListener('message', ev => {
     const d = ev.data;
     if (d && typeof d === 'object' && d.type === 'kotiontwin:score') submit(d.score, d.extra);
@@ -115,10 +119,28 @@ function renderScores(g) {
   const list = store.scores(g.id);
   $('scores').replaceChildren(...list.map((s, i) => el('li', {},
     el('span', { class: 'rank' }, i === 0 ? '🏆' : `${i + 1}.`),
-    el('b', {}, fmtScore(s.score)),
+    el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, s.name || 'Anonyme')),
     el('span', { class: 'muted small' }, fmtDate(s.date)))));
   $('scores-empty').hidden = list.length > 0;
   $('scores-clear').hidden = list.length === 0;
+}
+
+async function renderOnline(g) {
+  if (!(await onlineEnabled())) return;
+  const panel = $('online-panel'), msg = $('online-msg');
+  panel.hidden = false;
+  try {
+    const rows = await topOnline(g.id, 10);
+    const me = store.pseudo.toLowerCase();
+    $('online').replaceChildren(...rows.map((s, i) => el('li', { class: s.pseudo.toLowerCase() === me ? 'me' : null },
+      el('span', { class: 'rank' }, i === 0 ? '🏆' : `${i + 1}.`),
+      el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, s.pseudo)),
+      el('span', { class: 'muted small' }, fmtDate(s.created_at)))));
+    msg.textContent = rows.length ? 'Meilleur score de chaque joueur, tous appareils confondus.' : 'Personne n\'a encore de score en ligne : à toi de jouer !';
+  } catch (e) {
+    $('online').replaceChildren();
+    msg.textContent = 'Classement en ligne momentanément indisponible.';
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -154,15 +176,42 @@ const usesKeyboard = g => /clavier|fl[eè]ches|espace|touche|entr[ée]e|\bzqsd\b
 // ---------------------------------------------------------------------------
 function launchScreen(stage, g, onStart) {
   const st = styleOf(g.collection);
-  const btn = el('button', { class: 'launch-btn', type: 'button' }, el('span', { 'aria-hidden': 'true' }, '▶'), ' Lancer la partie');
+  const hint = el('p', { class: 'small' }, isTouch && usesKeyboard(g) ? 'Ce jeu se joue au clavier : une manette tactile est proposée.' : 'Le son démarre avec la partie.');
+  const box = el('div', { class: 'launch-in' },
+    el('img', { class: 'launch-cover' + (g.coverPixel ? ' pixel' : ''), src: coverSrc(g), alt: `Vignette de ${g.title}` }));
   stage.replaceChildren(el('div', { class: 'launch', style: `--hue:${st.hue};--deep:${st.deep}` },
-    el('img', { class: 'launch-bg', src: coverSrc(g), alt: '' }),
-    el('div', { class: 'launch-in' },
-      el('img', { class: 'launch-cover' + (g.coverPixel ? ' pixel' : ''), src: coverSrc(g), alt: `Vignette de ${g.title}` }),
-      btn,
-      el('p', { class: 'small' }, isTouch && usesKeyboard(g) ? 'Ce jeu se joue au clavier : une manette tactile est proposée.' : 'Le son démarre avec la partie.'))));
-  btn.addEventListener('click', onStart, { once: true });
-  btn.focus({ preventScroll: true });
+    el('img', { class: 'launch-bg', src: coverSrc(g), alt: '' }), box));
+
+  const ready = () => {
+    const btn = el('button', { class: 'launch-btn', type: 'button' }, el('span', { 'aria-hidden': 'true' }, '▶'), ' Lancer la partie');
+    btn.addEventListener('click', onStart, { once: true });
+    box.replaceChildren(box.firstChild, btn,
+      el('p', { class: 'small launch-player' }, 'Joueur : ', el('b', {}, store.pseudo), ' · ', el('a', { href: `settings.html?retour=${encodeURIComponent(location.pathname.split('/').pop() + location.search)}` }, 'changer')),
+      hint);
+    btn.focus({ preventScroll: true });
+  };
+  if (store.pseudo) { ready(); return; }
+
+  // Pas de pseudo : on le demande ici même, il est obligatoire pour jouer (il accompagne les scores).
+  const input = el('input', { id: 'launch-pseudo', type: 'text', maxlength: '16', autocomplete: 'nickname', required: true, placeholder: 'Ton pseudo', 'aria-describedby': 'launch-err' });
+  const err = el('p', { class: 'error', id: 'launch-err', role: 'alert', hidden: true });
+  const form = el('form', { class: 'launch-form', novalidate: true },
+    el('label', { for: 'launch-pseudo' }, 'Choisis un pseudo pour jouer'),
+    el('div', { class: 'pseudo-row' }, input, el('button', { class: 'launch-btn small', type: 'submit' }, el('span', { 'aria-hidden': 'true' }, '▶'), ' Jouer')),
+    err,
+    el('p', { class: 'small' }, 'Il s\'affiche avec tes scores et se modifie dans les ', el('a', { href: 'settings.html' }, 'Paramètres'), '.'));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = pseudoError(input.value);
+    err.hidden = !msg; err.textContent = msg || '';
+    input.setAttribute('aria-invalid', String(!!msg));
+    if (msg) { input.focus(); return; }
+    store.pseudo = input.value;
+    renderPlayerChip();
+    onStart(); // le clic sur « Jouer » compte comme geste utilisateur : le son peut démarrer
+  });
+  box.replaceChildren(box.firstChild, form);
+  input.focus({ preventScroll: true });
 }
 
 function notYet(stage, g) {
@@ -232,7 +281,7 @@ async function start(g) {
   currentNode = node;
   setPad ||= bindPad(() => currentNode);
   $('padbtn').hidden = !isTouch && !usesKeyboard(g);
-  if (isTouch && usesKeyboard(g)) setPad(true);
+  if (isTouch && usesKeyboard(g) && store.padAuto) setPad(true);
 
   addEventListener('keydown', ev => {
     if (ev.target.closest?.('input, textarea, select')) return;
@@ -301,6 +350,7 @@ async function main() {
   renderScores(g);
   $('scores-clear').onclick = () => { store.clearScores(g.id); renderScores(g); toast('Scores effacés'); };
   if (g.status !== 'jouable') $('scores-panel').hidden = true;
+  else renderOnline(g);
 
   // Jeux voisins dans la collection.
   const siblings = sortGames(games.filter(x => x.collection === g.collection), 'title');

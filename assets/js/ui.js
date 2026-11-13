@@ -2,7 +2,20 @@
 import { STATUS, styleOf, coverSrc, store, el, fmtScore, applyTheme, bindThemeToggle } from './data.js';
 
 applyTheme();
-document.addEventListener('DOMContentLoaded', () => bindThemeToggle(document.getElementById('theme')));
+document.addEventListener('DOMContentLoaded', () => {
+  bindThemeToggle(document.getElementById('theme'));
+  renderPlayerChip();
+});
+
+// Pastille du joueur dans la barre du haut (lien vers les paramètres).
+export function renderPlayerChip() {
+  const box = document.getElementById('player');
+  if (!box) return;
+  const p = store.pseudo;
+  box.replaceChildren(p
+    ? el('a', { class: 'player-chip', href: 'settings.html', title: 'Paramètres du joueur' }, el('span', { class: 'avatar', 'aria-hidden': 'true' }, p[0].toUpperCase()), el('span', { class: 'pname' }, p))
+    : el('a', { class: 'player-chip empty', href: 'settings.html' }, el('span', { class: 'avatar', 'aria-hidden': 'true' }, '?'), el('span', { class: 'pname' }, 'Choisir un pseudo')));
+}
 
 export function gameUrl(g) { return `play.html?g=${encodeURIComponent(g.id)}`; }
 export function collectionUrl(k) { return `collection.html?c=${encodeURIComponent(k)}`; }
@@ -39,7 +52,7 @@ export function card(g, { collections, showCollection = true } = {}) {
     el('div', { class: 'body' },
       el('h3', {}, g.title),
       el('span', { class: 'sub' }, meta || g.tech),
-      best ? el('span', { class: 'best' }, 'Record : ', el('b', {}, fmtScore(best.score))) : null));
+      best ? el('span', { class: 'best' }, 'Record : ', el('b', {}, fmtScore(best.score)), best.name ? ` (${best.name})` : '') : null));
   return el('div', { class: 'card-wrap' }, a, favBtn);
 }
 
