@@ -35,6 +35,7 @@ class Host extends Sprite {
 	// partie en cours
 	var loader : Loader;
 	var game : Dynamic;
+	var updateName : String;
 	var gameRoot : MovieClip;
 	var playing : Bool;
 	var mode : Int; // 0 = GM_PROGRESSION, 1 = GM_LEAGUE
@@ -57,6 +58,7 @@ class Host extends Sprite {
 	var keys : Map<Int,Bool>;
 	var toggled : Map<Int,Bool>;
 	var clicked : Bool;
+	var mouseDown : Bool;
 
 	// interface
 	var layer : Sprite;
@@ -105,8 +107,9 @@ class Host extends Sprite {
 		buildBar();
 		stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 		stage.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
-		stage.addEventListener(MouseEvent.MOUSE_DOWN, function(_) clicked = true);
-		stage.addEventListener(Event.DEACTIVATE, function(_) keys = new Map());
+		stage.addEventListener(MouseEvent.MOUSE_DOWN, function(_) { clicked = true; mouseDown = true; });
+		stage.addEventListener(MouseEvent.MOUSE_UP, function(_) mouseDown = false);
+		stage.addEventListener(Event.DEACTIVATE, function(_) { keys = new Map(); mouseDown = false; });
 		addEventListener(Event.ENTER_FRAME, onFrame);
 		if( modes == "league" ) startGame(1, 1) else showMenu();
 	}
@@ -152,9 +155,11 @@ class Host extends Sprite {
 		a.isToggled_ = function(k:Dynamic, k2:Dynamic, k3:Dynamic) return me.isToggled(k) || me.isToggled(k2) || me.isToggled(k3);
 		a.unrecordedIsDown_ = function(k:Dynamic) return me.isDown(k);
 		a.unrecordedIsToggled_ = function(k:Dynamic) return me.isToggled(k);
+		// isClicked = bouton de la souris enfoncé (les jeux détectent eux-mêmes le front),
+		// éventuellement au-dessus de l'objet d'affichage donné.
 		a.isClicked_ = function(?d:DisplayObject) {
-			if( !me.clicked ) return false;
-			if( d == null ) return true;
+			if( !me.mouseDown && !me.clicked ) return false;
+			if( d == null || Std.is(d, Stage) ) return true;
 			return d.hitTestPoint(me.stage.mouseX, me.stage.mouseY, true);
 		};
 		a.getCustomValue_ = function(v:Dynamic) return v;
@@ -254,15 +259,28 @@ class Host extends Sprite {
 	function onGameInit( _ ) {
 		clearOverlay();
 		var dom = loader.contentLoaderInfo.applicationDomain;
-		var ak : Dynamic = dom.getDefinition("api_.AKApi_");
-		ak.api_ = makeApi();
+		// game.swf d'origine (noms obfusqués « api_.AKApi_ ») ou jeu recompilé par KotionTwin (« api.AKApi »)
+		var api = makeApi();
+		if( dom.hasDefinition("api_.AKApi_") ) {
+			var ak : Dynamic = dom.getDefinition("api_.AKApi_");
+			ak.api_ = api;
+		} else {
+			var ak : Dynamic = dom.getDefinition("api.AKApi");
+			ak.api = api;
+		}
+		// masque les traces de debug laissées dans certains jeux (« Game.hx:350 : … » affichés à l'écran)
+		for( n in [["haxe_.Log_", "trace_"], ["haxe.Log", "trace"]] ) {
+			if( !dom.hasDefinition(n[0]) ) continue;
+			var log : Dynamic = dom.getDefinition(n[0]);
+			try Reflect.setField(log, n[1], function(v:Dynamic, ?i:Dynamic) { flash.Lib.trace(Std.string(v)); }) catch( e : Dynamic ) {}
+		}
 		baseFps = loader.contentLoaderInfo.frameRate;
 		realFps = baseFps;
 		try stage.frameRate = baseFps catch( e : Dynamic ) {}
 		gameRoot = cast loader.content;
 		// l'ajout à la scène déclenche flash.Boot (initialisation statique du jeu)
 		layer.addChild(loader);
-		var gcl : Class<Dynamic> = cast dom.getDefinition("Game_");
+		var gcl : Class<Dynamic> = cast dom.getDefinition(dom.hasDefinition("Game_") ? "Game_" : "Game");
 		try {
 			game = Type.createInstance(gcl, []);
 			gameRoot.addChild(cast game);
@@ -271,6 +289,7 @@ class Host extends Sprite {
 			trace(e);
 			return;
 		}
+		updateName = Reflect.field(game, "update_") != null ? "update_" : "update";
 		playing = true;
 		lastTime = flash.Lib.getTimer();
 		stage.focus = stage;
@@ -291,7 +310,7 @@ class Host extends Sprite {
 		if( playing && game != null && !waitingEngine ) {
 			frame++;
 			try {
-				game.update_(true);
+				Reflect.callMethod(game, Reflect.field(game, updateName), [true]);
 			} catch( e : Dynamic ) {
 				trace("Erreur dans le jeu : " + Std.string(e));
 				if( Std.is(e, flash.errors.Error) ) trace((e:flash.errors.Error).getStackTrace());

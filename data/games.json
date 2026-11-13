@@ -1741,8 +1741,8 @@
    "source": "Arkadeo/games/animoz",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 5,
     "hx": 39,
@@ -1750,9 +1750,27 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-animoz/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-animoz/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Animoz",
+     "id": "ak-animoz"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-animoz/thumb.jpg",
+   "description": "Puzzle au tour par tour dans un enclos : déplacez les animaux pour former des groupes et marquer des points. Chaque espèce a son pouvoir (la souris échange sa place, le fantôme se laisse traverser, le guépard joue deux fois…).",
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-badabloom",
@@ -1762,8 +1780,8 @@
    "source": "Arkadeo/games/badabloom",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 12,
     "hx": 12,
@@ -1771,9 +1789,27 @@
     "images": 68,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-badabloom/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Badabloom",
+     "id": "ak-badabloom"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-badabloom/thumb.jpg",
+   "description": "Reliez les arbres de même couleur en traçant leurs racines. Les croisements de racines font éclore des fleurs et rapportent un gros bonus ; passez sur les cadeaux pour les valider.",
+   "controls": "Souris : cliquez sur un arbre, maintenez le clic et tracez le chemin jusqu'à l'autre arbre.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-battlesheep",
@@ -1783,8 +1819,8 @@
    "source": "Arkadeo/games/battleSheep",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 2,
     "hx": 6,
@@ -1792,9 +1828,27 @@
     "images": 52,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-battlesheep/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-battlesheep/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Battle Sheep",
+     "id": "ak-battlesheep"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-battlesheep/thumb.jpg",
+   "description": "Stratégie en temps réel : vos enclos produisent des moutons que vous envoyez conquérir les enclos ennemis. Chaque enclos peut recevoir un bonus (vitesse, peste, population…).",
+   "controls": "Souris : cliquez sur un de vos enclos puis sur l'enclos à attaquer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-brutal-teenage-crisis",
@@ -1804,8 +1858,8 @@
    "source": "Arkadeo/games/brutal teenage crisis",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 16,
     "hx": 35,
@@ -1813,9 +1867,27 @@
     "images": 1235,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-brutal-teenage-crisis/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-brutal-teenage-crisis/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Brutal Teenage Crisis",
+     "id": "ak-brutal-teenage-crisis"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-brutal-teenage-crisis/thumb.jpg",
+   "description": "Plateformes et bagarre : foncez sur les monstres pour les éliminer, empêchez-les d'atteindre le haut de l'écran et détruisez toutes les serrures.",
+   "controls": "Flèches pour se déplacer et foncer ; Espace ou Échap pour passer les messages.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-capman",
@@ -1824,9 +1896,9 @@
    "year": null,
    "source": "Arkadeo/games/capman",
    "tech": "Haxe → Flash 10/11 (AS3)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "plan": "recompilation",
+   "status": "jouable",
+   "notes": "Aucun game.swf dans l'archive : sources Haxe 2 portées en Haxe 3 et recompilées avec les ressources d'origine (src/ak-capman). Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 4,
     "hx": 32,
@@ -1834,9 +1906,27 @@
     "images": 23,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-capman/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-capman/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Capman",
+     "id": "ak-capman"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-capman/thumb.jpg",
+   "description": "Labyrinthe d'arcade : ramassez toutes les pièces en évitant les monstres, franchissez les portes et profitez des bonus de saut et d'étoile.",
+   "controls": "Flèches pour se déplacer, Espace pour utiliser le bonus.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-cataclismo",
@@ -1846,8 +1936,8 @@
    "source": "Arkadeo/games/cataclismo",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 3,
     "hx": 20,
@@ -1855,9 +1945,27 @@
     "images": 12,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-cataclismo/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-cataclismo/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Cataclismo",
+     "id": "ak-cataclismo"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-cataclismo/thumb.jpg",
+   "description": "Faites tourner les anneaux concentriques pour aligner des lignes de même couleur et atteindre le nombre de lignes demandé.",
+   "controls": "Souris : faites glisser un anneau pour le faire tourner.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-charlottequest",
@@ -1867,8 +1975,8 @@
    "source": "Arkadeo/games/charlotteQuest",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 3,
     "hx": 26,
@@ -1876,9 +1984,27 @@
     "images": 122,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-charlottequest/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-charlottequest/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Charlotte's Quest",
+     "id": "ak-charlottequest"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-charlottequest/thumb.jpg",
+   "description": "Charlotte et sa licorne explorent des cavernes envahies de plantes carnivores : tirez, esquivez et ramassez les trésors.",
+   "controls": "Flèches ou ZQSD pour se déplacer, Ctrl ou Espace pour tirer (contrôles souris activables en jeu).",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-fafi360",
@@ -1888,8 +2014,8 @@
    "source": "Arkadeo/games/fafi360",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 15,
     "hx": 14,
@@ -1897,9 +2023,27 @@
     "images": 506,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-fafi360/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-fafi360/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Fafi 360",
+     "id": "ak-fafi360"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-fafi360/thumb.jpg",
+   "description": "Football survolté vu de dessus : chargez vos tirs, gérez votre gardien et choisissez des améliorations entre les matchs. Le premier à atteindre le nombre de buts gagne.",
+   "controls": "Souris : maintenez le clic pour charger un tir, relâchez pour frapper.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-greenwitch",
@@ -1909,8 +2053,8 @@
    "source": "Arkadeo/games/greenWitch",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Le game.swf archivé avait été compilé sans sons (-D disableSfx) : la méthode Sfx.start a été réécrite dans le bytecode et les 44 sons du dossier sounds/ réinjectés (platforms/arkadeo/patches/greenwitch_sfx.py). Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 6,
     "hx": 51,
@@ -1918,9 +2062,27 @@
     "images": 194,
     "sons": 44
    },
-   "entry": null,
-   "thumb": "games/ak-greenwitch/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-greenwitch/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Green Witch",
+     "id": "ak-greenwitch"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-greenwitch/thumb.jpg",
+   "description": "Action et défense dans un donjon : la sorcière et ses tourelles attaquent automatiquement les monstres ; sauvez les princes capturés puis rejoignez la sortie.",
+   "controls": "Souris : maintenez le clic dans un espace libre pour poser une tourelle et cliquez pour continuer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-iceway",
@@ -1930,8 +2092,8 @@
    "source": "Arkadeo/games/iceway",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Utilise le game.swf (et non standalone.swf, qui affiche des traces de debug). Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 4,
     "hx": 45,
@@ -1939,9 +2101,27 @@
     "images": 97,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-iceway/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-iceway/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Iceway",
+     "id": "ak-iceway"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-iceway/thumb.jpg",
+   "description": "Puzzle sur la glace : allez chercher votre petit frère puis ramenez-le à la maison. On glisse jusqu'au prochain obstacle, à vous de trouver le bon chemin.",
+   "controls": "Souris (cliquez sur une direction) ou flèches du clavier ; bouton « reset » si vous êtes bloqué.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-mel",
@@ -1951,8 +2131,8 @@
    "source": "Arkadeo/games/mel",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 5,
     "hx": 26,
@@ -1960,9 +2140,27 @@
     "images": 8,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-mel/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-mel/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Mel",
+     "id": "ak-mel"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-mel/thumb.jpg",
+   "description": "Plateformes verticales : Mel, coursière de la résistance, grimpe toujours plus haut en sautant, double-sautant et s'accrochant aux parois avant d'être rattrapée.",
+   "controls": "Flèches pour se déplacer, Espace pour sauter, Bas pour charger un saut ou piquer sur un ennemi.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-nosushi",
@@ -1971,9 +2169,9 @@
    "year": null,
    "source": "Arkadeo/games/nosushi",
    "tech": "Haxe → Flash 10/11 (AS3)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "plan": "recompilation",
+   "status": "jouable",
+   "notes": "Aucun game.swf dans l'archive : sources Haxe 2 portées en Haxe 3 et recompilées avec le gfx.swf d'origine (src/ak-nosushi). Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 1,
     "hx": 12,
@@ -1981,9 +2179,27 @@
     "images": 5,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-nosushi/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-nosushi/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "No Sushi",
+     "id": "ak-nosushi"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-nosushi/thumb.jpg",
+   "description": "Puzzle au restaurant : retirez des groupes de sushis identiques pour remplir les commandes avant d'épuiser vos coups ; bombes et dynamite aident à nettoyer le plateau.",
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-overdrive",
@@ -1993,8 +2209,8 @@
    "source": "Arkadeo/games/Overdrive",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 3,
     "hx": 37,
@@ -2002,9 +2218,27 @@
     "images": 67,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-overdrive/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-overdrive/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Overdrive",
+     "id": "ak-overdrive"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-overdrive/thumb.jpg",
+   "description": "Course de survie dans le désert : esquivez les obstacles et les autres véhicules, ramassez les bonus et déclenchez l'Overdrive.",
+   "controls": "Flèches du clavier, ou souris (cliquez deux fois pour activer le mode souris) ; clic pour déclencher l'Overdrive.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-pulsar",
@@ -2014,8 +2248,8 @@
    "source": "Arkadeo/games/pulsar",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Le build archivé est muet (Cs.SOUND_FX = false et sons compilés seulement avec -D sound) : il est laissé tel quel. Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 5,
     "hx": 51,
@@ -2023,9 +2257,27 @@
     "images": 33,
     "sons": 18
    },
-   "entry": null,
-   "thumb": "games/ak-pulsar/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-pulsar/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Pulsar",
+     "id": "ak-pulsar"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-pulsar/thumb.jpg",
+   "description": "Shoot'em up dans une arène hexagonale : détruisez les vagues de Celluloïnes, Diagons et Seigneurs, puis choisissez une amélioration entre les vagues.",
+   "controls": "Souris : le vaisseau suit le viseur ; maintenez le clic pour verrouiller la direction de tir.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-rockfaller",
@@ -2035,8 +2287,8 @@
    "source": "Arkadeo/games/rockFaller",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 5,
     "hx": 5,
@@ -2044,9 +2296,27 @@
     "images": 6,
     "sons": 32
    },
-   "entry": null,
-   "thumb": "games/ak-rockfaller/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-rockfaller/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Rock Faller",
+     "id": "ak-rockfaller"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-rockfaller/thumb.jpg",
+   "description": "Puzzle de gemmes : cliquez sur les groupes de pierres précieuses de même couleur pour les faire tomber et enchaîner les combos.",
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "ak-trigo",
@@ -2056,8 +2326,8 @@
    "source": "Arkadeo/games/trigo",
    "tech": "Haxe → Flash 10/11 (AS3)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf (AS3) : fournir l'API Arkadeo (api.AKApi, absente de l'archive).",
+   "status": "jouable",
+   "notes": "Lancé par l'hôte Arkadeo de KotionTwin (platforms/arkadeo/host.swf) qui remplace l'API du site : modes Ligue et Progression, score et niveaux sauvegardés localement, kdo simulés.",
    "stats": {
     "swf": 2,
     "hx": 9,
@@ -2065,9 +2335,27 @@
     "images": 5,
     "sons": 0
    },
-   "entry": null,
-   "thumb": "games/ak-trigo/thumb.png",
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "platforms/arkadeo/host.swf",
+    "width": 600,
+    "height": 480,
+    "scale": 2,
+    "base": "games/ak-trigo/",
+    "flashvars": {
+     "game": "game.swf",
+     "title": "Trigo",
+     "id": "ak-trigo"
+    },
+    "bgcolor": "#0b0d14",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
+   "thumb": "games/ak-trigo/thumb.jpg",
+   "description": "Formez des triangles avec trois pions de même couleur, validez-les et remplissez les objectifs avant la fin du chrono.",
+   "controls": "Souris : cliquez sur trois pions de même couleur, puis sur le triangle pour le valider.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-anticorps",
