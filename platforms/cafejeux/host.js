@@ -91,6 +91,7 @@
   function push(pid, kind, mine, data) {
     const p = S.players[pid];
     if (!p) return;
+    if (DEBUG) console.log('[cj] -> j' + (pid + 1) + ' ' + kind + ' ' + mine + ' ' + String(data).slice(0, 200));
     if (typeof p.cjPush === 'function') p.cjPush(kind, !!mine, String(data));
     else console.warn('[cafejeux] plateau', pid, 'pas encore prêt pour', kind);
     if (S.aiModel && pid === 1) aiObserve(kind, mine, data);
@@ -109,8 +110,10 @@
   }
 
   // ------------------------------------------------------------------ réception depuis un plateau
+  const DEBUG = params.has('debug');
   window.cjSend = function (pid, kind, data) {
     pid = Number(pid);
+    if (DEBUG) console.log('[cj] j' + (pid + 1) + ' -> ' + kind + ' ' + String(data).slice(0, 200));
     if (!S || !S.players[pid] && kind !== 'ready') return;
     switch (kind) {
       case 'ready':
