@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paramètres · KotionTwin</title>
+<meta name="theme-color" content="#14112a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>try{var t=JSON.parse(localStorage.getItem('kotiontwin:v1')||'{}').theme;if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+</head>
+<body class="settings-page">
+<a class="skip" href="#main">Aller aux paramètres</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="./" aria-label="KotionTwin, accueil"><span class="logo" aria-hidden="true">KT</span><span>KotionTwin</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="./#collections">Collections</a>
+      <a href="./#catalogue">Catalogue</a>
+      <a href="settings.html" aria-current="page">Paramètres</a>
+    </nav>
+    <div id="player" class="player"></div>
+    <button id="theme" class="icon-btn" type="button" aria-label="Changer de thème">☾</button>
+  </div>
+</header>
+
+<main id="main" class="wrap narrow">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="./">Accueil</a> <span aria-hidden="true">›</span> <span aria-current="page">Paramètres</span></nav>
+  <h1 class="page-title">Paramètres</h1>
+  <p class="notice" id="return-notice" hidden></p>
+
+  <section class="panel settings" aria-labelledby="h-player">
+    <h2 id="h-player">Joueur</h2>
+    <form id="pseudo-form" class="pseudo-form" novalidate>
+      <label for="pseudo">Pseudo <span class="req">(obligatoire pour jouer)</span></label>
+      <div class="pseudo-row">
+        <input id="pseudo" name="pseudo" type="text" autocomplete="nickname" maxlength="16" required aria-describedby="pseudo-help pseudo-err" placeholder="Ton pseudo">
+        <button class="btn primary" type="submit">Enregistrer</button>
+      </div>
+      <p class="muted small" id="pseudo-help">2 à 16 caractères. Il s'affiche à côté de tes scores et, s'il est activé, dans le classement en ligne de chaque jeu.</p>
+      <p class="error" id="pseudo-err" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section class="panel settings" aria-labelledby="h-display">
+    <h2 id="h-display">Affichage et jeu</h2>
+    <div class="field">
+      <span class="field-label" id="theme-label">Thème</span>
+      <div class="seg" role="radiogroup" aria-labelledby="theme-label" id="theme-seg">
+        <button class="seg-btn" type="button" role="radio" data-theme="">Système</button>
+        <button class="seg-btn" type="button" role="radio" data-theme="light">Clair</button>
+        <button class="seg-btn" type="button" role="radio" data-theme="dark">Sombre</button>
+      </div>
+    </div>
+    <label class="field check">
+      <input type="checkbox" id="pad-auto">
+      <span>Afficher la manette tactile automatiquement sur téléphone pour les jeux au clavier</span>
+    </label>
+  </section>
+
+  <section class="panel settings" aria-labelledby="h-data">
+    <h2 id="h-data">Mes données</h2>
+    <p class="muted small">Favoris, parties récentes et scores sont gardés dans ce navigateur uniquement.</p>
+    <ul class="data-list" id="data-list"></ul>
+  </section>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p>Jeux © <strong>Motion Twin</strong>, licence <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a>.
+      Projet de fan non commercial, non affilié à Motion Twin.</p>
+  </div>
+</footer>
+<script src="assets/js/settings.js" type="module"></script>
+</body>
+</html>

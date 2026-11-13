@@ -60,6 +60,11 @@ dans « Mes meilleurs scores ». Pour qu'un jeu y envoie son score de fin de par
 - HTML5 (iframe) : `parent.postMessage({ type: "kotiontwin:score", score: 1234 }, "*")`.
 - Depuis la page : `window.KotionTwin.submitScore(1234)`.
 
+Le joueur doit choisir un pseudo avant de lancer une partie (page `settings.html`, ou directement sur l'écran de
+lancement) : il est enregistré avec chaque score, et `ExternalInterface.call("ktGetPlayer")` le renvoie au jeu.
+Si le classement en ligne est configuré (`data/online.json`, voir `docs/CLASSEMENT-EN-LIGNE.md`), chaque score est
+aussi envoyé au classement partagé du jeu.
+
 **Vignette.** `g.thumb` (dans `games.json`) reste la vignette officielle du jeu. Pour les jeux qui n'avaient pas de capture,
 le site utilise `data/covers.json` (images dans `assets/covers/`, fabriquées par `tools/make_covers.py` à partir d'une
 image de l'archive). Un thread qui ajoute une meilleure vignette dans `games/<id>/thumb.*` peut supprimer l'entrée

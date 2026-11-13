@@ -80,6 +80,15 @@ export function coverSrc(g) { return g.cover || generatedCover(g); }
 // Données locales du joueur. Toutes les lectures/écritures sont protégées :
 // navigation privée ou stockage bloqué ⇒ le site fonctionne sans mémoire.
 const KEY = 'kotiontwin:v1';
+export const PSEUDO_MIN = 2, PSEUDO_MAX = 16;
+// Lettres (accents compris), chiffres, espace, tiret, point et souligné.
+export function cleanPseudo(v) { return String(v || '').replace(/\s+/g, ' ').trim().slice(0, PSEUDO_MAX); }
+export function pseudoError(v) {
+  const p = cleanPseudo(v);
+  if (p.length < PSEUDO_MIN) return `Le pseudo doit faire au moins ${PSEUDO_MIN} caractères.`;
+  if (!/^[\p{L}\p{N} _.\-]+$/u.test(p)) return 'Lettres, chiffres, espaces, tirets, points et soulignés seulement.';
+  return null;
+}
 function readStore() {
   try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
 }
@@ -107,7 +116,7 @@ export const store = {
     if (!Number.isFinite(n)) return null;
     const s = readStore(); s.scores ||= {};
     const list = s.scores[id] || [];
-    const entry = { score: n, date: new Date().toISOString(), ...extra };
+    const entry = { score: n, date: new Date().toISOString(), name: this.pseudo || 'Anonyme', ...extra };
     list.push(entry);
     list.sort((a, b) => b.score - a.score);
     s.scores[id] = list.slice(0, 10);
@@ -115,6 +124,19 @@ export const store = {
     return { entry, rank: s.scores[id].indexOf(entry) + 1 };
   },
   clearScores(id) { const s = readStore(); if (s.scores) delete s.scores[id]; writeStore(s); },
+  // Pseudo du joueur : obligatoire pour lancer une partie, enregistré avec chaque score.
+  get pseudo() { return readStore().pseudo || ''; },
+  set pseudo(v) { const s = readStore(); s.pseudo = cleanPseudo(v); writeStore(s); },
+  get padAuto() { return readStore().padAuto !== false; },
+  set padAuto(v) { const s = readStore(); s.padAuto = !!v; writeStore(s); },
+  clearAll(what) {
+    const s = readStore();
+    if (what === 'scores') delete s.scores;
+    else if (what === 'favorites') delete s.favorites;
+    else if (what === 'recent') delete s.recent;
+    else { try { localStorage.removeItem(KEY); } catch { /* rien */ } return; }
+    writeStore(s);
+  },
   get theme() { return readStore().theme || null; },
   set theme(v) { const s = readStore(); s.theme = v; writeStore(s); },
 };

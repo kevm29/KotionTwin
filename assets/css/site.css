@@ -323,6 +323,51 @@ kbd { background: var(--bg2); border: 1px solid var(--line); border-bottom-width
 .foot { border-top: 1px solid var(--line); margin-top: 56px; padding: 26px 0 calc(34px + env(safe-area-inset-bottom)); color: var(--muted); font-size: .88rem; background: var(--bg2); }
 .foot p { margin: 0 0 8px; max-width: 70em; }
 
+
+/* ---------- Joueur et paramètres ---------- */
+.player { display: flex; }
+.player-chip { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px 0 4px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--text) !important; text-decoration: none; font-weight: 800; font-size: .9rem; max-width: 190px; }
+.player-chip:hover { border-color: var(--accent); }
+.player-chip .avatar { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(145deg, var(--accent), var(--accent2)); color: var(--accent-ink); font-family: var(--font-title); flex: none; }
+.player-chip .pname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.player-chip.empty { border-style: dashed; color: var(--muted) !important; }
+.player-chip.empty .avatar { background: var(--bg2); color: var(--muted); }
+.nav a[aria-current="page"] { color: var(--text) !important; background: var(--surface); }
+.wrap.narrow { max-width: 760px; }
+.page-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 10px 0 18px; }
+.notice { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); border: 1px solid var(--accent); border-radius: 12px; padding: 10px 14px; font-weight: 700; }
+.panel.settings { margin-bottom: 16px; }
+.pseudo-form label { font-weight: 800; display: block; margin-bottom: 6px; }
+.req { color: var(--muted); font-weight: 600; font-size: .85rem; }
+.pseudo-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.pseudo-row input { flex: 1 1 200px; height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg2); color: var(--text); font: inherit; font-size: 1.05rem; font-weight: 700; }
+.pseudo-row input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent); }
+.pseudo-row input[aria-invalid="true"] { border-color: #ff6b6b; }
+.error { color: #ff8080; font-weight: 700; margin: 8px 0 0; }
+:root[data-theme="light"] .error { color: #c0262d; }
+.field { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 10px 0; }
+.field-label { font-weight: 800; min-width: 5em; }
+.field.check { align-items: flex-start; gap: 10px; cursor: pointer; }
+.field.check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.data-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+.data-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 10px 8px 14px; border-radius: 12px; background: var(--bg2); flex-wrap: wrap; }
+.tool.danger { border-color: #d64545; color: #ff8a8a; }
+:root[data-theme="light"] .tool.danger { color: #b3261e; }
+.tool[data-armed="1"] { background: #d64545; color: #fff; }
+.scores li.me { outline: 2px solid var(--accent); }
+.scores .who { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.scores .pname { color: var(--muted); font-weight: 700; font-size: .85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.launch-form { display: grid; gap: 10px; width: min(420px, 86vw); text-align: left; background: rgba(10, 8, 24, .72); border: 1px solid rgba(255,255,255,.25); border-radius: 16px; padding: 16px; backdrop-filter: blur(6px); }
+.launch-form label { font-family: var(--font-title); font-size: 1.2rem; font-weight: 600; }
+.launch-form .pseudo-row input { background: rgba(255,255,255,.95); color: #1e1a33; border-color: transparent; }
+.launch-form a, .launch-player a { color: #ffd966 !important; }
+.launch-btn.small { font-size: 1.05rem; padding: 0 20px; height: 46px; animation: none; }
+.launch-player { opacity: 1 !important; }
+@media (max-width: 640px) {
+  .player-chip .pname { display: none; }
+  .player-chip { padding: 0 4px; }
+}
+
 /* ---------- Adaptations ---------- */
 @media (max-width: 900px) {
   .hero-in { grid-template-columns: 1fr; padding-top: 30px; padding-bottom: 34px; gap: 26px; }
