@@ -122,7 +122,6 @@ function renderScores(g) {
     el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, s.name || 'Anonyme')),
     el('span', { class: 'muted small' }, fmtDate(s.date)))));
   $('scores-empty').hidden = list.length > 0;
-  $('scores-clear').hidden = list.length === 0;
 }
 
 async function renderOnline(g) {
@@ -348,7 +347,6 @@ async function main() {
   // Scores.
   installScoreApi(g);
   renderScores(g);
-  $('scores-clear').onclick = () => { store.clearScores(g.id); renderScores(g); toast('Scores effacés'); };
   if (g.status !== 'jouable') $('scores-panel').hidden = true;
   else renderOnline(g);
 

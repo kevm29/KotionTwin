@@ -57,12 +57,11 @@ pad.addEventListener('change', () => { store.padAuto = pad.checked; toast(pad.ch
 
 // Données locales
 function renderData() {
-  const nScores = Object.values((() => { try { return JSON.parse(localStorage.getItem('kotiontwin:v1')).scores || {}; } catch { return {}; } })()).reduce((a, l) => a + l.length, 0);
+
   const rows = [
-    ['scores', `Scores enregistrés : ${nScores}`, 'Effacer les scores'],
     ['favorites', `Favoris : ${store.favorites.length}`, 'Effacer les favoris'],
     ['recent', `Parties récentes : ${store.recent.length}`, 'Effacer l\'historique'],
-    ['all', 'Tout (pseudo compris)', 'Tout effacer'],
+    ['all', 'Pseudo, favoris, historique et préférences', 'Tout réinitialiser'],
   ];
   $('data-list').replaceChildren(...rows.map(([k, label, btn]) => el('li', {},
     el('span', {}, label),
