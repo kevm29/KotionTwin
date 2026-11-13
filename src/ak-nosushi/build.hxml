@@ -1,0 +1,12 @@
+# No Sushi (Arkadeo) - port Haxe 3 de KotionTwin. Depuis ce dossier : haxe build.hxml (Haxe 3.4.7)
+-cp src
+-cp stub
+-cp lib
+-swf ../../games/ak-nosushi/game.swf
+-swf-header 600:480:40:000000
+-swf-version 11.8
+-swf-lib res/gfx.swf
+-resource src/texts.fr.xml@texts.fr.xml
+-resource src/texts.en.xml@texts.en.xml
+-resource src/texts.es.xml@texts.es.xml
+Game
