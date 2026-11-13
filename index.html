@@ -2,35 +2,89 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>KotionTwin · Les jeux web de Motion Twin</title>
 <meta name="description" content="Rejouer les jeux web de Motion Twin (2004-2015) dans le navigateur, à partir de l'archive officielle WebGamesArchives.">
+<meta name="theme-color" content="#14112a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
+<script>try{var t=JSON.parse(localStorage.getItem('kotiontwin:v1')||'{}').theme;if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
-<body>
-<header class="hero">
-  <div class="wrap">
-    <a class="brand" href="./"><span class="logo">KT</span> KotionTwin</a>
-    <h1>Les jeux web de Motion Twin, jouables à nouveau</h1>
-    <p class="lead">KadoKado, Arkadeo, CaféJeux, Frutiparc, Muxxu et les grands jeux du studio, restaurés depuis
-      l'<a href="https://github.com/motion-twin/WebGamesArchives">archive officielle</a> et lancés dans le navigateur grâce à
-      <a href="https://ruffle.rs">Ruffle</a>.</p>
-    <div class="counters" id="counters"></div>
+<body class="home">
+<a class="skip" href="#catalogue">Aller au catalogue</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="./" aria-label="KotionTwin, accueil"><span class="logo" aria-hidden="true">KT</span><span>KotionTwin</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#collections">Collections</a>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#catalogue" data-fav-link>Favoris</a>
+    </nav>
+    <button id="theme" class="icon-btn" type="button" aria-label="Changer de thème">☾</button>
   </div>
 </header>
 
-<main class="wrap">
-  <section class="toolbar" aria-label="Filtres">
-    <input id="q" type="search" placeholder="Rechercher un jeu…" aria-label="Rechercher un jeu">
-    <div class="chips" id="collections" role="group" aria-label="Collections"></div>
-    <div class="chips" id="statuses" role="group" aria-label="État"></div>
-  </section>
-  <div id="groups"></div>
-  <p id="empty" class="empty" hidden>Aucun jeu ne correspond à ces filtres.</p>
+<header class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <p class="kicker">Archive jouable · 2004-2015</p>
+      <h1>Les jeux web de <span class="hl">Motion Twin</span>, jouables à nouveau</h1>
+      <p class="lead">KadoKado, Arkadeo, CaféJeux, Frutiparc, Muxxu et les grands jeux du studio, restaurés depuis
+        l'<a href="https://github.com/motion-twin/WebGamesArchives">archive officielle</a> et lancés dans le navigateur grâce à
+        <a href="https://ruffle.rs">Ruffle</a>. Pas de Flash, pas d'installation.</p>
+      <div class="hero-cta">
+        <a class="btn primary" id="random" href="#catalogue">🎲 Un jeu au hasard</a>
+        <a class="btn ghost" href="#catalogue">Parcourir les jeux</a>
+      </div>
+      <div id="hero-progress"></div>
+    </div>
+    <div class="hero-art" id="hero-art" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div id="shelves"></div>
+
+    <section id="collections" class="section" aria-labelledby="h-coll">
+      <h2 id="h-coll" class="section-title">Les collections</h2>
+      <div class="coll-grid" id="coll-grid"></div>
+    </section>
+
+    <section id="catalogue" class="section" aria-labelledby="h-cat" tabindex="-1">
+      <h2 id="h-cat" class="section-title">Tous les jeux</h2>
+      <div class="toolbar" role="search">
+        <label class="search">
+          <span class="sr">Rechercher un jeu</span>
+          <input id="q" type="search" placeholder="Rechercher un jeu… (touche /)" autocomplete="off">
+        </label>
+        <label class="select"><span class="sr">Collection</span><select id="coll"></select></label>
+        <label class="select"><span class="sr">Trier par</span>
+          <select id="sort">
+            <option value="collection">Par collection</option>
+            <option value="title">De A à Z</option>
+            <option value="status">Jouables d'abord</option>
+            <option value="year">Par année</option>
+          </select>
+        </label>
+        <div class="seg" id="statuses" role="group" aria-label="État de restauration"></div>
+        <button class="chip fav-toggle" id="favs" type="button" aria-pressed="false">★ Favoris</button>
+      </div>
+      <p class="count" id="count" aria-live="polite"></p>
+      <div id="groups"></div>
+      <div id="empty" class="empty" hidden>
+        <p>Aucun jeu ne correspond à ces filtres.</p>
+        <button class="btn ghost" id="reset" type="button">Réinitialiser les filtres</button>
+      </div>
+    </section>
+  </div>
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap foot-in">
     <p>Jeux, graphismes, sons et sources © <strong>Motion Twin</strong>, publiés sous licence
       <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a> dans
       <a href="https://github.com/motion-twin/WebGamesArchives">motion-twin/WebGamesArchives</a>.

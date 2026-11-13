@@ -1,0 +1,413 @@
+{
+ "_doc": "Vignettes du catalogue générées par tools/make_covers.py. 'from' = image d'origine dans WebGamesArchives (ou swf:<chemin> = capture Ruffle). 'override' = remplace la vignette g.thumb existante (icône trop petite). Un thread qui fournit une meilleure vignette dans games.json peut supprimer l'entrée ici.",
+ "games": {
+  "kk-alchimie2": {
+   "src": "assets/covers/kk-alchimie2.webp",
+   "from": "KadoKado/Games/alchimie2/gfx/Capture-3.png"
+  },
+  "kk-chakras": {
+   "src": "assets/covers/kk-chakras.webp",
+   "from": "KadoKado/Games/chakras/psd/screen04.jpg"
+  },
+  "kk-electrolink": {
+   "src": "assets/covers/kk-electrolink.webp",
+   "from": "KadoKado/Games/Electrolink/gfx/electrolink.gif"
+  },
+  "kk-happyptytank": {
+   "src": "assets/covers/kk-happyptytank.webp",
+   "from": "KadoKado/Games/HappyPtyTank/gfx/274.jpg"
+  },
+  "kk-kanji": {
+   "src": "assets/covers/kk-kanji.webp",
+   "from": "KadoKado/Games/kanji/gfx/bg.png"
+  },
+  "kk-kanji-gaiden": {
+   "src": "assets/covers/kk-kanji-gaiden.webp",
+   "from": "KadoKado/Games/Kanji_Gaiden/snap/kG_5.jpg"
+  },
+  "kk-killbulle": {
+   "src": "assets/covers/kk-killbulle.webp",
+   "from": "KadoKado/Games/killbulle/gfx/bg.png"
+  },
+  "kk-magmax": {
+   "src": "assets/covers/kk-magmax.webp",
+   "from": "KadoKado/Games/magmax/gfx/bg.png"
+  },
+  "kk-onu": {
+   "src": "assets/covers/kk-onu.webp",
+   "from": "KadoKado/Games/onu/gfx/bground.png"
+  },
+  "kk-opalus2": {
+   "src": "assets/covers/kk-opalus2.webp",
+   "from": "KadoKado/Games/Opalus2/fla/screen1.jpg"
+  },
+  "kk-opalusfactory": {
+   "src": "assets/covers/kk-opalusfactory.webp",
+   "from": "KadoKado/Games/opalusFactory/gfx/Capture.png"
+  },
+  "kk-oursouinvader": {
+   "src": "assets/covers/kk-oursouinvader.webp",
+   "from": "KadoKado/Games/Oursouinvader/gfx/bg.png"
+  },
+  "kk-paradice": {
+   "src": "assets/covers/kk-paradice.webp",
+   "from": "KadoKado/Games/paradice/png/bg.png"
+  },
+  "kk-quadrikolor": {
+   "src": "assets/covers/kk-quadrikolor.webp",
+   "from": "KadoKado/Games/quadrikolor/bitmap/space.png"
+  },
+  "kk-starfang": {
+   "src": "assets/covers/kk-starfang.webp",
+   "from": "KadoKado/Games/starfang/ads/coolSpace.png"
+  },
+  "kk-tianan-man": {
+   "src": "assets/covers/kk-tianan-man.webp",
+   "from": "KadoKado/Games/Tianan Man/gfx/tm4.png"
+  },
+  "kk-tortugaqix": {
+   "src": "assets/covers/kk-tortugaqix.webp",
+   "from": "KadoKado/Games/TortugaQix/screens/screen1.png"
+  },
+  "kk-train": {
+   "src": "assets/covers/kk-train.webp",
+   "from": "KadoKado/Games/train/gfx/Capture-1.png"
+  },
+  "kk-xianxiang": {
+   "src": "assets/covers/kk-xianxiang.webp",
+   "from": "KadoKado/Games/xianxiang/bitmaps/bg.png"
+  },
+  "ak-badabloom": {
+   "src": "assets/covers/ak-badabloom.webp",
+   "from": "Arkadeo/games/badabloom/assets/img/logo.png"
+  },
+  "cj-anticorps": {
+   "src": "assets/covers/cj-anticorps.webp",
+   "from": "CafeJeux/games/anticorps/bmp/box/box.png"
+  },
+  "fp-burningkiwi": {
+   "src": "assets/covers/fp-burningkiwi.webp",
+   "from": "Frutiparc/Games/burningKiwi/images/intro.png"
+  },
+  "fp-kaluga": {
+   "src": "assets/covers/fp-kaluga.webp",
+   "from": "Frutiparc/Games/kaluga/anim/intro/jpegs/che.jpg"
+  },
+  "fp-minifever": {
+   "src": "assets/covers/fp-minifever.webp",
+   "from": "Frutiparc/Games/miniFever/gfx/taquin_0.png"
+  },
+  "fp-minitroll": {
+   "src": "assets/covers/fp-minitroll.webp",
+   "from": "Frutiparc/Games/miniTroll/screenshot/annonces/sc0.gif"
+  },
+  "fp-miniwave2": {
+   "src": "assets/covers/fp-miniwave2.webp",
+   "from": "Frutiparc/Games/miniWave2/screenshot/miniwave05.jpg"
+  },
+  "fp-poulpi": {
+   "src": "assets/covers/fp-poulpi.webp",
+   "from": "Frutiparc/Games/poulpi/images/intro.jpg"
+  },
+  "fp-snake3": {
+   "src": "assets/covers/fp-snake3.webp",
+   "from": "Frutiparc/Games/snake3/book/images/cover.jpg"
+  },
+  "mx-fever": {
+   "src": "assets/covers/mx-fever.webp",
+   "from": "Muxxu/Fever/gfx/pousty_intro_preview.jpg"
+  },
+  "mx-snake": {
+   "src": "assets/covers/mx-snake.webp",
+   "from": "Muxxu/Snake/docs/screenshots/screen_01.png"
+  },
+  "mx-odyssey": {
+   "src": "assets/covers/mx-odyssey.webp",
+   "from": "Muxxu/Odyssey/www/img/skin/introbg_artwork.png"
+  },
+  "mx-intrusion": {
+   "src": "assets/covers/mx-intrusion.webp",
+   "from": "Muxxu/Intrusion/www/img/screenshots/screen4.jpg"
+  },
+  "mx-la-brute": {
+   "src": "assets/covers/mx-la-brute.webp",
+   "from": "Muxxu/LaBrute/www/img/muxxu/de/cover.jpg"
+  },
+  "mx-kingdom": {
+   "src": "assets/covers/mx-kingdom.webp",
+   "from": "Muxxu/Kingdom/www/img/map_screen.png"
+  },
+  "mx-croquemotel": {
+   "src": "assets/covers/mx-croquemotel.webp",
+   "from": "Muxxu/Hotel/www/img/screenshots/screen0.jpg"
+  },
+  "alphabounce": {
+   "src": "assets/covers/alphabounce.webp",
+   "from": "Alphabounce/design/fla/screen.gif"
+  },
+  "dinocard": {
+   "src": "assets/covers/dinocard.webp",
+   "from": "Dinocard/gfx/gui/dojo_bg.gif"
+  },
+  "dinoparc": {
+   "src": "assets/covers/dinoparc.webp",
+   "from": "Dinoparc/www/img/intro/dinoland.gif"
+  },
+  "la-bourinette": {
+   "src": "assets/covers/la-bourinette.webp",
+   "from": "LaBourinette/www/img/temp/background1.jpg"
+  },
+  "miniville": {
+   "src": "assets/covers/miniville.webp",
+   "from": "Miniville/arts/big_logo.png"
+  },
+  "monster-hotel": {
+   "src": "assets/covers/monster-hotel.webp",
+   "from": "MonsterHotel/assets/img/android/logo_1024.png"
+  },
+  "mush": {
+   "src": "assets/covers/mush.webp",
+   "from": "Mush/www/img/design/logo3_welcome.png"
+  },
+  "pioupiouz": {
+   "src": "assets/covers/pioupiouz.webp",
+   "from": "Pioupiouz/gfx/menu/creatposition.gif"
+  },
+  "rockfaller-journey": {
+   "src": "assets/covers/rockfaller-journey.webp",
+   "from": "Rockfaller/www/img/screens/screen05.png"
+  },
+  "skywar": {
+   "src": "assets/covers/skywar.webp",
+   "from": "SkyWar/web/www/gfx/screens/screenshot06.jpg"
+  },
+  "teacher-story": {
+   "src": "assets/covers/teacher-story.webp",
+   "from": "TeacherStory/www/img/logo.png"
+  },
+  "uppercup-football": {
+   "src": "assets/covers/uppercup-football.webp",
+   "from": "Uppercup/assets/screenshots/kick.jpg"
+  },
+  "kk-abcrevolution": {
+   "src": "assets/covers/kk-abcrevolution.webp",
+   "from": "swf:KadoKado/Games/abcrevolution/swf/gfx.swf"
+  },
+  "kk-alchimie": {
+   "src": "assets/covers/kk-alchimie.webp",
+   "from": "swf:KadoKado/Games/alchimie/swf/gfx.swf"
+  },
+  "kk-bactery": {
+   "src": "assets/covers/kk-bactery.webp",
+   "from": "swf:KadoKado/Games/bactery/swf/gfx.swf"
+  },
+  "kk-crepuscud": {
+   "src": "assets/covers/kk-crepuscud.webp",
+   "from": "swf:KadoKado/Games/crepuscud/swf/gfx.swf"
+  },
+  "kk-diver": {
+   "src": "assets/covers/kk-diver.webp",
+   "from": "swf:KadoKado/Games/diver/swf/gfx.swf"
+  },
+  "kk-drakhan": {
+   "src": "assets/covers/kk-drakhan.webp",
+   "from": "swf:KadoKado/Games/drakhan/swf/gfx.swf"
+  },
+  "kk-ellon": {
+   "src": "assets/covers/kk-ellon.webp",
+   "from": "swf:KadoKado/Games/ellon/swf/gfx.swf"
+  },
+  "kk-flushee": {
+   "src": "assets/covers/kk-flushee.webp",
+   "from": "swf:KadoKado/Games/flushee/swf/gfx.swf"
+  },
+  "kk-hypercube": {
+   "src": "assets/covers/kk-hypercube.webp",
+   "from": "swf:KadoKado/Games/hypercube/swf/gfx.swf"
+  },
+  "kk-invasion": {
+   "src": "assets/covers/kk-invasion.webp",
+   "from": "swf:KadoKado/Games/invasion/swf/gfx.swf"
+  },
+  "kk-julianus": {
+   "src": "assets/covers/kk-julianus.webp",
+   "from": "swf:KadoKado/Games/Julianus/swf/gfx.swf"
+  },
+  "kk-kanjinightmare": {
+   "src": "assets/covers/kk-kanjinightmare.webp",
+   "from": "swf:KadoKado/Games/KanjiNightmare/swf/decor.swf"
+  },
+  "kk-kaskade2": {
+   "src": "assets/covers/kk-kaskade2.webp",
+   "from": "swf:KadoKado/Games/kaskade2/swf/gfx.swf"
+  },
+  "kk-kaskade": {
+   "src": "assets/covers/kk-kaskade.webp",
+   "from": "swf:KadoKado/Games/kaskade/swf/gfx.swf"
+  },
+  "kk-kavern": {
+   "src": "assets/covers/kk-kavern.webp",
+   "from": "swf:KadoKado/Games/kavern/swf/gfx.swf"
+  },
+  "kk-logico": {
+   "src": "assets/covers/kk-logico.webp",
+   "from": "swf:KadoKado/Games/Logico/swf/gfx.swf"
+  },
+  "kk-manda": {
+   "src": "assets/covers/kk-manda.webp",
+   "from": "swf:KadoKado/Games/manda/swf/gfx.swf"
+  },
+  "kk-memopsy": {
+   "src": "assets/covers/kk-memopsy.webp",
+   "from": "swf:KadoKado/Games/memopsy/swf/gfx.swf"
+  },
+  "kk-pioupiou": {
+   "src": "assets/covers/kk-pioupiou.webp",
+   "from": "swf:KadoKado/Games/pioupiou/swf/gfx.swf"
+  },
+  "kk-pioutch": {
+   "src": "assets/covers/kk-pioutch.webp",
+   "from": "swf:KadoKado/Games/Pioutch/swf/gfx.swf"
+  },
+  "kk-punchin": {
+   "src": "assets/covers/kk-punchin.webp",
+   "from": "swf:KadoKado/Games/punchin/swf/gfx.swf"
+  },
+  "kk-sploutch": {
+   "src": "assets/covers/kk-sploutch.webp",
+   "from": "swf:KadoKado/Games/sploutch/swf/gfx.swf"
+  },
+  "kk-toymaniak": {
+   "src": "assets/covers/kk-toymaniak.webp",
+   "from": "swf:KadoKado/Games/toymaniak/swf/gfx.swf"
+  },
+  "kk-travoltax": {
+   "src": "assets/covers/kk-travoltax.webp",
+   "from": "swf:KadoKado/Games/Travoltax/swf/gfx.swf"
+  },
+  "kk-zipzap": {
+   "src": "assets/covers/kk-zipzap.webp",
+   "from": "swf:KadoKado/Games/zipzap/swf/gfx.swf"
+  },
+  "naturalchimie-2": {
+   "src": "assets/covers/naturalchimie-2.webp",
+   "from": "swf:Naturalchimie2/fla/botGame/swf/botGame.swf"
+  },
+  "cj-bandas": {
+   "src": "assets/covers/cj-bandas.webp",
+   "from": "swf:CafeJeux/games/bandas/swf/gfx.swf"
+  },
+  "cj-billard": {
+   "src": "assets/covers/cj-billard.webp",
+   "from": "swf:CafeJeux/games/billard/swf/gfx.swf"
+  },
+  "cj-power4": {
+   "src": "assets/covers/cj-power4.webp",
+   "from": "swf:CafeJeux/games/power4/swf/gfx.swf"
+  },
+  "cj-trigolo": {
+   "src": "assets/covers/cj-trigolo.webp",
+   "from": "swf:CafeJeux/games/trigolo/swf/gfx.swf"
+  },
+  "cj-utopiz": {
+   "src": "assets/covers/cj-utopiz.webp",
+   "from": "swf:CafeJeux/games/utopiz/swf/gfx.swf"
+  },
+  "cj-marbils": {
+   "src": "assets/covers/cj-marbils.webp",
+   "from": "swf:CafeJeux/games/marbils/swf/gfx.swf"
+  },
+  "dinorpg": {
+   "src": "assets/covers/dinorpg.webp",
+   "from": "swf:DinoRPG/gfx/pnj/grand.swf"
+  },
+  "kk-cooking-lili": {
+   "src": "assets/covers/kk-cooking-lili.webp",
+   "from": "KadoKado/Games/Cooking Lili/img/bg.png"
+  },
+  "ak-animoz": {
+   "src": "assets/covers/ak-animoz.webp",
+   "from": "icon:games/ak-animoz/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-battlesheep": {
+   "src": "assets/covers/ak-battlesheep.webp",
+   "from": "icon:games/ak-battlesheep/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-capman": {
+   "src": "assets/covers/ak-capman.webp",
+   "from": "icon:games/ak-capman/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-cataclismo": {
+   "src": "assets/covers/ak-cataclismo.webp",
+   "from": "icon:games/ak-cataclismo/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-charlottequest": {
+   "src": "assets/covers/ak-charlottequest.webp",
+   "from": "icon:games/ak-charlottequest/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-fafi360": {
+   "src": "assets/covers/ak-fafi360.webp",
+   "from": "icon:games/ak-fafi360/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-greenwitch": {
+   "src": "assets/covers/ak-greenwitch.webp",
+   "from": "icon:games/ak-greenwitch/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-iceway": {
+   "src": "assets/covers/ak-iceway.webp",
+   "from": "icon:games/ak-iceway/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-mel": {
+   "src": "assets/covers/ak-mel.webp",
+   "from": "icon:games/ak-mel/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-nosushi": {
+   "src": "assets/covers/ak-nosushi.webp",
+   "from": "icon:games/ak-nosushi/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-overdrive": {
+   "src": "assets/covers/ak-overdrive.webp",
+   "from": "icon:games/ak-overdrive/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-pulsar": {
+   "src": "assets/covers/ak-pulsar.webp",
+   "from": "icon:games/ak-pulsar/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-rockfaller": {
+   "src": "assets/covers/ak-rockfaller.webp",
+   "from": "icon:games/ak-rockfaller/thumb.png",
+   "override": true,
+   "pixel": true
+  },
+  "ak-trigo": {
+   "src": "assets/covers/ak-trigo.webp",
+   "from": "icon:games/ak-trigo/thumb.png",
+   "override": true,
+   "pixel": true
+  }
+ }
+}
