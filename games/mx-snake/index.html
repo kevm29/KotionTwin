@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snake (Muxxu)</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #1e3d0c; overflow: hidden; }
+  #stage { position: absolute; inset: 0; }
+  #stage > * { width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+// Snake (Muxxu, 2010) : SWF d'origine de l'arène, retouché par src/mx-snake/patch_game.py.
+// Cette page remplace le serveur Muxxu : elle fournit la collection de cartes au
+// format Codec « FAKE » (clé + haxe.Serializer) et reçoit le score de fin de partie.
+import { mount, store } from '../../platforms/flash8/kt-host.js';
+
+const CARD_COUNT = 131;        // constructeurs de l'énum _CardType (Protocole.hx / data.ods)
+const PLAYS_KEY = 'kt.mx-snake.plays';
+const KEY = 'K';               // clé Codec : données préfixées par la clé = mode FAKE, non chiffré
+
+// Sérialisation Haxe (USE_ENUM_INDEX) minimale.
+const S = v => { const e = encodeURIComponent(v); return `y${e.length}:${e}`; };
+const I = n => (n === 0 ? 'z' : `i${n}`);
+const obj = fields => 'o' + Object.entries(fields).map(([k, v]) => S(k) + v).join('') + 'g';
+
+function playerName() {
+  try { return (parent !== window && parent.ktGetPlayer?.()) || 'Joueur'; } catch { return 'Joueur'; }
+}
+
+function browserData() {
+  const cards = [];
+  for (let i = 0; i < CARD_COUNT; i++)
+    cards.push(obj({ _type: 'j' + S('_CardType') + `:${i}:0`, _available: 't' }));
+  return KEY + obj({
+    _age: I(18),
+    _plays: I(store.get(PLAYS_KEY, 0)),
+    _cards: 'a' + cards.join('') + 'h',
+    _draft: 'n',
+    _me: obj({ _name: S(playerName()), _avatar: S('hale.gif'), _rank: I(1), _id: I(1) }),
+  });
+}
+
+function start() {
+  return mount(document.getElementById('stage'), {
+    swf: 'game.swf',
+    bgcolor: '#5ca424',
+    flashvars: {
+      mode: 'browser', lang: 'fr', k: KEY, data: browserData(),
+      time: String(Date.now()),
+      dom: 'javascript:ktSnakeAgain()',   // bouton « rejouer » du bilan
+    },
+  });
+}
+
+// Fin de partie (appel injecté dans Game.sendInfos).
+window.ktSnakeEnd = score => {
+  store.set(PLAYS_KEY, store.get(PLAYS_KEY, 0) + 1);
+  const s = Number(score) || 0;
+  if (parent !== window) parent.postMessage({ type: 'kotiontwin:score', score: s }, '*');
+};
+window.ktSnakeAgain = () => { start(); };
+
+start();
+</script>
+</body>
+</html>
