@@ -84,11 +84,14 @@ a.set(f'_global.{o("startGame")}', lambda s: s.func('', [], f))
 # exitGame(data) : renvoie un LoadVars ; une image plus tard, si le jeu a branché onData
 # (bouton REJOUER), on relance le niveau, sinon on transmet le résultat à la page.
 f = Asm()
+dbg(f, 'exitGame')
 f.set('lv', lambda s: s.new('LoadVars'))
 f.set('lv.ktd', lambda s: s.get('d'))
 t = Asm()
+dbg(t, 'exitGame: timer')
 L = t.newlabel()
-t.get('lv.onData').Not().if_(L)
+# LoadVars.prototype.onData existe toujours : seul un onData posé par le jeu (REJOUER) compte
+t.get('lv.onData'); t.get('LoadVars.prototype.onData'); t.StrictEquals(); t.if_(L)
 t.call(f'{EI}.call', 'ktPiouRetry')
 t.call('lv.onData', None)
 t.push(None).Return()
