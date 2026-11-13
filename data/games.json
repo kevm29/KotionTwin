@@ -2454,7 +2454,7 @@
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine lancé tel quel dans Ruffle (premier test). Sons, score et fin de partie à vérifier dans le thread Frutiparc.",
+   "notes": "SWF d'origine de l'archive lancé tel quel dans Ruffle. C'est la version autonome compilée par Motion Twin (Manager.mt : genSlot(\"baseFever\") sans client Frusion) : elle démarre directement le mode Fever, enchaînement des micro-jeux avec jauge de temps, sans menu ni sauvegarde. Scène d'origine 240×240. Le jeu n'a pas de sons.",
    "stats": {
     "swf": 1,
     "hx": 0,
@@ -2465,13 +2465,14 @@
    "entry": {
     "type": "ruffle",
     "swf": "games/fp-minifever/minifever.swf",
-    "width": 281,
-    "height": 281,
+    "width": 240,
+    "height": 240,
     "scale": 2
    },
    "thumb": null,
    "description": "Enchaînement frénétique de micro-jeux de quelques secondes : réagissez vite pour garder vos vies.",
-   "controls": "Souris."
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004)"
   },
   {
    "id": "fp-minitroll",

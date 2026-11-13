@@ -213,10 +213,21 @@ def main():
     args = sys.argv[1:]; size = None
     if '--size' in args:
         i = args.index('--size'); size = [float(x) for x in args[i + 1].split('x')]; del args[i:i + 2]
+    hide = []  # --hide NOM : retire un nom d'export (ex. boutons de triche laissés dans un build de debug)
+    while '--hide' in args:
+        i = args.index('--hide'); hide.append(args[i + 1].encode()); del args[i:i + 2]
     base, out, libs = args[0], args[1], args[2:]
     ver, b, he = load(base)
     btags = list(tags(b, he))
     used = set()
+    def strip(t):
+        n = struct.unpack_from('<H', t)[0]; p = 2; keep = []
+        for _ in range(n):
+            e = t.index(b'\0', p + 2)
+            if t[p + 2:e] not in hide: keep.append(t[p:e + 1])
+            p = e + 1
+        return struct.pack('<H', len(keep)) + b''.join(keep)
+    if hide: btags = [(c, strip(t) if c == 56 else t) for c, t in btags]
     for c, t in btags:
         if c in DEFINES: used.add(struct.unpack_from('<H', t, 0)[0])
     nxt = max(used) + 1 if used else 1
@@ -245,7 +256,7 @@ def main():
                 n = struct.unpack_from('<H', nt)[0]; p = 2; keep = []
                 for _ in range(n):
                     e = nt.index(b'\0', p + 2); name = nt[p + 2:e]
-                    if name not in exported: keep.append(nt[p:e + 1]); exported.add(name)
+                    if name not in exported and name not in hide: keep.append(nt[p:e + 1]); exported.add(name)
                     p = e + 1
                 if not keep: continue
                 nt = struct.pack('<H', len(keep)) + b''.join(keep)

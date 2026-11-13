@@ -6,7 +6,7 @@ Usage : python3 platforms/frutiparc/build.py <chemin vers WebGamesArchives/Fruti
 Pour chaque jeu : copie les fichiers utiles dans games/<id>/ et compile l'hôte Frusion
 (platforms/frutiparc/frusion-host.as, via tools/as1c.py) aux dimensions et à la cadence du jeu.
 """
-import os, sys, shutil, struct, subprocess
+import os, sys, shutil, struct, subprocess, zlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -28,8 +28,18 @@ GAMES = {
     'fp-miniwave2': dict(src='miniWave2', w=240, h=240, fps=40, game='game.swf', files={},
         merge=('miniWave2.swf', ['lib.swf', 'gfx.swf', 'decor.swf', 'bumdum.swf'], '240x240')),
     'fp-minitroll': dict(src='miniTroll', w=240, h=240, fps=40, game='game.swf', files={},
-        merge=('swf/root.swf', ['swf/gfx.swf'], None)),
+        merge=('swf/root.swf', ['swf/gfx.swf'], None), 
+        # build de développement : Manager.CHEAT = 2 affichait la barre de triche ; on la remet à 0
+        patch=[(b'\x96\x08\x00\x09\x00\x02\x07\x02\x00\x00\x00', b'\x96\x08\x00\x09\x00\x02\x07\x00\x00\x00\x00')]),  # push 'Manager_CHEAT', 2
 }
+
+def patch_swf(path, patches):
+    raw = open(path, 'rb').read()
+    body = zlib.decompress(raw[8:]) if raw[:3] == b'CWS' else raw[8:]
+    for old, new in patches:
+        assert len(old) == len(new) and body.count(old) == 1, old
+        body = body.replace(old, new)
+    open(path, 'wb').write(b'CWS' + raw[3:8] + zlib.compress(body, 9))
 
 def swf_len(p):
     """Longueur annoncée dans l'en-tête (= getBytesTotal() pour un SWF compressé)."""
@@ -44,6 +54,7 @@ def build(arch, gid, cfg):
         cmd = [sys.executable, '-I', os.path.join(ROOT, 'tools', 'swfmerge.py')]
         if size: cmd += ['--size', size]
         subprocess.check_call(cmd + [os.path.join(src, base), os.path.join(out, cfg['game'])] + [os.path.join(src, l) for l in libs])
+    if 'patch' in cfg: patch_swf(os.path.join(out, cfg['game']), cfg['patch'])
     for dst, src in cfg['files'].items():
         s = os.path.join(arch, cfg['src'], src); d = os.path.join(out, dst)
         os.makedirs(os.path.dirname(d), exist_ok=True); shutil.copyfile(s, d)
