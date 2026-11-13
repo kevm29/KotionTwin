@@ -257,6 +257,10 @@ class Compiler:
             if m: return ('static', t, name, m[0])
         fi = cls.file if cls else None
         if fi is not None:
+            # comme Haxe : un constructeur d'enum du module courant ou d'un module importé passe avant un type
+            cands = self.p.ctor_index.get(name, [])
+            near = [t for t in cands if t.file is fi or any('.'.join(i) in (t.module, t.path) for i in fi['imports'])]
+            if near: return ('ctor', near[0], name)
             ti = self.p.resolve_type_name(name, fi)
             if ti is not None: return ('type', ti)
             # constructeurs d'enum : module courant, puis importés, puis n'importe lesquels
