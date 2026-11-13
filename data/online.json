@@ -1,5 +1,5 @@
 {
-  "_doc": "Classement en ligne (Supabase). Laisser vide pour le désactiver. La clé 'anon' est publique par conception ; ne jamais mettre la clé service_role ici. Voir docs/CLASSEMENT-EN-LIGNE.md.",
-  "supabaseUrl": "",
-  "anonKey": ""
+  "_doc": "Classement en ligne (Supabase). Laisser vide pour le désactiver. La clé publique (anon ou sb_publishable_) est publique par conception ; ne jamais mettre la clé service_role ici. Voir docs/CLASSEMENT-EN-LIGNE.md.",
+  "supabaseUrl": "https://xjtmbapwplpbknxwtyfn.supabase.co",
+  "anonKey": "sb_publishable_WKd9IANyWwGJuKn1Wmub-w_aqfylQEb"
 }

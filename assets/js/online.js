@@ -8,7 +8,9 @@ function config() {
     .catch(() => null);
   return cfgPromise;
 }
-const headers = c => ({ apikey: c.key, Authorization: `Bearer ${c.key}`, 'Content-Type': 'application/json' });
+// Les anciennes clés « anon » sont des JWT et se passent aussi en Authorization ;
+// les nouvelles clés sb_publishable_… ne vont que dans l'en-tête apikey.
+const headers = c => ({ apikey: c.key, ...(c.key.startsWith('eyJ') ? { Authorization: `Bearer ${c.key}` } : {}), 'Content-Type': 'application/json' });
 
 export async function onlineEnabled() { return !!(await config()); }
 

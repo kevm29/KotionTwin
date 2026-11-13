@@ -23,7 +23,7 @@ create policy "lecture publique" on public.scores for select to anon using (true
 create policy "ajout public" on public.scores for insert to anon with check (true);
 ```
 
-3. Recopier dans `data/online.json` l'URL du projet (`https://xxxx.supabase.co`) et la clé **anon public**
+3. Recopier dans `data/online.json` l'URL du projet (`https://xxxx.supabase.co`) et la clé publique (**publishable**, `sb_publishable_…`, ou l'ancienne clé **anon public**)
    (Project Settings › API). Ne jamais y mettre la clé `service_role`.
 
 ## Limites
