@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alphabounce</title>
+<style>
+  :root { --fond: #05060f; --panneau: #10142b; --ligne: #273063; --texte: #dfe6ff; --doux: #8f9bd0; --jaune: #ffd34d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--fond); color: var(--texte); font: 13px/1.4 Verdana, "Trebuchet MS", sans-serif; }
+  body { display: flex; flex-direction: column; }
+  .bar { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 6px 10px; background: var(--panneau); border-bottom: 1px solid var(--ligne); }
+  .bar b { color: var(--jaune); }
+  .bar .sp { flex: 1; }
+  button { font: inherit; background: #2a3570; color: var(--texte); border: 1px solid #3c4aa0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+  button:hover, button:focus-visible { background: #3a4790; outline: none; }
+  .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; }
+  #stage { width: 100%; max-width: calc((100vh - 40px) * 400 / 360); aspect-ratio: 400 / 360; }
+  .toast { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); background: #1d2650; border: 1px solid var(--jaune); border-radius: 8px; padding: 6px 14px; display: none; }
+  .toast.on { display: block; }
+</style>
+</head>
+<body>
+<header class="bar" aria-live="polite">
+  <span>Position <b id="pos">0 ; 0</b></span>
+  <span>Minerai <b id="min">0</b></span>
+  <span>Missions réussies <b id="mis">0</b></span>
+  <span class="sp"></span>
+  <button type="button" id="reset">Nouvelle partie</button>
+</header>
+<div class="stagewrap"><div id="stage"></div></div>
+<div class="toast" id="toast"></div>
+<script>window.KT_DEBUG = /debug/.test(location.search);</script>
+<script type="module">
+import { mount } from '../../platforms/flash8/kt-host.js';
+import { createServer } from './server.js';
+
+const $ = id => document.getElementById(id);
+const toast = t => { $('toast').textContent = t; $('toast').classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => $('toast').classList.remove('on'), 3500); };
+const server = await createServer((ev, data) => {
+  if (ev === 'mission') toast('Mission accomplie !');
+});
+const refresh = () => {
+  const p = server.player;
+  $('pos').textContent = `${p.x} ; ${p.y}`;
+  $('min').textContent = p.minerai.toLocaleString('fr');
+  $('mis').textContent = server.missionsDone();
+};
+setInterval(refresh, 1000); refresh();
+
+// appels ExternalInterface du client d'origine
+window.game_playing = () => {};
+window.game_update = () => refresh();
+window.game_add_mineral = () => refresh();
+
+async function start() {
+  await mount($('stage'), { swf: 'game.swf', base: './', bgcolor: '#000000', flashvars: { swfUrl: './', lang: 'fr' } });
+}
+$('reset').onclick = () => { if (confirm('Effacer la partie et repartir de la Terre… enfin, du point 0 ; 0 ?')) { server.reset(); start(); } };
+start();
+</script>
+</body>
+</html>
