@@ -118,6 +118,8 @@ function endGame(p) {
 	}
 	showScore();
 	notify("gameover");
+	// tableau des scores du site (assets/js/play.js)
+	if (flash.external.ExternalInterface.available) flash.external.ExternalInterface.call("ktSubmitScore", score);
 }
 function showOverlay() {
 	var o = _root.createEmptyMovieClip("overlay", 30);
