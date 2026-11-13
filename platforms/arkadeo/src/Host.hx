@@ -335,6 +335,18 @@ class Host extends Sprite {
 			save.unlocked = level + 1;
 		}
 		flush();
+		submitScore();
+	}
+
+	// Envoie le score de fin de partie au site (assets/js/play.js : tableau local + classement en ligne).
+	function submitScore() {
+		if( score <= 0 ) return;
+		try {
+			if( flash.external.ExternalInterface.available )
+				flash.external.ExternalInterface.call("ktSubmitScore", score, { mode : mode == 1 ? "Ligue" : "Progression niveau " + level });
+		} catch( e : Dynamic ) {
+			trace("ktSubmitScore indisponible : " + Std.string(e));
+		}
 	}
 
 	// ------------------------------------------------------------------ barre d'état
