@@ -4055,9 +4055,9 @@
    "year": 2010,
    "source": "Muxxu/Snake",
    "tech": "Haxe → Flash 9 (AS3)",
-   "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "arène game.swf à vérifier/recompiler ; cartes et quêtes à simuler.",
+   "plan": "ruffle-shim",
+   "status": "jouable",
+   "notes": "SWF d'origine de l'arène (Haxe → Flash 9). Le fichier de l'archive avait été compilé en mode développeur : trois retouches de bytecode (src/mx-snake/patch_game.py) rétablissent le choix des cartes à partir des données fournies par la page, transmettent le score de fin de partie au site et neutralisent la touche de debug S. La page remplace le serveur Muxxu : toutes les cartes (131) sont dans votre collection dès le départ. Pas de tournois (draft), de boutique ni de quêtes, qui étaient gérés par le serveur ; la progression « Encyclopéfruit » affichée au bilan est fictive. Le jeu n'avait pas de sons. Test automatique : choix des cartes, partie jusqu'à la mort du serpent, bilan et score transmis.",
    "stats": {
     "swf": 13,
     "hx": 159,
@@ -4065,9 +4065,17 @@
     "images": 634,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "html",
+    "url": "games/mx-snake/index.html",
+    "width": 800,
+    "height": 420,
+    "scale": 1.5
+   },
+   "thumb": "games/mx-snake/thumb.jpg",
+   "description": "Un serpent affamé dans une arène : avalez des fruits pour grossir et marquer des points sans toucher les murs ni votre queue. Avant chaque partie, composez une main de cartes aux effets variés pour 6 points de mojo.",
+   "controls": "Souris : le serpent suit le pointeur, clic gauche pour accélérer (ou clavier, au choix au début de la partie). Touches A Z E R T Y : activer les cartes. P ou Entrée : pause.",
+   "credits": "Motion Twin (jeu original, Muxxu 2010) ; restauration KotionTwin (SWF retouché, serveur simulé)"
   },
   {
    "id": "mx-odyssey",
