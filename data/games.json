@@ -4395,8 +4395,8 @@
    "source": "MonsterHotel",
    "tech": "Haxe 3 + OpenFL/h3d",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "Aucun binaire : recompiler le client OpenFL en HTML5 (ou Flash puis Ruffle).",
+   "status": "jouable",
+   "notes": "Client recompilé depuis les sources (Haxe 3.4.7, moteur h3d de Motion Twin en Stage3D, cible Flash) et joué en mode hors ligne : la logique du serveur (Solver) tourne dans le navigateur et l'hôtel est sauvegardé localement. Les 76 bruitages sont intégrés, les 5 musiques chargées à la demande. Les polices d'origine manquent dans l'archive (remplacées par DejaVu Sans Bold) ; amis, boîte de réception, Facebook et achats sont inactifs. Score du site = niveau de l'hôtel, envoyé à chaque niveau gagné.",
    "stats": {
     "swf": 0,
     "hx": 114,
@@ -4404,9 +4404,22 @@
     "images": 96,
     "sons": 209
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/monster-hotel/client.swf",
+    "width": 800,
+    "height": 600,
+    "scale": 1.5,
+    "base": "games/monster-hotel/",
+    "bgcolor": "#1a0d1f",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": null,
-   "description": ""
+   "description": "Gestion d'un hôtel pour monstres : construisez des chambres, placez chaque client selon ses goûts et ses voisins (bruit, odeurs, froid…), faites grandir l'hôtel et satisfaites les patrons exigeants.",
+   "controls": "Souris : cliquez et glissez les clients et les objets ; molette ou glisser pour déplacer la vue.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin ; police DejaVu Sans (licence libre Bitstream Vera)"
   },
   {
    "id": "mush",

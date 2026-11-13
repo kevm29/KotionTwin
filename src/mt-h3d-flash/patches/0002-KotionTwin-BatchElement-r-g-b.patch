@@ -1,0 +1,27 @@
+From f7cfa0b1ad3acefdd670252099bedf789c7e4f75 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Fri, 13 Nov 2026 17:57:53 +0000
+Subject: [PATCH 2/2] KotionTwin: BatchElement r/g/b
+
+---
+ h2d/SpriteBatch.hx | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/h2d/SpriteBatch.hx b/h2d/SpriteBatch.hx
+index b333267d..77093ac3 100644
+--- a/h2d/SpriteBatch.hx
++++ b/h2d/SpriteBatch.hx
+@@ -47,6 +47,10 @@ class BatchElement {
+ 	public var alpha : Float;
+ 	public var tile : Tile;
+ 	public var color : h3d.Vector;
++	// KotionTwin : accès r/g/b attendu par mt.deepnight.Color
++	public var r(get,set) : Float; inline function get_r() return color.x; inline function set_r(v:Float) return color.x = v;
++	public var g(get,set) : Float; inline function get_g() return color.y; inline function set_g(v:Float) return color.y = v;
++	public var b(get,set) : Float; inline function get_b() return color.z; inline function set_b(v:Float) return color.z = v;
+ 	public var batch(default, null) : SpriteBatch;
+ 
+ 	var prev : BatchElement;
+-- 
+2.43.0
+

@@ -30,8 +30,13 @@ s = sub(s, 'public function new(fps:Float) {', 'public function new(?fps:Float=3
 s = sub(s, 'public function update(dt:Float) {', 'public function update(?dt:Float=1.0) {')
 s = s.rstrip()[:-1] + '''
 	// --- API 2014 (KotionTwin) ---
-	public function add(cb:Void->Void, ms:Float) addMs(cb, ms);
+	// add(cb, ms) (2014) ou add(id, cb, ms) (2015)
+	public function add(a:Dynamic, b:Dynamic, ?c:Dynamic) {
+		if( Std.is(a, String) || a == null && Reflect.isFunction(b) ) addMs(a, b, c);
+		else addMs(null, a, b);
+	}
 	public function addFrame(cb:Void->Void, frames:Float) addF(cb, frames);
+	public function addFrameBased(cb:Void->Void, frames:Float) addF(cb, frames);
 }
 '''
 wr('mt/Delayer.hx', s)
@@ -44,7 +49,24 @@ s = sub(s, '	public macro function createMs(', '''	public macro function create(
 	}
 
 	public macro function createMs(''')
+s = sub(s, '	public function chainMs(', '''	// chain(to, ?ease, ?ms) (2015)
+	public function chain(to:Float, ?a:Dynamic, ?b:Dynamic) {
+		return if( a != null && Reflect.isEnumValue(a) ) chainMs(to, a, b) else chainMs(to, null, a);
+	}
+
+	public function chainMs(''')
 wr('mt/deepnight/Tweenie.hx', s)
+
+# Lib.shuffle (ancienne API : renvoie une copie mélangée)
+s = rd('mt/deepnight/Lib.hx')
+s = sub(s, '	public static function shuffleArray<T>(', '''	public static function shuffle<T>(arr:Array<T>, randFunc:Int->Int) : Array<T> {
+		var a = arr.copy();
+		shuffleArray(a, randFunc);
+		return a;
+	}
+
+	public static function shuffleArray<T>(''')
+wr('mt/deepnight/Lib.hx', s)
 print('ok')
 
 # mui : surcharges onWatchChange non typées (refusées par Haxe 3.4)
@@ -106,3 +128,10 @@ s = sub(s, '	public function update() {', '''	public function destroy() {
 	public function updateOne() {''')
 wr('mt/deepnight/FParticle.hx', s)
 print('ok3')
+
+# mt.Process : le constructeur n'appelle plus une méthode init() publique (conflit avec Room.init de Monster Hotel)
+s = rd('mt/Process.hx')
+s = sub(s, '	public function new(?parent : Process) {\n		init();', '	public function new(?parent : Process) {\n		initProcess();')
+s = sub(s, '	public function init(){', '	function initProcess(){')
+wr('mt/Process.hx', s)
+print('ok4')
