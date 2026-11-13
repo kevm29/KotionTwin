@@ -3083,8 +3083,8 @@
    "source": "Alphabounce",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "Client game.swf présent ; simuler le protocole serveur (com/Protocol.hx) pour un mode solo.",
+   "status": "jouable",
+   "notes": "Le serveur (missions, boutique, atterrissages, trous de ver, brouillard de la carte) est simulé dans le navigateur à partir de PlayerInfo/Protocol.hx ; la sauvegarde reste dans le navigateur. Simplification : l'hydrogène liquide se recharge à 3 quand il est vide. Les atterrissages et trous de ver n'ont pas pu être testés jusqu'au bout automatiquement. Le jeu d'origine est muet (Sound.MUTE).",
    "stats": {
     "swf": 8,
     "hx": 84,
@@ -3092,9 +3092,17 @@
     "images": 211,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "html",
+    "url": "games/alphabounce/index.html",
+    "width": 600,
+    "height": 580,
+    "scale": 1.6
+   },
+   "thumb": "games/alphabounce/thumb.jpg",
+   "description": "Un casse-briques spatial : chaque case de la carte galactique est un niveau. Récoltez du minerai, améliorez votre vaisseau à la boutique, posez-vous sur les planètes et accomplissez les missions.",
+   "controls": "Souris : déplacer la raquette, clic pour lancer la balle. Sur la carte, cliquez sur une case verte pour vous y rendre.",
+   "credits": "Motion Twin (jeu original, CC BY-NC-SA 4.0) ; restauration KotionTwin"
   },
   {
    "id": "dinocard",
@@ -3104,8 +3112,8 @@
    "source": "Dinocard",
    "tech": "MotionTypes (.mt) → Flash 7/8",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "code.swf/temple.swf compilés présents ; adversaire et decks à simuler côté navigateur.",
+   "status": "jouable",
+   "notes": "Le lecteur de combat temple.swf est d'origine. Les combats étaient calculés par le serveur, dont ni le code ni la base des cartes ne sont dans l'archive : un moteur de duel simplifié (pioche, énergies, éclosion, attaques) le remplace, et les 388 cartes reprennent les illustrations d'origine avec un élément déduit de la couleur de l'image, des noms et des caractéristiques inventés. Pas de sorts, d'objets ni de capacités spéciales. Le jeu d'origine n'a pas de son.",
    "stats": {
     "swf": 14,
     "hx": 0,
@@ -3113,9 +3121,17 @@
     "images": 807,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "html",
+    "url": "games/dinocard/index.html",
+    "width": 700,
+    "height": 640,
+    "scale": 1.4
+   },
+   "thumb": "games/dinocard/thumb.jpg",
+   "description": "Jeu de cartes à collectionner : choisissez votre deck (Feu, Bois, Eau, Foudre ou Ciel) et regardez vos dinoz éclore puis affronter ceux de l'adversaire jusqu'à ce qu'un joueur n'ait plus de points de vie.",
+   "controls": "Choisissez un élément puis « Nouveau duel ». Espace ou la flèche ▶ fait avancer le combat, Maj l'accélère ; survolez une carte pour lire ses caractéristiques.",
+   "credits": "Motion Twin (jeu original, CC BY-NC-SA 4.0) ; restauration KotionTwin"
   },
   {
    "id": "dinoparc",
@@ -3230,8 +3246,8 @@
    "source": "Miniville",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "client.swf présent ; simuler l'API serveur de la ville.",
+   "status": "jouable",
+   "notes": "Sur le site d'origine, la ville grandissait quand des visiteurs cliquaient sur vos liens : ces visites sont simulées par un clic (une journée). client.swf est d'origine ; les taux suivent les formules de Core.hx. Pas de son dans le jeu d'origine. Pas de fin de partie : c'est un jeu d'entretien sans game over.",
    "stats": {
     "swf": 2,
     "hx": 4,
@@ -3239,9 +3255,17 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "html",
+    "url": "games/miniville/index.html",
+    "width": 960,
+    "height": 600,
+    "scale": 1.4
+   },
+   "thumb": "games/miniville/thumb.jpg",
+   "description": "Faites grandir votre ville isométrique : chaque journée apporte des habitants, puis l'industrie, les transports, la sécurité, l'environnement et les commerces, avec leurs problèmes de chômage, de pollution ou de criminalité.",
+   "controls": "Cliquez sur un secteur pour faire passer une journée ; glissez le rond bleu pour vous déplacer dans la ville.",
+   "credits": "Motion Twin (jeu original, CC BY-NC-SA 4.0) ; restauration KotionTwin"
   },
   {
    "id": "monster-hotel",
@@ -3314,8 +3338,8 @@
    "source": "Pioupiouz",
    "tech": "ActionScript 2 → Flash 7/8",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "pioupiouz.swf/code.swf présents + niveaux XML/SQL : brancher le chargement des niveaux.",
+   "status": "jouable",
+   "notes": "temple.swf de l'archive était obfusqué sans la liste des noms natifs protégés : 174 noms (Array, String…) ont été rétablis en les alignant sur pioupiouz.swf, puis un démarreur remplace le chargeur du site (src/pioupiouz/build.py). Les niveaux viennent de levels.sql ; les textes d'aide des tutoriels, absents de l'archive, ont été réécrits. Le jeu d'origine n'a aucun son. Progression gardée dans le navigateur.",
    "stats": {
     "swf": 13,
     "hx": 0,
@@ -3323,9 +3347,17 @@
     "images": 707,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "html",
+    "url": "games/pioupiouz/index.html",
+    "width": 760,
+    "height": 560,
+    "scale": 1.6
+   },
+   "thumb": "games/pioupiouz/thumb.jpg",
+   "description": "Guidez la colonie de piouz jusqu'à la sortie en donnant à certains d'entre eux un rôle : creuseur, sauteur, arc-en-ciel, fleur… Un jeu de réflexion à la Lemmings, en 51 niveaux officiels et 10 tutoriels.",
+   "controls": "Souris : choisissez une action à droite puis cliquez sur un piou. Espace : pause.",
+   "credits": "Motion Twin (jeu original, CC BY-NC-SA 4.0) ; restauration KotionTwin"
   },
   {
    "id": "rockfaller-journey",

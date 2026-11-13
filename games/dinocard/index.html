@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinocard</title>
+<style>
+  :root { --fond: #1b130c; --panneau: #2b1f14; --ligne: #5a4128; --texte: #f6ead6; --doux: #c9b08c; --or: #ffcf5a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--fond); color: var(--texte); font: 13px/1.4 Verdana, "Trebuchet MS", sans-serif; }
+  body { display: flex; flex-direction: column; height: 100vh; }
+  .bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 6px 10px; background: var(--panneau); border-bottom: 1px solid var(--ligne); }
+  .bar b { color: var(--or); }
+  .bar .sp { flex: 1; }
+  button { font: inherit; background: #5a3a1c; color: var(--texte); border: 1px solid #8a6034; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
+  button:hover, button:focus-visible { background: #7a4f26; outline: none; }
+  button[aria-pressed="true"] { background: var(--or); color: #2b1f14; border-color: var(--or); }
+  .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; position: relative; }
+  #stage { width: 100%; max-width: calc((100vh - 80px) * 600 / 500); aspect-ratio: 600 / 500; }
+  .end { position: absolute; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.55); }
+  .end.on { display: grid; }
+  .end > div { background: var(--panneau); border: 2px solid var(--or); border-radius: 12px; padding: 18px 26px; text-align: center; max-width: 90%; }
+  .end h2 { margin: 0 0 6px; color: var(--or); font-size: 24px; }
+  .end p { margin: 4px 0 14px; color: var(--doux); }
+  .help { padding: 4px 10px; color: var(--doux); font-size: 12px; background: var(--panneau); border-top: 1px solid var(--ligne); }
+</style>
+</head>
+<body>
+<header class="bar">
+  <span>Votre deck :</span>
+  <span id="decks" role="group" aria-label="Élément du deck"></span>
+  <span class="sp"></span>
+  <span>Victoires <b id="win">0</b> · Défaites <b id="lose">0</b></span>
+  <button type="button" id="go">Nouveau duel</button>
+</header>
+<div class="stagewrap">
+  <div id="stage"></div>
+  <div class="end" id="end"><div><h2 id="endTitle"></h2><p id="endText"></p><button type="button" id="again">Nouveau duel</button></div></div>
+</div>
+<div class="help">Espace ou la flèche ▶ : faire avancer le combat · Maj maintenue : accélérer · survolez une carte pour lire ses caractéristiques.</div>
+<script type="module">
+import { mount, store, h } from '../../platforms/flash8/kt-host.js';
+import { encode } from '../../platforms/flash8/persistcodec.js';
+import { makeFight, ELEMENTS } from './duel.js';
+
+const $ = id => document.getElementById(id);
+const cards = await (await fetch('cards.json')).json();
+const SAVE = 'kt.dinocard.v1';
+const st = Object.assign({ deck: 0, win: 0, lose: 0, draw: 0 }, store.get(SAVE, {}));
+const save = () => store.set(SAVE, st);
+const OPP = ['Grand Shaman', 'Mamie Rocking', 'Professeur Eugène', 'Bao Bob', 'Le Dojo', 'Sorcière Ploup'];
+
+ELEMENTS.forEach((name, i) => {
+  const b = h('button', { type: 'button', 'aria-pressed': String(i === st.deck) }, name);
+  b.onclick = () => { st.deck = i; save(); [...$('decks').children].forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); };
+  $('decks').append(b, ' ');
+});
+const score = () => { $('win').textContent = st.win; $('lose').textContent = st.lose; };
+score();
+
+let data = '', last = null;
+const realFetch = window.fetch.bind(window);
+window.fetch = async (input, init) => {
+  const url = typeof input === 'string' ? input : input.url;
+  if (/kt\.local\/duel\/data/.test(url)) return new Response(data, { status: 200 });
+  const m = /data\.dinocard\.net\/(swf\/avatar\.swf|gfx\/card\/artwork\/(\d+\.jpg))/.exec(url);
+  if (m) return realFetch(m[2] ? 'art/' + m[2] : 'avatar.swf');
+  return realFetch(input, init);
+};
+
+// fin du combat : le lecteur « redirige » vers $endUrl
+window.ktDinoEnd = () => {
+  if (!last) return;
+  const r = last; last = null;
+  if (r.winner === 1) st.win++; else if (r.winner === 2) st.lose++; else st.draw++;
+  save(); score();
+  $('endTitle').textContent = r.winner === 1 ? 'Victoire !' : r.winner === 2 ? 'Défaite…' : 'Match nul';
+  $('endText').textContent = `Points de vie : vous ${r.life[0]}, ${r.opp} ${r.life[1]}.`;
+  $('end').classList.add('on');
+};
+
+async function duel() {
+  $('end').classList.remove('on');
+  const seed = (Math.random() * 2 ** 31) | 0;
+  let oe = Math.floor(Math.random() * 5);
+  const opp = OPP[seed % OPP.length];
+  const fight = makeFight({ cards, elements: [st.deck, oe], seed, names: ['Vous', opp] });
+  last = { ...fight._result, opp };
+  delete fight._result;
+  // le décodeur du lecteur gère mal les renvois vers des noms de champs déjà vus : on les écrit en entier
+  data = encode(fight, { refs: false });
+  const info = encode({ $url: 'http://kt.local/duel/data', $imgUrl: 'art/', $seed: seed, $side: 1, $noob: true, $endUrl: 'javascript:ktDinoEnd()' });
+  await mount($('stage'), { swf: 'temple.swf', base: './', bgcolor: '#f3e2c0', flashvars: { $info: info }, config: { allowScriptAccess: true } });
+}
+$('go').onclick = duel;
+$('again').onclick = duel;
+duel();
+</script>
+</body>
+</html>
