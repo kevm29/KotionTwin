@@ -356,7 +356,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 11,
@@ -517,7 +517,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 5,
@@ -615,7 +615,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 4,
@@ -874,7 +874,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 15,
@@ -1413,7 +1413,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 5,
@@ -1826,7 +1826,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 4,
@@ -1917,7 +1917,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : la partie démarre et répond aux commandes sans erreur ; l'écran de fin n'a pas été atteint par le test aléatoire.",
+   "notes": "SWF d'origine (Haxe 2, Flash 8) lancé par le loader KadoKado de remplacement de KotionTwin, qui simule l'API KKApi (score, fin de partie) et garde le record en local. Images vérifiées (aucune vide). Les jeux KadoKado de cette époque n'avaient ni musique ni bruitages. Test automatique : partie menée jusqu'à l'écran de fin sans erreur.",
    "stats": {
     "swf": 2,
     "hx": 5,
