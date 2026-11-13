@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miniville</title>
+<style>
+  :root { --bleu: #1f5fbf; --ciel: #dbe9ff; --fond: #f4f8ff; --texte: #18325c; --vert: #338103; --orange: #e08a00; --rouge: #c62020; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--fond); color: var(--texte); font: 14px/1.4 Verdana, "Trebuchet MS", sans-serif; }
+  .app { display: grid; grid-template-columns: minmax(0, 600px) minmax(260px, 1fr); gap: 10px; padding: 10px; max-width: 960px; margin: 0 auto; }
+  @media (max-width: 720px) { .app { grid-template-columns: 1fr; } }
+  .view { position: relative; aspect-ratio: 3 / 2; background: #c5dd2c; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+  #stage { position: absolute; inset: 0; }
+  .badge { position: absolute; left: 8px; top: 8px; background: rgba(255,255,255,.92); border-radius: 6px; padding: 4px 8px; font-weight: bold; }
+  .side { display: grid; gap: 8px; align-content: start; }
+  .logo { width: 100%; max-width: 300px; display: block; }
+  .card { background: #fff; border: 1px solid #c9daf5; border-radius: 8px; padding: 10px; }
+  .card h2 { font-size: 13px; margin: 0 0 6px; color: var(--bleu); text-transform: uppercase; letter-spacing: .5px; }
+  .kpi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; }
+  .kpi b { display: block; font-size: 17px; }
+  .kpi span { font-size: 11px; color: #4b6590; }
+  .stat { display: grid; grid-template-columns: 90px 1fr 42px; align-items: center; gap: 6px; font-size: 12px; margin: 3px 0; }
+  .gauge { height: 8px; background: #e3ecfb; border-radius: 4px; overflow: hidden; }
+  .gauge i { display: block; height: 100%; }
+  .links { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  button { font: inherit; font-size: 12px; border: 0; border-radius: 6px; padding: 7px 8px; cursor: pointer; background: var(--bleu); color: #fff; text-align: left; }
+  button small { display: block; opacity: .85; font-size: 10.5px; }
+  button:disabled { background: #b7c3d6; cursor: not-allowed; }
+  button.alt { background: #e5eefc; color: var(--texte); }
+  button:hover:not(:disabled), button:focus-visible { filter: brightness(1.1); outline: 2px solid #ffcc33; }
+  .log { font-size: 12px; max-height: 110px; overflow: auto; margin: 0; padding-left: 16px; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  input { font: inherit; padding: 5px 7px; border: 1px solid #c9daf5; border-radius: 6px; width: 140px; }
+  .note { font-size: 11px; color: #5d7398; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div>
+    <div class="view"><div id="stage"></div><div class="badge" id="badge"></div></div>
+    <p class="note">Glissez le rond bleu en bas à droite de la ville pour vous déplacer. Après quelques journées, cliquez sur « Actualiser la ville » pour voir les nouveaux bâtiments.</p>
+  </div>
+  <div class="side">
+    <img class="logo" src="logo.png" alt="Miniville">
+    <div class="card">
+      <div class="kpi">
+        <div><b id="kPop">0</b><span>habitants</span></div>
+        <div><b id="kDay">1</b><span>jour</span></div>
+        <div><b id="kInc">0</b><span>revenus / jour</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Faire venir des visiteurs</h2>
+      <p class="note" style="margin:0 0 6px">Sur le site d'origine, chaque visite d'un de vos liens faisait grandir la ville. Choisissez le lien à faire circuler aujourd'hui :</p>
+      <div class="links" id="links"></div>
+    </div>
+    <div class="card">
+      <h2>Problèmes de la ville</h2>
+      <div id="stats"></div>
+    </div>
+    <div class="card">
+      <div class="row">
+        <button type="button" id="bShow">Actualiser la ville</button>
+        <input id="name" maxlength="20" aria-label="Nom de la ville">
+        <button type="button" class="alt" id="bReset">Nouvelle ville</button>
+      </div>
+      <ol class="log" id="log" reversed></ol>
+    </div>
+  </div>
+</div>
+<script type="module">
+import { mount, store, h } from '../../platforms/flash8/kt-host.js';
+import { md5 } from '../../platforms/flash8/md5.js';
+
+// Règles reprises de Miniville/com/Core.hx (calcul des taux et des revenus) ;
+// l'arrivée des visiteurs est une simulation locale (le site d'origine n'est pas archivé).
+const KEY = 'kt.miniville.city';
+const SECTORS = [
+  { k: 'pop', label: 'Habitants', desc: '+ population', need: 0 },
+  { k: 'ind', label: 'Industrie', desc: 'emplois, mais pollution', need: 50 },
+  { k: 'tra', label: 'Transports', desc: 'routes et trafic', need: 100 },
+  { k: 'sec', label: 'Sécurité', desc: 'contre la criminalité', need: 500 },
+  { k: 'env', label: 'Environnement', desc: 'contre la pollution', need: 500 },
+  { k: 'com', label: 'Commerces', desc: 'emplois et revenus', need: 1000 },
+];
+const fresh = name => ({ name, day: 1, pop: 10, ind: 0, tra: 0, sec: 0, env: 0, com: 0, log: [] });
+let city = store.get(KEY, null) || fresh('Kotionville');
+
+const core = c => {
+  const pop = Math.max(c.pop, 1), ind = Math.max(c.ind, 1);
+  const chom = 1 - Math.min(((c.ind * 3 + c.com) + 50) / pop, 1);
+  const road = Math.min((c.tra * 5 + 100) / pop, 1);
+  const pol = Math.min(Math.max(0, ((c.ind + c.pop * 0.1 + c.com * 0.3) - (c.env * 2 + 200)) / ind), 1);
+  const crim = 1 - Math.min((c.sec * 4 + 300) / pop, 1);
+  const income = Math.trunc((c.pop * 1.5 + c.ind * 2.5 + c.com * 4) * 100);
+  return { chom, road, pol, crim, income };
+};
+
+function day(k) {
+  const s = core(city);
+  const visitors = 3 + Math.floor(Math.sqrt(city.pop) * (0.6 + Math.random() * 0.8));
+  let msg;
+  if (k === 'pop') {
+    const trouble = (s.chom + (1 - s.road) + s.pol + s.crim) / 4;
+    const gain = Math.max(1, Math.round(visitors * (1 - 0.75 * trouble)));
+    city.pop += gain;
+    msg = `${visitors} visiteurs, ${gain} nouveaux habitants` + (trouble > 0.4 ? ' (les problèmes freinent la croissance)' : '');
+  } else {
+    city[k] += visitors;
+    msg = `${visitors} visiteurs pour ${SECTORS.find(x => x.k === k).label.toLowerCase()}`;
+  }
+  city.log.unshift(`Jour ${city.day} : ${msg}.`);
+  city.log = city.log.slice(0, 30);
+  city.day++;
+  city.dirty = true;
+  store.set(KEY, city);
+  render();
+}
+
+const pct = x => Math.round(x * 100);
+function render() {
+  const s = core(city);
+  document.getElementById('kPop').textContent = city.pop.toLocaleString('fr');
+  document.getElementById('kDay').textContent = city.day;
+  document.getElementById('kInc').textContent = (s.income / 100).toLocaleString('fr', { maximumFractionDigits: 0 }) + ' €';
+  document.getElementById('badge').textContent = city.name + (city.dirty ? ' · nouveaux bâtiments à voir' : '');
+  document.getElementById('links').replaceChildren(...SECTORS.map(x => h('button', {
+    type: 'button', disabled: city.pop < x.need, onclick: () => day(x.k),
+    title: city.pop < x.need ? `Disponible à ${x.need} habitants` : null,
+  }, x.label, h('small', {}, city.pop < x.need ? `à partir de ${x.need} hab.` : `${x.desc} · ${city[x.k]}`))));
+  const rows = [['Chômage', s.chom, false], ['Transports', s.road, true], ['Pollution', s.pol, false], ['Criminalité', s.crim, false]];
+  document.getElementById('stats').replaceChildren(...rows.map(([n, v, good]) => {
+    const bad = good ? 1 - v : v;
+    const col = bad >= 1 ? '#880000' : bad > 0.8 ? 'var(--rouge)' : bad > 0.5 ? 'var(--orange)' : 'var(--vert)';
+    return h('div', { class: 'stat' }, h('span', {}, n), h('div', { class: 'gauge' }, h('i', { style: `width:${pct(v)}%;background:${col}` })), h('b', { style: `color:${col}` }, pct(v) + '%'));
+  }));
+  document.getElementById('log').replaceChildren(...city.log.slice(0, 12).map(t => h('li', {}, t)));
+  document.getElementById('name').value = city.name;
+}
+
+async function show() {
+  const c = city;
+  const k = md5(`${c.pop};${c.ind};${c.tra};${c.sec};${c.env};${c.com}`).slice(0, 5);
+  city.dirty = false; store.set(KEY, city); render();
+  await mount(document.getElementById('stage'), {
+    swf: 'client.swf', base: './', bgcolor: '#c5dd2c',
+    flashvars: { pop: c.pop, ind: c.ind, tra: c.tra, sec: c.sec, env: c.env, com: c.com, deb: 0, sta: '0', name: c.name, k },
+  });
+}
+
+document.getElementById('bShow').onclick = show;
+document.getElementById('name').onchange = e => { city.name = e.target.value.trim() || 'Kotionville'; city.dirty = true; store.set(KEY, city); render(); };
+document.getElementById('bReset').onclick = () => {
+  if (!confirm('Raser la ville et repartir de zéro ?')) return;
+  city = fresh(document.getElementById('name').value.trim() || 'Kotionville'); store.set(KEY, city); render(); show();
+};
+render();
+show();
+</script>
+</body>
+</html>
