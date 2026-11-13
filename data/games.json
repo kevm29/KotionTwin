@@ -2077,8 +2077,8 @@
    "source": "CafeJeux/games/anticorps",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-anticorps",
    "stats": {
     "swf": 3,
     "hx": 18,
@@ -2086,9 +2086,16 @@
     "images": 5,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-anticorps",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-bandas",
@@ -2098,8 +2105,8 @@
    "source": "CafeJeux/games/bandas",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-bandas",
    "stats": {
     "swf": 1,
     "hx": 6,
@@ -2107,9 +2114,16 @@
     "images": 28,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-bandas",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-billard",
@@ -2119,8 +2133,8 @@
    "source": "CafeJeux/games/billard",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-billard",
    "stats": {
     "swf": 1,
     "hx": 5,
@@ -2128,9 +2142,16 @@
     "images": 3,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-billard",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-boum",
@@ -2139,9 +2160,9 @@
    "year": 2007,
    "source": "CafeJeux/games/boum",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf présent ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "plan": "recompilation",
+   "status": "en-cours",
+   "notes": "Prototype inachevé dans l'archive (pas de dégâts ni de victoire, initialize() incomplet). Recompilé : il démarre, mais n'est pas jouable jusqu'au bout. Version de test : platforms/cafejeux/host.html?g=cj-boum",
    "stats": {
     "swf": 2,
     "hx": 7,
@@ -2149,9 +2170,16 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-boum",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-grapiz",
@@ -2161,8 +2189,8 @@
    "source": "CafeJeux/games/grapiz",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-grapiz",
    "stats": {
     "swf": 1,
     "hx": 5,
@@ -2170,9 +2198,16 @@
     "images": 2,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-grapiz",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-hordes",
@@ -2182,8 +2217,8 @@
    "source": "CafeJeux/games/hordes",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-hordes",
    "stats": {
     "swf": 1,
     "hx": 8,
@@ -2191,9 +2226,16 @@
     "images": 59,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-hordes",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-laferme",
@@ -2202,9 +2244,9 @@
    "year": 2007,
    "source": "CafeJeux/games/laferme",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf présent ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "plan": "recompilation",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-laferme",
    "stats": {
     "swf": 2,
     "hx": 5,
@@ -2212,9 +2254,16 @@
     "images": 10,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-laferme",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-marbils",
@@ -2225,7 +2274,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
    "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "notes": "Le dossier marbils de l'archive est une copie exacte de Bandas (mêmes sources, même gfx.swf) : le vrai Marbils semble perdu.",
    "stats": {
     "swf": 1,
     "hx": 6,
@@ -2245,8 +2294,8 @@
    "source": "CafeJeux/games/opalus",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc : la page se fige au démarrage (bogue du compilateur maison à corriger). Version de test : platforms/cafejeux/host.html?g=cj-opalus",
    "stats": {
     "swf": 1,
     "hx": 5,
@@ -2254,9 +2303,16 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-opalus",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-paturage",
@@ -2265,9 +2321,9 @@
    "year": 2007,
    "source": "CafeJeux/games/paturage",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf présent ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "plan": "recompilation",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-paturage",
    "stats": {
     "swf": 2,
     "hx": 4,
@@ -2275,9 +2331,16 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-paturage",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-power4",
@@ -2287,8 +2350,8 @@
    "source": "CafeJeux/games/power4",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée : partie à deux (chacun son tour ou côte à côte) et IA simple. Démarrage et premiers coups vérifiés ; partie complète jusqu'à la victoire encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-power4",
    "stats": {
     "swf": 1,
     "hx": 4,
@@ -2296,9 +2359,16 @@
     "images": 3,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-power4",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-trigolo",
@@ -2307,9 +2377,9 @@
    "year": 2007,
    "source": "CafeJeux/games/trigolo",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
-   "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "game.swf présent ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "plan": "recompilation",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-trigolo",
    "stats": {
     "swf": 2,
     "hx": 4,
@@ -2317,9 +2387,16 @@
     "images": 7,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-trigolo",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "cj-utopiz",
@@ -2329,8 +2406,8 @@
    "source": "CafeJeux/games/utopiz",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "game.swf absent (seul gfx.swf) : recompiler ; jeu à 2 joueurs : recréer l'API CaféJeux (../api absent) pour un duel local ou contre une IA.",
+   "status": "en-cours",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée (deux joueurs sur le même écran). Le jeu démarre et l'initialisation est échangée entre les deux joueurs ; parties complètes encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-utopiz",
    "stats": {
     "swf": 1,
     "hx": 7,
@@ -2338,9 +2415,16 @@
     "images": 0,
     "sons": 0
    },
-   "entry": null,
+   "entry": {
+    "type": "html",
+    "url": "platforms/cafejeux/host.html?g=cj-utopiz",
+    "width": 640,
+    "height": 760,
+    "scale": 1.3
+   },
    "thumb": null,
-   "description": ""
+   "description": "",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   },
   {
    "id": "fp-burningkiwi",
