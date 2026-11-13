@@ -15,8 +15,9 @@
   button { font: inherit; font-weight: bold; color: var(--brun); background: var(--sable); border: 0; border-radius: 6px; padding: 5px 12px; cursor: pointer; box-shadow: 0 2px 0 #8b6a2c; }
   button:hover, button:focus-visible { background: #f1dcaa; outline: none; }
   button.go { background: #9bd25c; color: #1f3a0a; box-shadow: 0 2px 0 #4f7d22; }
-  .stagewrap { position: relative; flex: 1 1 auto; display: grid; place-items: center; min-height: 0; background: #000; }
-  #stage { width: 100%; height: 100%; max-width: calc((100vh - 46px) * 622 / 424); aspect-ratio: 622 / 424; max-height: 100%; }
+  .stagewrap { position: relative; flex: 1 1 auto; display: grid; place-items: center; min-height: 0; overflow: hidden; background: #2b2113; }
+  #stage { width: 622px; height: 424px; }
+  #stage > * { width: 100%; height: 100%; display: block; }
   .overlay { position: absolute; inset: 0; background: rgba(43, 33, 19, .94); overflow: auto; padding: 14px; display: none; }
   .overlay.on { display: block; }
   .overlay h2 { margin: 0 0 6px; color: var(--sable); font-size: 18px; }
@@ -59,6 +60,7 @@ const nextLevel = () => levels.find(l => !isDone(l)) || levels[0];
 const fmt = ms => { const s = Math.round(ms / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 
 function showMenu() {
+  clearTimeout(autoTimer);
   const nxt = nextLevel();
   const card = l => h('button', { type: 'button', class: 'lv' + (isDone(l) ? ' done' : '') + (l === nxt ? ' next' : ''), onclick: () => play(l) },
     h('b', {}, l.title), h('span', {}, `${l.piouz} piou${l.piouz > 1 ? 'z' : ''} à sauver` + (progress[l.id] ? ` · record ${progress[l.id].piouz}` : '')));
@@ -75,21 +77,23 @@ function showMenu() {
 }
 
 async function play(l) {
+  clearTimeout(autoTimer);
   current = l;
   $('menu').classList.remove('on');
   $('end').classList.remove('on');
   $('sub').textContent = `· ${l.title} · objectif ${l.piouz} piou${l.piouz > 1 ? 'z' : ''}`;
   $('bRetry').hidden = false;
   await mount($('stage'), {
-    swf: 'pioupiouz.swf', base: './', bgcolor: '#dec896',
+    swf: 'pioupiouz.swf', base: './', bgcolor: '#dec896', config: /debug/.test(location.search) ? { logLevel: 'info' } : {},
     flashvars: { lvl: `levels/${l.id}.xml`, $mode: '0', $lang: 'fr', $help: l.tuto ? '1' : '0' },
   });
 }
 
 // Appels du jeu (ExternalInterface, voir src/pioupiouz/build.py)
 window.ktPiouStart = () => {};
-window.ktPiouRetry = () => {};
+window.ktPiouRetry = () => { if (/debug/.test(location.search)) console.log('ktPiouRetry'); };
 window.ktPiouExit = (time, piouz, pid) => {
+  if (/debug/.test(location.search)) console.log('ktPiouExit', time, piouz, pid);
   const l = current; if (!l) return;
   piouz = +piouz || 0; time = +time || 0;
   const ok = piouz >= l.piouz;
@@ -104,10 +108,32 @@ window.ktPiouExit = (time, piouz, pid) => {
     h('div', { class: 'row' },
       ok && nxt ? h('button', { type: 'button', class: 'go', onclick: () => play(nxt) }, 'Niveau suivant') : null,
       h('button', { type: 'button', onclick: () => play(l) }, 'Rejouer'),
-      h('button', { type: 'button', onclick: showMenu }, 'Tous les niveaux'))));
+      h('button', { type: 'button', onclick: showMenu }, 'Tous les niveaux')),
+    ok && nxt ? h('p', { class: 'note', id: 'auto' }, '') : null));
   $('end').classList.add('on');
+  // niveau réussi : on enchaîne tout seul sur le suivant
+  if (ok && nxt) {
+    let n = 3;
+    const tick = () => {
+      if (current !== l || !$('end').classList.contains('on')) return;
+      if (n === 0) return play(nxt);
+      $('auto').textContent = `Niveau suivant « ${nxt.title} » dans ${n} s…`;
+      n--; autoTimer = setTimeout(tick, 1000);
+    };
+    tick();
+  }
 };
+let autoTimer = 0;
 
+// la scène garde exactement les proportions d'origine (622×424) : pas de bandes noires
+const fit = () => {
+  const r = document.querySelector('.stagewrap').getBoundingClientRect();
+  const k = Math.min(r.width / 622, r.height / 424);
+  $('stage').style.width = Math.floor(622 * k) + 'px';
+  $('stage').style.height = Math.floor(424 * k) + 'px';
+};
+new ResizeObserver(fit).observe(document.querySelector('.stagewrap'));
+fit();
 $('bList').onclick = showMenu;
 $('bRetry').onclick = () => current && play(current);
 if (Object.keys(progress).length) showMenu(); else play(nextLevel());
