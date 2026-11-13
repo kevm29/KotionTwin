@@ -2350,8 +2350,8 @@
    "source": "CafeJeux/games/power4",
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
-   "status": "en-cours",
-   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée : partie à deux (chacun son tour ou côte à côte) et IA simple. Démarrage et premiers coups vérifiés ; partie complète jusqu'à la victoire encore à vérifier. Version de test : platforms/cafejeux/host.html?g=cj-power4",
+   "status": "jouable",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison de KotionTwin) et l'API CaféJeux recréée : la page hôte remplace le serveur de duel. Partie vérifiée jusqu'à la victoire (écran de fin, rejouer) ; IA simple ajoutée (aligner, bloquer). Aucun son dans l'archive pour ce jeu.",
    "stats": {
     "swf": 1,
     "hx": 4,
@@ -2366,9 +2366,10 @@
     "height": 760,
     "scale": 1.3
    },
-   "thumb": null,
-   "description": "",
-   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
+   "thumb": "games/cj-power4/thumb.png",
+   "description": "Un Puissance 4 sans gravité, sur une toile d'araignée : chacun lance sa coccinelle depuis un bord, elle glisse jusqu'à toucher une autre pièce. Le premier qui en aligne 4 (horizontalement ou verticalement) gagne.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin",
+   "controls": "Souris : bougez pour viser une case libre au contact des pièces, cliquez pour lancer la coccinelle. Modes : à deux chacun son tour, à deux côte à côte, ou contre l'ordinateur."
   },
   {
    "id": "cj-trigolo",
