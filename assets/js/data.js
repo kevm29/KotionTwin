@@ -123,7 +123,6 @@ export const store = {
     writeStore(s);
     return { entry, rank: s.scores[id].indexOf(entry) + 1 };
   },
-  clearScores(id) { const s = readStore(); if (s.scores) delete s.scores[id]; writeStore(s); },
   // Pseudo du joueur : obligatoire pour lancer une partie, enregistré avec chaque score.
   get pseudo() { return readStore().pseudo || ''; },
   set pseudo(v) { const s = readStore(); s.pseudo = cleanPseudo(v); writeStore(s); },
@@ -131,10 +130,9 @@ export const store = {
   set padAuto(v) { const s = readStore(); s.padAuto = !!v; writeStore(s); },
   clearAll(what) {
     const s = readStore();
-    if (what === 'scores') delete s.scores;
-    else if (what === 'favorites') delete s.favorites;
+    if (what === 'favorites') delete s.favorites;
     else if (what === 'recent') delete s.recent;
-    else { try { localStorage.removeItem(KEY); } catch { /* rien */ } return; }
+    else { writeStore(s.scores ? { scores: s.scores } : {}); return; } // les scores ne s'effacent jamais
     writeStore(s);
   },
   get theme() { return readStore().theme || null; },
