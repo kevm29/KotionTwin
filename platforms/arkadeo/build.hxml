@@ -1,0 +1,6 @@
+-cp src
+-main Host
+-swf host.swf
+-swf-version 11.8
+-swf-header 600:480:40:0b0d14
+-D native-trace
