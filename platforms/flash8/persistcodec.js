@@ -32,7 +32,7 @@ class BitReader {
   crcStr() { const c = this.crc; return [0, 6, 12, 18].map(s => ALPHA[(c >> s) & 63]).join(''); }
 }
 
-export function encode(o, { crc = false, obfu = false } = {}) {
+export function encode(o, { crc = false, obfu = false, refs = true } = {}) {
   const bc = new BitWriter(); const fields = new Map(); let nfields = 0, nbits = 0, next = 1;
   const int = n => {
     if (n < 0) { bc.write(3, 7); int(-n); }
@@ -81,7 +81,7 @@ export function encode(o, { crc = false, obfu = false } = {}) {
       for (let [k, x] of Object.entries(v)) {
         if (typeof x === 'function' || x == null) continue;
         if (obfu && k[0] === '$') k = k.slice(1);
-        if (fields.has(k)) { bc.write(1, 0); bc.write(nbits, fields.get(k)); }
+        if (refs && fields.has(k)) { bc.write(1, 0); bc.write(nbits, fields.get(k)); }
         else {
           nfields++; fields.set(k, nfields);
           if (!(nfields < next)) { nbits++; next *= 2; }
@@ -155,7 +155,8 @@ export function decode(s, { crc = false, obfu = false } = {}) {
       }
       return a;
     }
-    return [false, true, undefined, null][bc.read(2)] ?? (null);
+    const t = bc.read(2);
+    return t === 2 ? str() : [false, true, null, null][t];
   };
   const v = any();
   return v;
