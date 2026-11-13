@@ -160,11 +160,11 @@
         break;
       }
       case 'infos':
-        S.infos[pid] = String(data);
+        S.infos[pid] = names_in(pid, String(data));
         renderInfos();
         break;
       case 'log':
-        S.logs[pid].push(String(data));
+        S.logs[pid].push(names_in(pid, String(data)));
         renderLog();
         break;
       case 'print':
@@ -175,6 +175,11 @@
         break;
     }
   };
+
+  // Le serveur d'origine remplaçait $me et $other par les pseudos des joueurs.
+  function names_in(pid, txt) {
+    return txt.replace(/\$me\b/g, names[pid]).replace(/\$other\b/g, names[1 - pid]);
+  }
 
   // ------------------------------------------------------------------ déroulement
   function start() {
