@@ -48,3 +48,23 @@ Dans `data/games.json`, pour l'entrée du jeu :
 5. **Fidélité graphique** : comparer avec des captures d'époque (vignettes `sc*.gif`, `teaser.jpg`, captures web) : couleurs, polices, cadrage, taille de scène.
 6. **Test automatique** : `node tools/smoke-swf.js <racine> '["/play.html?g=<id>"]' /tmp/shot 8000` puis regarder la capture.
 7. **Crédits** : Motion Twin reste crédité ; toute ressource tierce est listée dans `CREDITS.md`.
+
+## Scores, vignette et confort de jeu (interface du site)
+
+**Scores.** La page de jeu garde les 10 meilleurs scores de chaque jeu dans le `localStorage` du joueur et les affiche
+dans « Mes meilleurs scores ». Pour qu'un jeu y envoie son score de fin de partie :
+
+- Flash (Ruffle) : `ExternalInterface.call("ktSubmitScore", score)` (ou `"KotionTwin.submitScore"`).
+  `ExternalInterface.call("ktGetBest")` renvoie le record local, ou `null`.
+  Dans un loader de plateforme (KKApi, AKApi, Frusion…), c'est l'endroit où brancher `gameOver`/`saveScore`.
+- HTML5 (iframe) : `parent.postMessage({ type: "kotiontwin:score", score: 1234 }, "*")`.
+- Depuis la page : `window.KotionTwin.submitScore(1234)`.
+
+**Vignette.** `g.thumb` (dans `games.json`) reste la vignette officielle du jeu. Pour les jeux qui n'avaient pas de capture,
+le site utilise `data/covers.json` (images dans `assets/covers/`, fabriquées par `tools/make_covers.py` à partir d'une
+image de l'archive). Un thread qui ajoute une meilleure vignette dans `games/<id>/thumb.*` peut supprimer l'entrée
+correspondante de `data/covers.json` (sinon une entrée marquée `"override": true` reste prioritaire).
+
+**Commandes.** Renseignez `controls` en toutes lettres (« Flèches pour bouger, Espace pour tirer ») : sur téléphone,
+le site propose une manette tactile (flèches, Espace, Entrée) dès que ce texte mentionne le clavier, les flèches,
+Espace ou Entrée. Les jeux à la souris n'en ont pas besoin (le toucher fait office de clic dans Ruffle).

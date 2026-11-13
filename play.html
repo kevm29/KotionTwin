@@ -2,42 +2,91 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KotionTwin · Jouer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jouer · KotionTwin</title>
+<meta name="theme-color" content="#14112a">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">
+<script>try{var t=JSON.parse(localStorage.getItem('kotiontwin:v1')||'{}').theme;if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 </head>
 <body class="play">
-<header class="bar">
-  <div class="wrap bar-in">
-    <a class="brand" href="./"><span class="logo">KT</span> KotionTwin</a>
-    <a class="back" href="./">← Tous les jeux</a>
+<a class="skip" href="#stage">Aller au jeu</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="./" aria-label="KotionTwin, accueil"><span class="logo" aria-hidden="true">KT</span><span>KotionTwin</span></a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="./#collections">Collections</a>
+      <a href="./#catalogue">Catalogue</a>
+    </nav>
+    <button id="theme" class="icon-btn" type="button" aria-label="Changer de thème">☾</button>
   </div>
 </header>
-<main class="wrap">
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Fil d'Ariane"><a href="./">Accueil</a> <span aria-hidden="true">›</span> <a id="crumb-coll" href="./#collections">Collection</a> <span aria-hidden="true">›</span> <span id="crumb" aria-current="page"></span></nav>
   <div class="game-head">
     <div>
       <p class="eyebrow" id="meta"></p>
       <h1 id="title">Chargement…</h1>
     </div>
-    <div class="actions">
-      <button id="fs" type="button" hidden>Plein écran</button>
+    <div class="actions" role="toolbar" aria-label="Actions du jeu">
+      <button id="fav" class="tool" type="button" aria-pressed="false"><span aria-hidden="true">★</span> <span class="lbl">Favori</span></button>
+      <button id="share" class="tool" type="button"><span aria-hidden="true">🔗</span> <span class="lbl">Partager</span></button>
     </div>
   </div>
-  <section id="stage" class="stage" aria-live="polite"></section>
+
+  <div class="stage-wrap" id="stage-wrap">
+    <section id="stage" class="stage" aria-live="polite" tabindex="-1" aria-label="Zone de jeu"></section>
+    <div class="pad" id="pad" hidden aria-hidden="true">
+      <div class="pad-dir">
+        <button data-key="ArrowUp" class="k up">▲</button>
+        <button data-key="ArrowLeft" class="k left">◀</button>
+        <button data-key="ArrowRight" class="k right">▶</button>
+        <button data-key="ArrowDown" class="k down">▼</button>
+      </div>
+      <div class="pad-act">
+        <button data-key=" " data-code="Space" class="k a">Espace</button>
+        <button data-key="Enter" data-code="Enter" class="k b">Entrée</button>
+      </div>
+    </div>
+    <div class="stage-bar" id="stage-bar" hidden role="toolbar" aria-label="Contrôles du lecteur">
+      <button id="restart" class="tool" type="button" title="Recommencer"><span aria-hidden="true">↻</span> <span class="lbl">Recommencer</span></button>
+      <button id="mute" class="tool" type="button" aria-pressed="false" title="Couper le son (M)"><span aria-hidden="true" class="ico">🔊</span> <span class="lbl">Son</span></button>
+      <button id="padbtn" class="tool" type="button" aria-pressed="false" title="Manette tactile"><span aria-hidden="true">🎮</span> <span class="lbl">Manette</span></button>
+      <button id="fs" class="tool primary" type="button" title="Plein écran (F)"><span aria-hidden="true">⛶</span> <span class="lbl">Plein écran</span></button>
+    </div>
+  </div>
+  <p class="hint" id="hint" hidden></p>
+
   <div class="cols">
     <section class="panel">
       <h2>À propos</h2>
       <p id="desc"></p>
       <div id="controls"></div>
     </section>
-    <section class="panel">
+    <section class="panel" id="scores-panel">
+      <h2>Mes meilleurs scores</h2>
+      <ol class="scores" id="scores"></ol>
+      <p class="muted small" id="scores-empty">Aucun score enregistré pour l'instant. Les scores restent sur cet appareil.</p>
+      <button class="link-btn" id="scores-clear" type="button" hidden>Effacer mes scores</button>
+    </section>
+    <section class="panel span2">
       <h2>Fiche technique</h2>
       <dl id="tech" class="tech"></dl>
     </section>
   </div>
+
+  <nav class="pager" id="pager" aria-label="Jeux voisins"></nav>
+  <div id="related"></div>
 </main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
 <footer class="foot">
-  <div class="wrap">
+  <div class="wrap foot-in">
     <p>© <strong>Motion Twin</strong> — licence <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a>.
       Source : <a id="srclink" href="https://github.com/motion-twin/WebGamesArchives">motion-twin/WebGamesArchives</a>.
       Projet de fan non commercial, non affilié à Motion Twin.</p>
