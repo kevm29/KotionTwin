@@ -2638,8 +2638,8 @@
    "source": "Frutiparc/Games/burningKiwi",
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF présents ; simuler l'API Frusion (Frutiparc/frusion).",
+   "status": "jouable",
+   "notes": "SWF d'origine (racer.swf) lancé par l'hôte Frusion réécrit, disque blanc. La « course du jour » est choisie localement chaque jour parmi les 6 circuits. Les tailles de fichiers attendues par le jeu sont fournies par l'hôte.",
    "stats": {
     "swf": 12,
     "hx": 0,
@@ -2647,9 +2647,18 @@
     "images": 54,
     "sons": 12
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/fp-burningkiwi/host.swf",
+    "width": 350,
+    "height": 350,
+    "scale": 2,
+    "base": "games/fp-burningkiwi/"
+   },
    "thumb": null,
-   "description": ""
+   "description": "Course de voitures vue de dessus dans des décors fruités : essais, tutoriel, évolution, épreuves et course du jour sur six circuits.",
+   "controls": "Flèches pour piloter (Haut accélère), Espace/Entrée pour valider ; souris dans les menus.",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004) ; restauration KotionTwin (hôte Frusion réécrit)"
   },
   {
    "id": "fp-frutibandas",
@@ -2695,14 +2704,14 @@
   },
   {
    "id": "fp-kaluga",
-   "title": "kaluga",
+   "title": "Kaluga",
    "collection": "frutiparc",
    "year": 2004,
    "source": "Frutiparc/Games/kaluga",
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF présents ; simuler l'API Frusion (Frutiparc/frusion).",
+   "status": "jouable",
+   "notes": "SWF d'origine (full.swf) lancé par un hôte Frusion réécrit : la classe frusion.gameclient.GameClient, absente de l'archive, est recréée en mode « disque blanc » (version complète). Fruticard et objets gagnés sauvegardés dans le navigateur. Animation de fin (anim/end.swf) absente de l'archive.",
    "stats": {
     "swf": 18,
     "hx": 0,
@@ -2710,9 +2719,19 @@
     "images": 338,
     "sons": 2
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/fp-kaluga/host.swf",
+    "width": 700,
+    "height": 480,
+    "scale": 1.5,
+    "base": "games/fp-kaluga/",
+    "bgcolor": "#ade76b"
+   },
    "thumb": null,
-   "description": ""
+   "description": "Entraînez votre tzongre Kaluga, un gros insecte volant, à travers des épreuves d'adresse : ramasser des pommes, lancer des écureuils, courir contre la montre, survivre aux vagues d'ennemis…",
+   "controls": "Souris (menus et épreuves), parfois Espace ; Échap pour la pause.",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004) ; restauration KotionTwin (hôte Frusion réécrit)"
   },
   {
    "id": "fp-minifever",
@@ -2723,7 +2742,7 @@
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine lancé tel quel dans Ruffle (premier test). Sons, score et fin de partie à vérifier dans le thread Frutiparc.",
+   "notes": "SWF d'origine de l'archive lancé tel quel dans Ruffle. C'est la version autonome compilée par Motion Twin (Manager.mt : genSlot(\"baseFever\") sans client Frusion) : elle démarre directement le mode Fever, enchaînement des micro-jeux avec jauge de temps, sans menu ni sauvegarde. Scène d'origine 240×240. Le jeu n'a pas de sons.",
    "stats": {
     "swf": 1,
     "hx": 0,
@@ -2734,24 +2753,25 @@
    "entry": {
     "type": "ruffle",
     "swf": "games/fp-minifever/minifever.swf",
-    "width": 281,
-    "height": 281,
+    "width": 240,
+    "height": 240,
     "scale": 2
    },
    "thumb": null,
    "description": "Enchaînement frénétique de micro-jeux de quelques secondes : réagissez vite pour garder vos vies.",
-   "controls": "Souris."
+   "controls": "Souris.",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004)"
   },
   {
    "id": "fp-minitroll",
-   "title": "Mini Troll",
+   "title": "Mini Pixiz (Mini Troll)",
    "collection": "frutiparc",
    "year": 2004,
    "source": "Frutiparc/Games/miniTroll",
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF présents ; simuler l'API Frusion (Frutiparc/frusion).",
+   "status": "en-cours",
+   "notes": "Le SWF « release » de l'archive est une version de test (puzzle de démonstration, journal affiché). La version complète est reconstituée en fusionnant swf/root.swf et swf/gfx.swf, puis lancée par l'hôte Frusion réécrit. Démarrage et carte vérifiés ; partie complète encore à vérifier.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -2759,9 +2779,18 @@
     "images": 650,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/fp-minitroll/host.swf",
+    "width": 240,
+    "height": 240,
+    "scale": 2,
+    "base": "games/fp-minitroll/"
+   },
+   "thumb": "games/fp-minitroll/thumb.jpg",
+   "description": "Aventure-puzzle : guidez votre fée dans le monde de Mini Pixiz, explorez la carte et résolvez des puzzles de billes colorées pour gagner objets et sorts.",
+   "controls": "Souris ; flèches et Espace dans les puzzles.",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004) ; restauration KotionTwin (hôte Frusion réécrit)"
   },
   {
    "id": "fp-miniwave2",
@@ -2771,8 +2800,8 @@
    "source": "Frutiparc/Games/miniWave2",
    "tech": "ActionScript 1/2 → Flash 6-7 (AVM1)",
    "plan": "ruffle-shim",
-   "status": "a-restaurer",
-   "notes": "SWF présents ; simuler l'API Frusion (Frutiparc/frusion).",
+   "status": "jouable",
+   "notes": "Le SWF final n'était pas dans l'archive : il est reconstitué en fusionnant miniWave2.swf, lib.swf, gfx.swf, decor.swf et bumdum.swf (équivalent de l'outil swfmake de Motion Twin), scène recadrée à 240×240 comme dans la fenêtre Frusion (le journal de débogage est hors champ). Lancé par l'hôte Frusion réécrit.",
    "stats": {
     "swf": 6,
     "hx": 0,
@@ -2780,9 +2809,19 @@
     "images": 198,
     "sons": 0
    },
-   "entry": null,
-   "thumb": null,
-   "description": ""
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/fp-miniwave2/host.swf",
+    "width": 240,
+    "height": 240,
+    "scale": 2,
+    "base": "games/fp-miniwave2/",
+    "bgcolor": "#4b4880"
+   },
+   "thumb": "games/fp-miniwave2/thumb.jpg",
+   "description": "Shoot'em up vertical à la Space Invaders : choisissez votre escadron de vaisseaux et affrontez des vagues de fruits et de légumes, avec missions, boutique et pouvoirs.",
+   "controls": "Flèches pour se déplacer, Espace pour tirer ; souris dans les menus (cliquez sur un vaisseau pour l'ajouter à l'escadron).",
+   "credits": "Motion Twin (jeu original, Frutiparc 2004) ; restauration KotionTwin (hôte Frusion réécrit)"
   },
   {
    "id": "fp-motionball2",
