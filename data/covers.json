@@ -289,10 +289,6 @@
    "src": "assets/covers/kk-zipzap.webp",
    "from": "swf:KadoKado/Games/zipzap/swf/gfx.swf"
   },
-  "naturalchimie-2": {
-   "src": "assets/covers/naturalchimie-2.webp",
-   "from": "swf:Naturalchimie2/fla/botGame/swf/botGame.swf"
-  },
   "cj-bandas": {
    "src": "assets/covers/cj-bandas.webp",
    "from": "swf:CafeJeux/games/bandas/swf/gfx.swf"

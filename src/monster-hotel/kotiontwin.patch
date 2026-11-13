@@ -1,0 +1,233 @@
+diff --git a/client/src/Assets.hx b/client/src/Assets.hx
+index 71e6f17..fed3fd6 100644
+--- a/client/src/Assets.hx
++++ b/client/src/Assets.hx
+@@ -35,7 +35,7 @@ class Assets {
+ 	#if cpp
+ 	public static var SBANK			= mt.flash.Sfx.importFromAssets("assets/sfx_ogg");
+ 	#else
+-	public static var SBANK			= mt.flash.Sfx.importFromAssets("assets/sfx_low");
++	public static var SBANK			= mt.flash.Sfx.importDirectory("assets/sfx_hd"); // KotionTwin : sons intégrés au SWF
+ 	#end
+ 
+ 	public static var SCALE			= 1;
+@@ -126,25 +126,25 @@ class Assets {
+ 				if( SCALE==1 )
+ 					TexturePacker.importXmlMtDeferred("assets/bgAssets.hd.xml",getWorker(),function(t){ bg = t; doneStep++; });
+ 				else
+-					TexturePacker.importXmlMtDeferred("assets/bgAssets.low.xml",getWorker(),function(t){ bg = t; doneStep++; });
++					TexturePacker.importXmlMtDeferred("assets/bgAssets.hd.xml",getWorker(),function(t){ bg = t; doneStep++; });
+ 
+ 			case 4 :
+ 				if( SCALE==1 )
+ 					TexturePacker.importXmlMtDeferred("assets/monsters0.hd.xml",getWorker(),function(t){ monsters0 = t; doneStep++; });
+ 				else
+-					TexturePacker.importXmlMtDeferred("assets/monsters0.low.xml",getWorker(),function(t){ monsters0 = t; doneStep++; });
++					TexturePacker.importXmlMtDeferred("assets/monsters0.hd.xml",getWorker(),function(t){ monsters0 = t; doneStep++; });
+ 
+ 			case 5 :
+ 				if( SCALE==1 )
+ 					TexturePacker.importXmlMtDeferred("assets/monsters1.hd.xml",getWorker(),function(t){ monsters1 = t; doneStep++; });
+ 				else
+-					TexturePacker.importXmlMtDeferred("assets/monsters1.low.xml",getWorker(),function(t){ monsters1 = t; doneStep++; });
++					TexturePacker.importXmlMtDeferred("assets/monsters1.hd.xml",getWorker(),function(t){ monsters1 = t; doneStep++; });
+ 
+ 			case 6 :
+ 				if( SCALE==1 )
+ 					TexturePacker.importXmlMtDeferred("assets/monsters2.hd.xml",getWorker(),function(t){ monsters2 = t; doneStep++; });
+ 				else
+-					TexturePacker.importXmlMtDeferred("assets/monsters2.low.xml",getWorker(),function(t){ monsters2 = t; doneStep++; });
++					TexturePacker.importXmlMtDeferred("assets/monsters2.hd.xml",getWorker(),function(t){ monsters2 = t; doneStep++; });
+ 
+ 			case 7:
+ 				var f = openfl.Assets.getFont("large");
+@@ -162,7 +162,7 @@ class Assets {
+ 				if( SCALE==1 )
+ 					TexturePacker.importXmlMtDeferred("assets/custo0.hd.xml",getWorker(),function(t){ custo0 =  t; doneStep++; });
+ 				else
+-					TexturePacker.importXmlMtDeferred("assets/custo0.low.xml",getWorker(),function(t){ custo0 =  t; doneStep++; });
++					TexturePacker.importXmlMtDeferred("assets/custo0.hd.xml",getWorker(),function(t){ custo0 =  t; doneStep++; });
+ 
+ 			case 12:
+ 				TexturePacker.importXmlMtDeferred("assets/intro.xml",getWorker(),function(t){ intro =  t; doneStep++; });
+diff --git a/client/src/Game.hx b/client/src/Game.hx
+index 593496e..43a68da 100644
+--- a/client/src/Game.hx
++++ b/client/src/Game.hx
+@@ -2631,7 +2631,7 @@ class Game extends H2dProcess {
+ 				#if console
+ 				Main.ME.console.log(s, 0xFFCC00);
+ 				#else
+-				new ui.Notification(s, 0xFFCC00);
++				new ui.Notification(cast s, 0xFFCC00);
+ 				#end
+ 
+ 			case SyncLastEventTime(_) :
+@@ -2711,7 +2711,7 @@ class Game extends H2dProcess {
+ 					q.addText( Lang.untranslated(line) );
+ 				q.addOk( Lang.t._("Cool!") );
+ 
+-			case SpecialRewardReceived(id, items) :
++			case com.Protocol.GameEffect.SpecialRewardReceived(id, rewardItems) :
+ 				ui.side.Inbox.CURRENT.invalidate();
+ 				Assets.SBANK.happy(1);
+ 
+@@ -2719,7 +2719,7 @@ class Game extends H2dProcess {
+ 				q.addTitle(Lang.t._("Special reward!"));
+ 				//q.addText( Lang.t._("You received the following items:") );
+ 				q.addSeparator();
+-				for(i in items) {
++				for(i in rewardItems) {
+ 					var icon = Assets.getItemHSprite(i.i, 100, 0.5,0.5);
+ 					var label : LocaleString = cast ( Lang.getItem(i.i).name + (i.n>1 ? " (x"+i.n+")" : "") );
+ 					if( icon!=null )
+@@ -3033,6 +3033,9 @@ class Game extends H2dProcess {
+ 			//case HappinessUpdate :
+ 
+ 			case LevelUp :
++				#if kotion // KotionTwin : score du site = niveau de l'hôtel
++				try { if( flash.external.ExternalInterface.available ) flash.external.ExternalInterface.call("ktSubmitScore", shotel.level); } catch(e:Dynamic) {}
++				#end
+ 				#if connected
+ 				mt.device.EventTracker.levelAchieved( shotel.level-1 );
+ 				#end
+diff --git a/client/src/SoundMan.hx b/client/src/SoundMan.hx
+index 16fc8ab..5997f9b 100644
+--- a/client/src/SoundMan.hx
++++ b/client/src/SoundMan.hx
+@@ -241,12 +241,16 @@ class SoundMan extends mt.Process {
+ 
+ 	#if !musicIncluded
+ 	function downloadNext() {
+-		#if !connected
++		#if (!connected && !kotion)
+ 		return;
+ 		#else
+ 		downloading = true;
+ 		var id = downloads.shift();
++		#if kotion
++		var base = "music/"; // KotionTwin : musiques MP3 servies à côté du SWF
++		#else
+ 		var base = Main.ME.hdata.musicUrl;
++		#end
+ 		if( base.charAt(base.length-1)!="/" )
+ 			base+="/";
+ 		var url = base + id + ".mp3";
+@@ -322,7 +326,7 @@ class SoundMan extends mt.Process {
+ 		super.update();
+ 
+ 		#if( connected && !musicIncluded )
+-		if( Main.ME.hdata!=null && !downloading && downloads.length>0 )
++		if( #if kotion true #else Main.ME.hdata!=null #end && !downloading && downloads.length>0 )
+ 			downloadNext();
+ 		#end
+ 
+diff --git a/client/src/WebMain.hx b/client/src/WebMain.hx
+index 51a879b..2eb6f25 100644
+--- a/client/src/WebMain.hx
++++ b/client/src/WebMain.hx
+@@ -8,6 +8,7 @@
+ class WebMain {
+ 
+ 	function new() {
++		KtAssets.init(); // KotionTwin : ressources intégrées au SWF (remplace openfl.Assets)
+ 		#if !debug
+ 		// static entry point
+ 		flash.Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener( flash.events.UncaughtErrorEvent.UNCAUGHT_ERROR, onErrorEvent );
+@@ -67,18 +68,13 @@ class WebMain {
+ 			stack = haxe.CallStack.toString(haxe.CallStack.exceptionStack());
+ 		}
+ 		//
+-		haxe.Timer.delay( function() {
+-			var http = new mt.net.Http("/tid/logError" );
+-			var logs = mt.Console.dump();
+-			http.setParameter("err", title+"\n"+message+"\n" + stack+"\nCaps:"+mt.Lib.getNativeCaps()+"\nLogs:\n"+logs );
+-			http.request( true );
+-			new page.FatalError(title, message, stack);
+-		}, 1 );
++		// KotionTwin : pas de serveur de rapport d'erreurs
++		new page.FatalError(title, message, stack);
+ 	}
+ 
+ 	function onFriendRequest(){
+ 		if( Game.ME != null )
+-			Game.ME.inboxSync();
++			{} // KotionTwin : pas de demandes d'amis hors ligne
+ 	}
+ 
+ }
+diff --git a/client/src/ui/side/BuildMenu.hx b/client/src/ui/side/BuildMenu.hx
+index d38c2aa..4bee8c7 100644
+--- a/client/src/ui/side/BuildMenu.hx
++++ b/client/src/ui/side/BuildMenu.hx
+@@ -24,7 +24,7 @@ class BuildMenu extends ui.SideMenu {
+ 	}
+ 
+ 
+-	override function onStartDrag(v) {
++	override function onStartDrag(v:Dynamic) {
+ 		super.onStartDrag(v);
+ 
+ 		g.clearHudLayer();
+@@ -102,7 +102,7 @@ class BuildMenu extends ui.SideMenu {
+ 		//}
+ 	}
+ 
+-	override function onDragOnScene(v,cx,cy,?r:b.Room) {
++	override function onDragOnScene(v:Dynamic,cx:Int,cy:Int,?r:b.Room) {
+ 		super.onDragOnScene(v,cx,cy,r);
+ 
+ 		if( r==null )
+diff --git a/client/src/ui/side/CustomizeMenu.hx b/client/src/ui/side/CustomizeMenu.hx
+index a66171c..8ed3363 100644
+--- a/client/src/ui/side/CustomizeMenu.hx
++++ b/client/src/ui/side/CustomizeMenu.hx
+@@ -501,7 +501,7 @@ class CustomizeMenu extends ui.SideMenu {
+ 		Assets.tiles.getH2dBitmap( Assets.getItemIcon(i), 0.5,0.5, cursor );
+ 	}
+ 
+-	override function onDragOnScene(i:Item,cx,cy,?r) {
++	override function onDragOnScene(i:Dynamic,cx:Int,cy:Int,?r:b.Room) {
+ 		super.onDragOnScene(i,cx,cy,r);
+ 
+ 		if( r!=null )
+diff --git a/client/src/ui/side/ItemMenu.hx b/client/src/ui/side/ItemMenu.hx
+index 6356ce8..4ec0b88 100644
+--- a/client/src/ui/side/ItemMenu.hx
++++ b/client/src/ui/side/ItemMenu.hx
+@@ -110,7 +110,7 @@ class ItemMenu extends ui.SideMenu {
+ 		b.position();
+ 	}
+ 
+-	override function onStartDrag(i) {
++	override function onStartDrag(i:Dynamic) {
+ 		super.onStartDrag(i);
+ 
+ 		g.clearHudLayer();
+@@ -144,7 +144,7 @@ class ItemMenu extends ui.SideMenu {
+ 		Assets.tiles.getH2dBitmap( Assets.getItemIcon(i), 0.5,0.5, cursor );
+ 	}
+ 
+-	override function onDragOnScene(i:Item,cx,cy,?r) {
++	override function onDragOnScene(i:Dynamic,cx:Int,cy:Int,?r:b.Room) {
+ 		super.onDragOnScene(i,cx,cy,r);
+ 
+ 		if( r!=null )
+diff --git a/client/src/ui/side/Quests.hx b/client/src/ui/side/Quests.hx
+index d0cc7ba..8fb4fb3 100644
+--- a/client/src/ui/side/Quests.hx
++++ b/client/src/ui/side/Quests.hx
+@@ -264,11 +264,11 @@ class Quests extends ui.SideMenu {
+ 		qidx++;
+ 	}
+ 
+-	override function onStartDrag(i) {
++	override function onStartDrag(i:Dynamic) {
+ 		super.onStartDrag(i);
+ 	}
+ 
+-	override function onDragOnScene(i:Item,cx,cy,?r) {
++	override function onDragOnScene(i:Dynamic,cx:Int,cy:Int,?r:b.Room) {
+ 		super.onDragOnScene(i,cx,cy,r);
+ 	}
+ 
