@@ -383,10 +383,16 @@ def rect(w, h):
     bits += '0' * (-len(bits) % 8)
     return bytes(int(bits[i:i+8], 2) for i in range(0, len(bits), 8))
 
-def make_swf(actions, width=300, height=320, fps=40, bg='FFFFFF', version=8):
+def make_swf(actions, width=300, height=320, fps=40, bg='FFFFFF', version=8, sprites=()):
+    """sprites : liste de (nom_export, octets_DoAction) ajoutés comme symboles exportés."""
     body = rect(width, height) + struct.pack('<BBH', int((fps % 1) * 256), int(fps), 1)
     body += tag(69, struct.pack('<I', 0x01))                       # FileAttributes : useNetwork
     body += tag(9, bytes.fromhex(bg))                               # SetBackgroundColor
+    for i, (name, act) in enumerate(sprites):
+        cid = 100 + i
+        inner = tag(12, act) + tag(1, b'') + tag(0, b'')
+        body += tag(39, struct.pack('<HH', cid, 1) + inner)        # DefineSprite
+        body += tag(56, struct.pack('<HH', 1, cid) + name.encode('latin1') + b'\0')  # ExportAssets
     body += tag(12, actions)                                        # DoAction
     body += tag(1, b'') + tag(0, b'')
     return b'FWS' + bytes([version]) + struct.pack('<I', len(body) + 8) + body
@@ -397,9 +403,11 @@ if __name__ == '__main__':
     ap.add_argument('--width', type=float, default=300); ap.add_argument('--height', type=float, default=320)
     ap.add_argument('--fps', type=float, default=40); ap.add_argument('--bg', default='FFFFFF')
     ap.add_argument('-D', action='append', default=[], help='NOM=valeur : remplace %%NOM%% dans la source')
+    ap.add_argument('--sprite', action='append', default=[], help='nom_export=fichier_DoAction.bin')
     a = ap.parse_args()
     src = open(a.src, encoding='utf-8').read()
     for d in a.D:
         n, v = d.split('=', 1); src = src.replace('%' + n + '%', v)
-    open(a.out, 'wb').write(make_swf(compile_as(src), a.width, a.height, a.fps, a.bg))
+    sprites = [(x.split('=', 1)[0], open(x.split('=', 1)[1], 'rb').read()) for x in a.sprite]
+    open(a.out, 'wb').write(make_swf(compile_as(src), a.width, a.height, a.fps, a.bg, sprites=sprites))
     print('écrit', a.out)

@@ -14,6 +14,13 @@ var SWF = _root.swf; if (SWF == undefined || SWF == "") SWF = "game.swf";
 var GID = _root.gid; if (GID == undefined || GID == "") GID = SWF;
 var ATTACH = _root.attach; if (ATTACH == undefined || ATTACH == "") ATTACH = "90D*";
 
+// Jeux MotionTypes (anciens jeux, FlashVar mt=1) : la bibliothèque d'exécution MT (Std, Log…)
+// était fournie par le loader d'origine (sprite exporté "}ND*9", fonction "}-B2"(clip)).
+// build.sh réinjecte ce DoAction d'origine (mt_runtime.bin) dans loader.swf.
+var MT = _root.mt == "1";
+var rt = null;
+if (MT) rt = _root.attachMovie("}ND*9", "mtrt", 5);
+
 var W = 300; var H = 300; var BAR = 20;
 
 var score = 0;
@@ -157,6 +164,7 @@ function start() {
 		var c = mc.attachMovie(ATTACH, "_c", 10);
 		if (c == undefined) c = mc.attachMovie("code", "_c", 10);
 		if (c != undefined) { c.gotoAndStop(1); codeClip = c; } else codeClip = mc;
+		if (MT && rt != null) rt["}-B2"].apply(rt, [codeClip]);
 		waiting = 1;
 	};
 	lis.onLoadError = function(mc, err) { tBest.text = "Erreur de chargement : " + SWF; };
