@@ -34,6 +34,11 @@ body {
 .infos { min-height: 1.6em; text-align: center; color: var(--muted); font-size: .95rem; }
 .infos b, .infos strong { color: var(--text); }
 .infos p { margin: 2px 0; }
+/* boîte de score des jeux (setInfos) : <div class="score0"> et <div class="score1"> */
+.infos { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; }
+.infos .score0, .infos .score1 { font-weight: 800; color: var(--text); }
+.infos .score0 { color: var(--c0); } .infos .score1 { color: var(--c1); }
+.infos p { flex-basis: 100%; }
 
 /* Plateau(x) */
 .board { position: relative; flex: 1 1 auto; min-height: 240px; display: flex; justify-content: center; align-items: center; gap: 12px; }

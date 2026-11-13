@@ -2295,7 +2295,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "recompilation",
    "status": "en-cours",
-   "notes": "Recompilé avec hxc : la page se fige au démarrage (bogue du compilateur maison à corriger). Version de test : platforms/cafejeux/host.html?g=cj-opalus",
+   "notes": "Recompilé avec hxc (compilateur Haxe 2 maison) et l'API CaféJeux recréée. La partie démarre (choix du point de départ) ; le navigateur de test sans écran n'arrive pas à afficher ses effets BitmapData, rendu à vérifier dans un vrai navigateur. Version de test : platforms/cafejeux/host.html?g=cj-opalus",
    "stats": {
     "swf": 1,
     "hx": 5,

@@ -249,13 +249,15 @@
   // setInfos reçoit du HTML écrit par les jeux : on ne garde que quelques balises de mise en forme.
   function safeHtml(html) {
     const doc = new DOMParser().parseFromString('<div>' + html + '</div>', 'text/html');
-    const ok = new Set(['B', 'STRONG', 'I', 'EM', 'P', 'BR', 'SPAN', 'FONT', 'U']);
+    const ok = new Set(['B', 'STRONG', 'I', 'EM', 'P', 'BR', 'SPAN', 'FONT', 'U', 'DIV', 'A']);
     const clean = (node) => {
       for (const ch of [...node.childNodes]) {
         if (ch.nodeType === 1) {
           if (!ok.has(ch.tagName)) { ch.replaceWith(...ch.childNodes); continue; }
           const color = ch.tagName === 'FONT' ? ch.getAttribute('color') : null;
+          const cls = /^(score0|score1|help)$/.test(ch.getAttribute('class') || '') ? ch.getAttribute('class') : null;
           for (const a of [...ch.attributes]) ch.removeAttribute(a.name);
+          if (cls) ch.className = cls;
           if (color && /^#?[0-9a-f]{3,6}$/i.test(color)) ch.style.color = color.startsWith('#') ? color : '#' + color;
           clean(ch);
         } else if (ch.nodeType !== 3) ch.remove();
