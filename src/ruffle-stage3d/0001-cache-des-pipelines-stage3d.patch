@@ -1,0 +1,166 @@
+diff --git a/render/wgpu/src/context3d/current_pipeline.rs b/render/wgpu/src/context3d/current_pipeline.rs
+index 60c32fc4..c2533959 100644
+--- a/render/wgpu/src/context3d/current_pipeline.rs
++++ b/render/wgpu/src/context3d/current_pipeline.rs
+@@ -51,7 +51,8 @@ impl IntoWgpu for Context3DStencilAction {
+     }
+ }
+ 
+-use std::cell::Cell;
++use std::cell::{Cell, RefCell};
++use std::collections::HashMap;
+ use std::num::NonZeroU64;
+ use std::rc::Rc;
+ 
+@@ -125,6 +126,29 @@ pub struct CurrentPipeline {
+     // (which allows rendering with an 'ignoresampler' tex opcode,
+     // and no calls to Context3D.setSamplerStateAt)
+     sampler_configs: [SamplerConfig; 8],
++
++    pipeline_cache: RefCell<HashMap<PipelineCacheKey, CachedPipeline>>,
++}
++
++#[derive(Hash, PartialEq, Eq)]
++struct PipelineCacheKey {
++    shaders: usize,
++    compile_data: ShaderCompileData,
++    buffers: Vec<(u64, Vec<wgpu::VertexAttribute>)>,
++    target_format: TextureFormat,
++    color_component: wgpu::BlendComponent,
++    alpha_component: wgpu::BlendComponent,
++    color_mask: wgpu::ColorWrites,
++    cull_mode: Option<wgpu::Face>,
++    depth_stencil: Option<DepthStencilState>,
++    sample_count: u32,
++}
++
++#[derive(Clone)]
++struct CachedPipeline {
++    pipeline: wgpu::RenderPipeline,
++    bind_group_layout: wgpu::BindGroupLayout,
++    _shaders: Rc<ShaderPairAgal>,
+ }
+ 
+ #[derive(Clone)]
+@@ -159,6 +183,7 @@ impl CurrentPipeline {
+             vertex_shader_uniforms,
+             fragment_shader_uniforms,
+             dirty: Cell::new(true),
++            pipeline_cache: RefCell::new(HashMap::new()),
+             culling: Context3DTriangleFace::None,
+ 
+             has_depth_texture: false,
+@@ -399,32 +424,6 @@ impl CurrentPipeline {
+             }
+         }
+ 
+-        let compiled_shaders = self.shaders.as_ref().expect("Missing shaders!").compile(
+-            descriptors,
+-            ShaderCompileData {
+-                vertex_attributes: agal_attributes,
+-                texture_infos,
+-            },
+-        );
+-
+-        let pipeline_layout_label = create_debug_label!("Pipeline layout");
+-        let pipeline_layout =
+-            descriptors
+-                .device
+-                .create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+-                    label: pipeline_layout_label.as_deref(),
+-                    bind_group_layouts: &[Some(&compiled_shaders.bind_group_layout)],
+-                    immediate_size: 0,
+-                });
+-
+-        let bind_group = descriptors
+-            .device
+-            .create_bind_group(&wgpu::BindGroupDescriptor {
+-                label: bind_group_label.as_deref(),
+-                layout: &compiled_shaders.bind_group_layout,
+-                entries: &bind_group_entries,
+-            });
+-
+         struct BufferData {
+             buffer: Rc<VertexBufferWrapper>,
+             attrs: Vec<wgpu::VertexAttribute>,
+@@ -546,7 +545,50 @@ impl CurrentPipeline {
+             })
+             .collect::<Vec<_>>();
+ 
+-        let compiled = descriptors
++        // KotionTwin : cache des pipelines. Sans lui, chaque changement de programme ou d'état
++        // recrée le pipeline et WebGL recompile/relie les shaders à chaque image.
++        let cache_key = PipelineCacheKey {
++            shaders: Rc::as_ptr(self.shaders.as_ref().expect("Missing shaders!")) as *const () as usize,
++            compile_data: ShaderCompileData {
++                vertex_attributes: agal_attributes.clone(),
++                texture_infos,
++            },
++            buffers: wgpu_vertex_buffers
++                .iter()
++                .map(|b| {
++                    let b = b.as_ref().unwrap();
++                    (b.array_stride, b.attributes.to_vec())
++                })
++                .collect(),
++            target_format: self.target_format,
++            color_component: self.color_component,
++            alpha_component: self.alpha_component,
++            color_mask: self.color_mask,
++            cull_mode,
++            depth_stencil: depth_stencil.clone(),
++            sample_count: self.sample_count,
++        };
++        let cached = self.pipeline_cache.borrow().get(&cache_key).cloned();
++        let cached = match cached {
++            Some(cached) => cached,
++            None => {
++                let compiled_shaders = self.shaders.as_ref().expect("Missing shaders!").compile(
++            descriptors,
++            ShaderCompileData {
++                vertex_attributes: agal_attributes,
++                texture_infos,
++            },
++        );
++                let pipeline_layout_label = create_debug_label!("Pipeline layout");
++        let pipeline_layout =
++            descriptors
++                .device
++                .create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
++                    label: pipeline_layout_label.as_deref(),
++                    bind_group_layouts: &[Some(&compiled_shaders.bind_group_layout)],
++                    immediate_size: 0,
++                });
++        let compiled_pipeline = descriptors
+             .device
+             .create_render_pipeline(&RenderPipelineDescriptor {
+                 label: create_debug_label!("RenderPipeline").as_deref(),
+@@ -586,6 +628,28 @@ impl CurrentPipeline {
+                 multiview_mask: None,
+                 cache: None,
+             });
++                let entry = CachedPipeline {
++                    pipeline: compiled_pipeline,
++                    bind_group_layout: compiled_shaders.bind_group_layout.clone(),
++                    _shaders: self.shaders.clone().unwrap(),
++                };
++                drop(compiled_shaders);
++                let mut cache = self.pipeline_cache.borrow_mut();
++                if cache.len() >= 512 {
++                    cache.clear();
++                }
++                cache.insert(cache_key, entry.clone());
++                entry
++            }
++        };
++        let bind_group = descriptors
++            .device
++            .create_bind_group(&wgpu::BindGroupDescriptor {
++                label: bind_group_label.as_deref(),
++                layout: &cached.bind_group_layout,
++                entries: &bind_group_entries,
++            });
++        let compiled = cached.pipeline;
+         Some((compiled, bind_group))
+     }
+ 

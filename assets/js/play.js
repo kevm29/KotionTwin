@@ -15,8 +15,10 @@ function loadScript(src) {
     document.head.append(s);
   });
 }
-async function ensureRuffle() {
+async function ensureRuffle(e) {
   if (window.RufflePlayer?.newest) return;
+  // Un jeu peut demander sa propre version de Ruffle (ex. Ruffle corrigé pour Stage3D, voir vendor-ruffle/).
+  if (e?.ruffle) { await loadScript(e.ruffle); return; }
   try { await loadScript(RUFFLE_LOCAL); } catch { await loadScript(RUFFLE_CDN); }
 }
 
@@ -24,11 +26,12 @@ async function ensureRuffle() {
  * Format de g.entry (rempli par les threads de restauration) :
  *  { "type": "ruffle", "swf": "games/<id>/loader.swf", "width": 300, "height": 320,
  *    "flashvars": { "swf": "game.swf" }, "base": "games/<id>/", "bgcolor": "#ffffff",
- *    "config": { ... options Ruffle supplémentaires ... } }
+ *    "config": { ... options Ruffle supplémentaires ... },
+ *    "ruffle": "chemin/vers/ruffle.js" (facultatif : version de Ruffle propre à ce jeu) }
  *  { "type": "html", "url": "games/<id>/index.html", "width": 800, "height": 600 }
  */
 async function mountRuffle(stage, e) {
-  await ensureRuffle();
+  await ensureRuffle(e);
   window.RufflePlayer.config = {
     autoplay: 'on', unmuteOverlay: 'hidden', splashScreen: false, letterbox: 'on',
     warnOnUnsupportedContent: false, showSwfDownload: false, contextMenu: 'rightClickOnly',
