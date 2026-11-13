@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CaféJeux · KotionTwin</title>
+<link rel="stylesheet" href="host.css">
+</head>
+<body>
+<div class="cj">
+  <header class="hud">
+    <div class="pl" id="p0">
+      <span class="dot"></span>
+      <span class="name">Joueur 1</span>
+      <span class="turn">à toi</span>
+    </div>
+    <div class="vs">VS</div>
+    <div class="pl right" id="p1">
+      <span class="turn">à toi</span>
+      <span class="name">Joueur 2</span>
+      <span class="dot"></span>
+    </div>
+  </header>
+
+  <div class="infos" id="infos" aria-live="polite"></div>
+
+  <main class="board" id="board">
+    <div class="seat" id="seat0"></div>
+    <div class="seat" id="seat1"></div>
+
+    <div class="overlay" id="relay" hidden>
+      <div class="box">
+        <p class="small">Passe la souris</p>
+        <p class="big" id="relayName">Joueur 2</p>
+        <button id="relayGo" type="button">C'est à moi !</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="end" hidden>
+      <div class="box">
+        <p class="small">Fin de partie</p>
+        <p class="big" id="endText">Joueur 1 gagne !</p>
+        <button id="again" type="button">Rejouer</button>
+      </div>
+    </div>
+
+    <div class="overlay" id="err" hidden>
+      <div class="box"><p class="big">Le jeu n'a pas pu démarrer</p><p id="errText" class="small"></p></div>
+    </div>
+  </main>
+
+  <footer class="tools">
+    <div class="modes" role="group" aria-label="Mode de jeu">
+      <button type="button" data-mode="tour">À deux, chacun son tour</button>
+      <button type="button" data-mode="cote">À deux, côte à côte</button>
+      <button type="button" data-mode="ia" hidden>Contre l'ordinateur</button>
+    </div>
+    <button type="button" id="restart" class="ghost">Nouvelle partie</button>
+  </footer>
+
+  <details class="log">
+    <summary>Journal de la partie</summary>
+    <ol id="log"></ol>
+  </details>
+</div>
+<script src="haxe-serializer.js"></script>
+<script src="ai.js"></script>
+<script src="host.js"></script>
+</body>
+</html>
