@@ -4571,8 +4571,8 @@
    "source": "Uppercup",
    "tech": "Haxe → AIR/Flash 11",
    "plan": "recompilation",
-   "status": "a-restaurer",
-   "notes": "client.swf absent : recompiler (gfx.swf + sources), cible Flash puis Ruffle ou HTML5.",
+   "status": "jouable",
+   "notes": "Client recompilé depuis les sources (Haxe 3.4.7, cible Flash 11 au lieu d'AIR) avec gfx.swf et les 53 sons d'origine. Les extensions mobiles (achats intégrés, Google Analytics, partage, publicités) sont retirées : le jeu complet est débloqué d'office. Quelques classes de la bibliothèque Motion Twin absentes de l'archive ont été reconstituées (src/uppercup-football). Score du site = total des étoiles gagnées, envoyé à chaque nouveau record d'étoiles.",
    "stats": {
     "swf": 3,
     "hx": 78,
@@ -4580,9 +4580,22 @@
     "images": 17,
     "sons": 53
    },
-   "entry": null,
+   "entry": {
+    "type": "ruffle",
+    "swf": "games/uppercup-football/client.swf",
+    "width": 600,
+    "height": 600,
+    "scale": 2,
+    "base": "games/uppercup-football/",
+    "bgcolor": "#1b3b1f",
+    "config": {
+     "preferredRenderer": "wgpu-webgl"
+    }
+   },
    "thumb": null,
-   "description": ""
+   "description": "Football d'arcade vu de dessus : passes et tirs d'une simple touche, trois coupes autour du monde, terrains piégés (bumpers, téléporteurs, mines), modes Normal, Difficile et Épique.",
+   "controls": "Souris (ou doigt) : cliquez sur un coéquipier pour lui passer la balle, bouton en bas à droite pour tirer.",
+   "credits": "Motion Twin (jeu original) ; restauration KotionTwin"
   }
  ]
 }
