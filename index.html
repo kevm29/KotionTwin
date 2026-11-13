@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KotionTwin · Les jeux web de Motion Twin</title>
+<meta name="description" content="Rejouer les jeux web de Motion Twin (2004-2015) dans le navigateur, à partir de l'archive officielle WebGamesArchives.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <a class="brand" href="./"><span class="logo">KT</span> KotionTwin</a>
+    <h1>Les jeux web de Motion Twin, jouables à nouveau</h1>
+    <p class="lead">KadoKado, Arkadeo, CaféJeux, Frutiparc, Muxxu et les grands jeux du studio, restaurés depuis
+      l'<a href="https://github.com/motion-twin/WebGamesArchives">archive officielle</a> et lancés dans le navigateur grâce à
+      <a href="https://ruffle.rs">Ruffle</a>.</p>
+    <div class="counters" id="counters"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="toolbar" aria-label="Filtres">
+    <input id="q" type="search" placeholder="Rechercher un jeu…" aria-label="Rechercher un jeu">
+    <div class="chips" id="collections" role="group" aria-label="Collections"></div>
+    <div class="chips" id="statuses" role="group" aria-label="État"></div>
+  </section>
+  <div id="groups"></div>
+  <p id="empty" class="empty" hidden>Aucun jeu ne correspond à ces filtres.</p>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Jeux, graphismes, sons et sources © <strong>Motion Twin</strong>, publiés sous licence
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a> dans
+      <a href="https://github.com/motion-twin/WebGamesArchives">motion-twin/WebGamesArchives</a>.
+      KotionTwin est un projet de fan non commercial, non affilié à Motion Twin, redistribué sous la même licence.</p>
+    <p><a href="https://github.com/kevm29/KotionTwin/blob/main/CREDITS.md">Crédits</a> · <a href="https://github.com/kevm29/KotionTwin/blob/main/docs/INVENTAIRE.md">Inventaire technique</a> · Émulation Flash : <a href="https://ruffle.rs">Ruffle</a> (MIT/Apache 2.0)</p>
+  </div>
+</footer>
+<script src="assets/js/catalog.js" type="module"></script>
+</body>
+</html>

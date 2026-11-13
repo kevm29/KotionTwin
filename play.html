@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KotionTwin · Jouer</title>
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body class="play">
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="./"><span class="logo">KT</span> KotionTwin</a>
+    <a class="back" href="./">← Tous les jeux</a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="game-head">
+    <div>
+      <p class="eyebrow" id="meta"></p>
+      <h1 id="title">Chargement…</h1>
+    </div>
+    <div class="actions">
+      <button id="fs" type="button" hidden>Plein écran</button>
+    </div>
+  </div>
+  <section id="stage" class="stage" aria-live="polite"></section>
+  <div class="cols">
+    <section class="panel">
+      <h2>À propos</h2>
+      <p id="desc"></p>
+      <div id="controls"></div>
+    </section>
+    <section class="panel">
+      <h2>Fiche technique</h2>
+      <dl id="tech" class="tech"></dl>
+    </section>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>© <strong>Motion Twin</strong> — licence <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr">CC BY-NC-SA 4.0</a>.
+      Source : <a id="srclink" href="https://github.com/motion-twin/WebGamesArchives">motion-twin/WebGamesArchives</a>.
+      Projet de fan non commercial, non affilié à Motion Twin.</p>
+  </div>
+</footer>
+<script src="assets/js/play.js" type="module"></script>
+</body>
+</html>
