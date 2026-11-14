@@ -17,6 +17,12 @@ Hammerfest n'est volontairement pas inclus.
 KotionTwin est un projet de fan **non commercial**, sans lien avec Motion Twin. Les adaptations (loaders, API simulées,
 recompilations, portages HTML5, interface du site) sont redistribuées sous la même licence CC BY-NC-SA 4.0.
 
+## Sons ajoutés
+
+Alphabounce était muet à l'origine. Les bruitages ajoutés par KotionTwin (`games/alphabounce/sons/` :
+rebond de la balle, brique cassée, bonus) ont été fournis par Kevin ; les musiques d'ambiance sont
+« Cosmic Pulse » et « Untitled » de **minimalisticstage983**. Ces fichiers ne viennent pas de l'archive Motion Twin.
+
 ## Outils tiers
 
 - [Ruffle](https://ruffle.rs) : émulateur Flash, licences MIT / Apache 2.0, chargé depuis jsDelivr (non inclus dans le dépôt).

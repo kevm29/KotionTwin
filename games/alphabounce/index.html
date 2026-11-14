@@ -14,6 +14,7 @@
   .bar .sp { flex: 1; }
   button { font: inherit; background: #2a3570; color: var(--texte); border: 1px solid #3c4aa0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
   button:hover, button:focus-visible { background: #3a4790; outline: none; }
+  button[aria-pressed="false"] { opacity: .55; text-decoration: line-through; }
   .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; overflow: hidden; }
   #box { position: relative; }
   #stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
@@ -28,6 +29,8 @@
   <span>Niveaux réussis <b id="lvl">0</b></span>
   <span>Missions <b id="mis">0</b></span>
   <span class="sp"></span>
+  <button type="button" id="sfx" aria-pressed="true" title="Bruitages : rebond, brique cassée, bonus">🔊 Sons</button>
+  <button type="button" id="music" aria-pressed="true" title="Musique d'ambiance">🎵 Musique</button>
   <button type="button" id="reset">Nouvelle partie</button>
 </header>
 <div class="stagewrap"><div id="box"><div id="stage"></div></div></div>
@@ -36,6 +39,7 @@
 <script type="module">
 import { mount } from '../../platforms/flash8/kt-host.js';
 import { createServer } from './server.js';
+import { createAudio } from './audio.js';
 
 const $ = id => document.getElementById(id);
 const toast = t => { $('toast').textContent = t; $('toast').classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => $('toast').classList.remove('on'), 3500); };
@@ -56,6 +60,16 @@ const refresh = () => {
   if (n > startLevels && parent !== window) parent.postMessage({ type: 'kotiontwin:progress', score: n }, '*');
 };
 setInterval(refresh, 1000); refresh();
+
+// Sons ajoutés par KotionTwin (le jeu d'origine était muet) : le SWF appelle ktSnd(quoi)
+const audio = createAudio('sons/');
+window.ktSnd = kind => audio.play(kind);
+const toggle = (id, key) => {
+  const b = $(id), set = on => { b.setAttribute('aria-pressed', String(on)); audio.set(key, on); };
+  set(audio.get(key));
+  b.onclick = () => set(!audio.get(key));
+};
+toggle('sfx', 'sfx'); toggle('music', 'music');
 
 // appels ExternalInterface du client d'origine
 window.game_playing = () => {};

@@ -1,7 +1,8 @@
 # Alphabounce
 
 Rebâtir : `node src/alphabounce/build.mjs <WebGamesArchives>/Alphabounce` puis
-`python3 -I src/alphabounce/gpu_colortransform.py games/alphabounce/game.swf`.
+`python3 -I src/alphabounce/gpu_colortransform.py games/alphabounce/game.swf` et
+`python3 -I src/alphabounce/sounds_hook.py games/alphabounce/game.swf`.
 
 - `game.swf` est le client d'origine ; seul l'en-tête est corrigé (scène 400×360, valeur de `Cs.mcw/mch`).
 - `data.json` reprend les constantes de `MissionInfo`/`ShopInfo`, les missions, les prix, les trous
@@ -17,3 +18,8 @@ Rebâtir : `node src/alphabounce/build.mjs <WebGamesArchives>/Alphabounce` puis
   agrandit : les flous et lueurs coûtent sinon proportionnellement à la taille de l'écran.
 - Score : nombre de niveaux réussis (cases conquises). La page l'envoie au site avec
   `postMessage({type:'kotiontwin:progress'})` et le site l'enregistre quand on quitte la page.
+- Sons (ajouts KotionTwin, le jeu d'origine est muet) : `sounds_hook.py` fait appeler
+  `ktSnd('bank.wav' | 'brick' | 'bonus')` par le SWF au rebond sur la raquette (`Sound.play`), à la
+  destruction d'une brique (`Block.explode`) et au ramassage d'une capsule (`Option.apply`).
+  `games/alphabounce/audio.js` joue les MP3 de `games/alphabounce/sons/` (Web Audio) et enchaîne les
+  deux musiques ; les boutons Sons / Musique sont mémorisés dans `localStorage`.
