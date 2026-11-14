@@ -238,10 +238,10 @@ export async function createServer(onEvent = () => {}) {
     reset() { P = fresh(); checkMission(); save(); },
     planetName: id => D.planets[id]?.name,
     missionsDone: () => P.missions.filter(x => x === 1).length,
-    // Marchand ambulant (ajout KotionTwin) : une vie contre du minerai, de plus en plus chère.
-    lifePrice: () => 1000 * 2 ** (P.boughtLives || 0),
+    // Marchand ambulant (ajout KotionTwin) : une vie contre un minerai.
+    lifePrice: () => 1,
     buyLife() {
-      const cost = 1000 * 2 ** (P.boughtLives || 0);
+      const cost = 1;
       if (P.minerai < cost) return false;
       P.minerai -= cost; P.life++; P.boughtLives = (P.boughtLives || 0) + 1;
       save(); return true;

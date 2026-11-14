@@ -103,7 +103,7 @@ function shopRefresh() {
   const fmt = n => n.toLocaleString('fr');
   $('shopText').innerHTML = playing
     ? 'Je ne fais pas affaire en plein combat. Reviens me voir une fois sur la carte !'
-    : `Une vie de plus pour chaque niveau contre <b>${fmt(cost)}</b> minerai. Tu en as <b>${fmt(p.minerai)}</b>.` + (p.boughtLives ? ` Le prix double à chaque achat.` : '');
+    : `Une vie de plus pour chaque niveau contre <b>${fmt(cost)}</b> minerai. Tu en as <b>${fmt(p.minerai)}</b>.`;
   $('buyLife').disabled = playing || p.minerai < cost;
 }
 $('shopTab').onclick = () => {
