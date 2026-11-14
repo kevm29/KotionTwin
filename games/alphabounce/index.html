@@ -9,12 +9,24 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; background: var(--fond); color: var(--texte); font: 13px/1.4 Verdana, "Trebuchet MS", sans-serif; }
   body { display: flex; flex-direction: column; }
-  .bar { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 6px 10px; background: var(--panneau); border-bottom: 1px solid var(--ligne); }
+  .bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 6px 10px; background: var(--panneau); border-bottom: 1px solid var(--ligne); }
   .bar b { color: var(--jaune); }
   .bar .sp { flex: 1; }
   button { font: inherit; background: #2a3570; color: var(--texte); border: 1px solid #3c4aa0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
   button:hover, button:focus-visible { background: #3a4790; outline: none; }
-  button[aria-pressed="false"] { opacity: .55; text-decoration: line-through; }
+  button.ico { padding: 3px 7px; font-size: 15px; line-height: 1.2; }
+  button[aria-pressed="false"] { opacity: .4; filter: grayscale(1); }
+  .shop { background: var(--panneau); border-top: 1px solid var(--ligne); }
+  .shop > button.tab { display: flex; align-items: center; gap: 8px; width: 100%; border: 0; border-radius: 0; background: transparent; padding: 4px 10px; text-align: left; }
+  .shop > button.tab:hover, .shop > button.tab:focus-visible { background: #1a2148; }
+  .shop > button.tab img { width: 26px; height: 26px; object-fit: contain; }
+  .shop > button.tab .chev { margin-left: auto; color: var(--doux); }
+  .shop .panel { display: none; gap: 14px; align-items: center; padding: 8px 12px 10px; flex-wrap: wrap; }
+  .shop.open .panel { display: flex; }
+  .shop .panel img { width: 64px; height: 64px; object-fit: contain; }
+  .shop .panel p { margin: 0; flex: 1; min-width: 200px; color: var(--doux); }
+  .shop .panel p b { color: var(--jaune); }
+  button:disabled { opacity: .45; cursor: not-allowed; }
   .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; overflow: hidden; }
   #box { position: relative; }
   #stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
@@ -28,12 +40,21 @@
   <span>Minerai <b id="min">0</b></span>
   <span>Niveaux réussis <b id="lvl">0</b></span>
   <span>Missions <b id="mis">0</b></span>
+  <span>Vies <b id="life">3</b></span>
   <span class="sp"></span>
-  <button type="button" id="sfx" aria-pressed="true" title="Bruitages : rebond, brique cassée, bonus">🔊 Sons</button>
-  <button type="button" id="music" aria-pressed="true" title="Musique d'ambiance">🎵 Musique</button>
+  <button type="button" id="sfx" class="ico" aria-pressed="true" aria-label="Sons" title="Bruitages : rebond, brique cassée, bonus">🔊</button>
+  <button type="button" id="music" class="ico" aria-pressed="true" aria-label="Musique" title="Musique d'ambiance">🎵</button>
   <button type="button" id="reset">Nouvelle partie</button>
 </header>
 <div class="stagewrap"><div id="box"><div id="stage"></div></div></div>
+<section class="shop" id="shop">
+  <button type="button" class="tab" id="shopTab" aria-expanded="false" aria-controls="shopPanel"><img src="marchand.png" alt=""> Marchand ambulant <span class="chev">▲</span></button>
+  <div class="panel" id="shopPanel">
+    <img src="marchand.png" alt="Le marchand ambulant">
+    <p id="shopText"></p>
+    <button type="button" id="buyLife">Acheter une vie</button>
+  </div>
+</section>
 <div class="toast" id="toast"></div>
 <script>window.KT_DEBUG = /debug/.test(location.search);</script>
 <script type="module">
@@ -45,6 +66,7 @@ const $ = id => document.getElementById(id);
 const toast = t => { $('toast').textContent = t; $('toast').classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => $('toast').classList.remove('on'), 3500); };
 const server = await createServer((ev, data) => {
   if (ev === 'mission') toast('Mission accomplie !');
+  if (ev === 'end') { playing = false; shopRefresh(); }   // fin de niveau ou d'atterrissage
 });
 // Score : on ne meurt jamais vraiment à Alphabounce, le score est le nombre de niveaux réussis
 // (cases conquises sur la carte). Le site l'enregistre quand on quitte la page.
@@ -57,9 +79,10 @@ const refresh = () => {
   $('mis').textContent = server.missionsDone();
   const n = levels();
   $('lvl').textContent = n;
+  $('life').textContent = p.life - (p.travel || []).length;
+  shopRefresh();
   if (n > startLevels && parent !== window) parent.postMessage({ type: 'kotiontwin:progress', score: n }, '*');
 };
-setInterval(refresh, 1000); refresh();
 
 // Sons ajoutés par KotionTwin (le jeu d'origine était muet) : le SWF appelle ktSnd(quoi)
 const audio = createAudio('sons/');
@@ -71,10 +94,36 @@ const toggle = (id, key) => {
 };
 toggle('sfx', 'sfx'); toggle('music', 'music');
 
+// Marchand ambulant (ajout KotionTwin) : échange du minerai contre une vie supplémentaire.
+// Le jeu ne relit l'inventaire qu'au chargement de la carte : après l'achat on relance donc la carte,
+// et l'achat est refusé pendant un niveau.
+let playing = false;
+function shopRefresh() {
+  const p = server.player, cost = server.lifePrice();
+  const fmt = n => n.toLocaleString('fr');
+  $('shopText').innerHTML = playing
+    ? 'Je ne fais pas affaire en plein combat. Reviens me voir une fois sur la carte !'
+    : `Une vie de plus pour chaque niveau contre <b>${fmt(cost)}</b> minerai. Tu en as <b>${fmt(p.minerai)}</b>.`;
+  $('buyLife').disabled = playing || p.minerai < cost;
+}
+$('shopTab').onclick = () => {
+  const open = $('shop').classList.toggle('open');
+  $('shopTab').setAttribute('aria-expanded', String(open));
+  $('shopTab').querySelector('.chev').textContent = open ? '▼' : '▲';
+  shopRefresh(); fit();
+};
+$('buyLife').onclick = () => {
+  if (playing || !server.buyLife()) return;
+  audio.play('bonus');
+  toast(`Vie achetée ! Vous avez maintenant ${server.player.life - (server.player.travel || []).length} vies.`);
+  refresh(); start();
+};
+
 // appels ExternalInterface du client d'origine
-window.game_playing = () => {};
+window.game_playing = on => { playing = !!on; shopRefresh(); };
 window.game_update = () => refresh();
 window.game_add_mineral = () => refresh();
+setInterval(refresh, 1000); refresh();
 
 // Taille de rendu plafonnée : en grand écran, Ruffle calcule les flous et lueurs des effets à la
 // résolution de l'écran, ce qui fait ramer. On rend au plus à MAXPX pixels de large puis on agrandit.

@@ -23,3 +23,7 @@ Rebâtir : `node src/alphabounce/build.mjs <WebGamesArchives>/Alphabounce` puis
   destruction d'une brique (`Block.explode`) et au ramassage d'une capsule (`Option.apply`).
   `games/alphabounce/audio.js` joue les MP3 de `games/alphabounce/sons/` (Web Audio) et enchaîne les
   deux musiques ; les boutons Sons / Musique sont mémorisés dans `localStorage`.
+- Marchand ambulant (ajout KotionTwin) : onglet en bas de la page qui échange du minerai contre une
+  vie (1 minerai, prix fixe ; `server.buyLife()`). Refusé pendant un niveau
+  (`game_playing`) ; après l'achat la carte est relancée, car le jeu ne relit l'inventaire qu'à ce moment.
+  `games/alphabounce/marchand.png` reprend un marchand du jeu (case -2 ; 3) recoloré en vert et or.
