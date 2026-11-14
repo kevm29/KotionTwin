@@ -112,10 +112,17 @@ function installScoreApi(g) {
   window.ktSubmitScore = submit;
   window.ktGetBest = api.getBest;
   window.ktGetPlayer = api.getPlayer;
+  // Jeux sans fin de partie (Alphabounce…) : la page du jeu signale sa progression avec
+  // « kotiontwin:progress » ; elle est enregistrée comme score quand on quitte la page ou relance.
+  let pending = null;
+  api.flushProgress = () => { if (pending) { const p = pending; pending = null; submit(p.score, p.extra); } };
   addEventListener('message', ev => {
     const d = ev.data;
-    if (d && typeof d === 'object' && d.type === 'kotiontwin:score') submit(d.score, d.extra);
+    if (!d || typeof d !== 'object') return;
+    if (d.type === 'kotiontwin:score') submit(d.score, d.extra);
+    if (d.type === 'kotiontwin:progress' && Number.isFinite(+d.score) && (!pending || +d.score >= pending.score)) pending = { score: +d.score, extra: d.extra };
   });
+  addEventListener('pagehide', api.flushProgress);
 }
 
 function renderScores(g) {
@@ -278,7 +285,7 @@ async function start(g) {
     mute.querySelector('.lbl').textContent = on ? 'Muet' : 'Son';
   };
 
-  $('restart').onclick = () => start(g);
+  $('restart').onclick = () => { window.KotionTwin?.flushProgress?.(); start(g); };
 
   currentNode = node;
   setPad ||= bindPad(() => currentNode);

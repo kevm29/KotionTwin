@@ -21,6 +21,7 @@ export async function submitOnline(game, pseudo, score) {
     method: 'POST',
     headers: { ...headers(c), Prefer: 'return=minimal' },
     body: JSON.stringify({ game, pseudo, score: Math.floor(score) }),
+    keepalive: true, // le score part aussi quand on quitte la page
   });
   return r.ok;
 }
