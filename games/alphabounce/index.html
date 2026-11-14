@@ -14,8 +14,9 @@
   .bar .sp { flex: 1; }
   button { font: inherit; background: #2a3570; color: var(--texte); border: 1px solid #3c4aa0; border-radius: 6px; padding: 4px 10px; cursor: pointer; }
   button:hover, button:focus-visible { background: #3a4790; outline: none; }
-  .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; }
-  #stage { width: 100%; max-width: calc((100vh - 40px) * 400 / 360); aspect-ratio: 400 / 360; }
+  .stagewrap { flex: 1; display: grid; place-items: center; min-height: 0; overflow: hidden; }
+  #box { position: relative; }
+  #stage { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
   .toast { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); background: #1d2650; border: 1px solid var(--jaune); border-radius: 8px; padding: 6px 14px; display: none; }
   .toast.on { display: block; }
 </style>
@@ -24,11 +25,12 @@
 <header class="bar" aria-live="polite">
   <span>Position <b id="pos">0 ; 0</b></span>
   <span>Minerai <b id="min">0</b></span>
-  <span>Missions réussies <b id="mis">0</b></span>
+  <span>Niveaux réussis <b id="lvl">0</b></span>
+  <span>Missions <b id="mis">0</b></span>
   <span class="sp"></span>
   <button type="button" id="reset">Nouvelle partie</button>
 </header>
-<div class="stagewrap"><div id="stage"></div></div>
+<div class="stagewrap"><div id="box"><div id="stage"></div></div></div>
 <div class="toast" id="toast"></div>
 <script>window.KT_DEBUG = /debug/.test(location.search);</script>
 <script type="module">
@@ -40,11 +42,18 @@ const toast = t => { $('toast').textContent = t; $('toast').classList.add('on');
 const server = await createServer((ev, data) => {
   if (ev === 'mission') toast('Mission accomplie !');
 });
+// Score : on ne meurt jamais vraiment à Alphabounce, le score est le nombre de niveaux réussis
+// (cases conquises sur la carte). Le site l'enregistre quand on quitte la page.
+const levels = () => Math.max(0, Object.keys(server.player.visited || {}).length - 1);
+let startLevels = levels();
 const refresh = () => {
   const p = server.player;
   $('pos').textContent = `${p.x} ; ${p.y}`;
   $('min').textContent = p.minerai.toLocaleString('fr');
   $('mis').textContent = server.missionsDone();
+  const n = levels();
+  $('lvl').textContent = n;
+  if (n > startLevels && parent !== window) parent.postMessage({ type: 'kotiontwin:progress', score: n }, '*');
 };
 setInterval(refresh, 1000); refresh();
 
@@ -53,10 +62,25 @@ window.game_playing = () => {};
 window.game_update = () => refresh();
 window.game_add_mineral = () => refresh();
 
+// Taille de rendu plafonnée : en grand écran, Ruffle calcule les flous et lueurs des effets à la
+// résolution de l'écran, ce qui fait ramer. On rend au plus à MAXPX pixels de large puis on agrandit.
+const MAXPX = +(new URLSearchParams(location.search).get('maxpx') || 1000);
+const fit = () => {
+  const r = document.querySelector('.stagewrap').getBoundingClientRect();
+  const k = Math.min(r.width / 400, r.height / 360);
+  const w = Math.floor(400 * k), h = Math.floor(360 * k);
+  const iw = Math.min(w, Math.max(400, MAXPX / (devicePixelRatio || 1)));
+  const s = w / iw;
+  Object.assign($('box').style, { width: w + 'px', height: h + 'px' });
+  Object.assign($('stage').style, { width: iw + 'px', height: Math.round(h / s) + 'px', transform: `scale(${s})` });
+};
+new ResizeObserver(fit).observe(document.querySelector('.stagewrap'));
+fit();
+
 async function start() {
-  await mount($('stage'), { swf: 'game.swf', base: './', bgcolor: '#000000', flashvars: { swfUrl: './', lang: 'fr' } });
+  await mount($('stage'), { swf: 'game.swf', base: './', bgcolor: '#000000', flashvars: { swfUrl: './', lang: 'fr' }, config: { quality: new URLSearchParams(location.search).get('quality') || 'high' } });
 }
-$('reset').onclick = () => { if (confirm('Effacer la partie et repartir de la Terre… enfin, du point 0 ; 0 ?')) { server.reset(); start(); } };
+$('reset').onclick = () => { if (confirm('Effacer la partie et repartir de la Terre… enfin, du point 0 ; 0 ?')) { server.reset(); startLevels = 0; refresh(); start(); } };
 start();
 </script>
 </body>
