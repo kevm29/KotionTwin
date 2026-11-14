@@ -4212,7 +4212,7 @@
    "tech": "Haxe 2 → Flash 8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "Le serveur (missions, boutique, atterrissages, trous de ver, brouillard de la carte) est simulé dans le navigateur à partir de PlayerInfo/Protocol.hx ; la sauvegarde reste dans le navigateur. Simplification : l'hydrogène liquide se recharge à 3 quand il est vide. Les atterrissages et trous de ver n'ont pas pu être testés jusqu'au bout automatiquement. Le jeu d'origine est muet (Sound.MUTE) : les bruitages (rebond, brique cassée, bonus) et les deux musiques d'ambiance sont des ajouts de KotionTwin, coupables avec les boutons Sons et Musique. Score : nombre de niveaux réussis, enregistré quand on quitte la page (on ne perd jamais vraiment). Rendu plafonné en grand écran et effets plasma gardés sur la carte graphique pour que le jeu ne rame pas.",
+   "notes": "Le serveur (missions, boutique, atterrissages, trous de ver, brouillard de la carte) est simulé dans le navigateur à partir de PlayerInfo/Protocol.hx ; la sauvegarde reste dans le navigateur. Simplification : l'hydrogène liquide se recharge à 3 quand il est vide. Les atterrissages et trous de ver n'ont pas pu être testés jusqu'au bout automatiquement. Le jeu d'origine est muet (Sound.MUTE) : les bruitages (rebond, brique cassée, bonus) et les deux musiques d'ambiance sont des ajouts de KotionTwin, coupables avec les boutons Sons et Musique. Ajout : un marchand ambulant (onglet en bas) échange du minerai contre une vie. Score : nombre de niveaux réussis, enregistré quand on quitte la page (on ne perd jamais vraiment). Rendu plafonné en grand écran et effets plasma gardés sur la carte graphique pour que le jeu ne rame pas.",
    "stats": {
     "swf": 8,
     "hx": 84,
