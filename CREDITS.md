@@ -19,9 +19,9 @@ recompilations, portages HTML5, interface du site) sont redistribuées sous la m
 
 ## Sons ajoutés
 
-Alphabounce était muet à l'origine. Les bruitages ajoutés par KotionTwin (`games/alphabounce/sons/` :
-rebond de la balle, brique cassée, bonus) ont été fournis par Kevin ; les musiques d'ambiance sont
-« Cosmic Pulse » et « Untitled » de **minimalisticstage983**. Ces fichiers ne viennent pas de l'archive Motion Twin.
+Alphabounce était muet à l'origine. Les bruitages (rebond de la balle, brique cassée, bonus) et les
+musiques d'ambiance ajoutés par KotionTwin (`games/alphabounce/sons/`) sont des créations faites avec Suno ;
+ils ne viennent pas de l'archive Motion Twin.
 
 ## Outils tiers
 
