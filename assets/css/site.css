@@ -254,6 +254,10 @@ button { font: inherit; }
 .stage-bar { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding: 10px 2px 0; }
 .stage-bar .tool { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.18); color: #fff; }
 .stage-bar .tool.primary { background: var(--accent); color: var(--accent-ink); }
+.tool.vols { gap: 12px; cursor: default; }
+.tool.vols label { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+.tool.vols input[type=range] { width: 78px; accent-color: var(--accent); cursor: pointer; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .stage-wrap:fullscreen, .stage-wrap.pseudo-full { padding: 0; border-radius: 0; background: #000; display: flex; flex-direction: column; justify-content: center; }
 .stage-wrap.pseudo-full { position: fixed; inset: 0; z-index: 100; }
 .stage-wrap:fullscreen .stage, .stage-wrap.pseudo-full .stage { border-radius: 0; flex: 1; }

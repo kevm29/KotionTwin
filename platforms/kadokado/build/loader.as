@@ -152,7 +152,7 @@ function managerMain(m) {
 }
 
 function start() {
-	waiting = 0; score = 0; over = false; overTimer = 0; lastShown = -1; manager = null; codeClip = null;
+	waiting = 0; pops = 0; growDelay = 0; score = 0; over = false; overTimer = 0; lastShown = -1; manager = null; codeClip = null;
 	showScore();
 	var holder = _root.createEmptyMovieClip("game", 10);
 	var msk = _root.createEmptyMovieClip("gmask", 11);
@@ -180,20 +180,94 @@ function restart() {
 	start();
 }
 
+// ------------------------------------------------------------------ sons ajoutés par KotionTwin
+// Les jeux KadoKado d'origine étaient muets. Pour certains, on enveloppe une méthode du jeu
+// (noms obfusqués retrouvés avec tools/swfdis.py) et on prévient la page : ktSnd(type, valeur).
+// La page (assets/js/game-audio.js) joue le son correspondant, réglé par les curseurs de volume.
+var pops = 0;        // Opalus 2 : bulles éclatées pendant la frame
+var growDelay = 0;   // Opalus 2 : frames avant le son gélatineux de l'agrandissement
+function snd(kind, n) {
+	if (flash.external.ExternalInterface.available) flash.external.ExternalInterface.call("ktSnd", kind, n);
+}
+function findClass(name) {
+	var c = undefined;
+	if (codeClip != null) c = codeClip[name];
+	if (c == undefined && gameClip != null) c = gameClip[name];
+	if (c == undefined) c = _global[name];
+	return c;
+}
+function installHooks() {
+	var p = null;
+	if (GID == "kk-opalus2") {
+		// Game ("44{N").burst ("88rS(") : appelé une fois par bulle au moment où elle éclate en
+		// débris (chaque vague d'une réaction en chaîne éclate dans la même frame).
+		var G = findClass("44{N");
+		if (G != undefined && G.prototype.__ktBurst == undefined) {
+			p = G.prototype;
+			p.__ktBurst = p["88rS("];
+			p["88rS("] = function(b) { pops++; return this.__ktBurst.apply(this, arguments); };
+		}
+		// Frame ("638J").fit (" 1qEn") : recalcule la taille du cadre ; s'il grandit, il s'étire
+		// avec un effet ressort (« gélatineux »).
+		var F = findClass("638J");
+		if (F != undefined && F.prototype.__ktFit == undefined) {
+			p = F.prototype;
+			p.__ktFit = p[" 1qEn"];
+			p[" 1qEn"] = function() {
+				var w = this["{FL"]; var h = this["}FL"];
+				var r = this.__ktFit.apply(this, arguments);
+				if (this["{FL"] > w + 0.5 || this["}FL"] > h + 0.5) growDelay = 3;
+				return r;
+			};
+		}
+	}
+	if (GID == "kk-alchimie") {
+		// Element ("4FAK").update ("5aiB)(") : état 0 = les éléments blanchissent, puis éclatent
+		// en étincelles et l'élément cible passe à l'état 1 : c'est l'instant de la transformation.
+		// Type ("*B") : 0 = potion verte … 11 = pépite d'or.
+		var E = findClass("4FAK");
+		if (E != undefined && E.prototype.__ktUpd == undefined) {
+			p = E.prototype;
+			p.__ktUpd = p["5aiB)("];
+			p["5aiB)("] = function() {
+				var st = this["=kIA"];
+				var r = this.__ktUpd.apply(this, arguments);
+				if (st == 0 && this["=kIA"] == 1) snd("element", this["*B"] + 1);
+				return r;
+			};
+		}
+	}
+}
+function flushSounds() {
+	if (pops > 0) {
+		// 4 sons de plus en plus fournis selon le nombre de bulles éclatées ensemble
+		var lvl = 1;
+		if (pops >= 4) lvl = 2;
+		if (pops >= 7) lvl = 3;
+		if (pops >= 12) lvl = 4;
+		snd("bulles", lvl);
+		pops = 0;
+	}
+	if (growDelay > 0) {
+		growDelay--;
+		if (growDelay == 0) snd("gelee", 1);
+	}
+}
+
 var waiting = 0;
 _root.onEnterFrame = function() {
 	if (waiting > 0) {
 		// le code du clip attaché s'exécute à la fin de la frame : on attend que Manager existe
 		var m = findManager();
 		if (m != undefined && m != null) {
-			waiting = 0; manager = m; managerInit(manager, codeClip); notify("start");
+			waiting = 0; manager = m; managerInit(manager, codeClip); installHooks(); notify("start");
 		} else {
 			waiting++;
 			if (waiting > 200) { waiting = 0; tBest.text = "Manager introuvable"; notify("nomanager"); }
 		}
 	}
 	if (manager != null && manager != undefined) {
-		if (!over || overTimer < 50) managerMain(manager);
+		if (!over || overTimer < 50) { managerMain(manager); flushSounds(); }
 		if (over) {
 			overTimer++;
 			if (overTimer == 50) showOverlay();

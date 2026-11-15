@@ -57,6 +57,10 @@
     <div class="stage-bar" id="stage-bar" hidden role="toolbar" aria-label="Contrôles du lecteur">
       <button id="restart" class="tool" type="button" title="Recommencer"><span aria-hidden="true">↻</span> <span class="lbl">Recommencer</span></button>
       <button id="mute" class="tool" type="button" aria-pressed="false" title="Couper le son (M)"><span aria-hidden="true" class="ico">🔊</span> <span class="lbl">Son</span></button>
+      <div id="volumes" class="tool vols" hidden role="group" aria-label="Volume">
+        <label title="Volume des bruitages"><span aria-hidden="true">🔔</span><span class="sr-only">Bruitages</span> <input id="vol-sfx" type="range" min="0" max="100" step="5"></label>
+        <label id="vol-music-l" title="Volume de la musique"><span aria-hidden="true">🎵</span><span class="sr-only">Musique</span> <input id="vol-music" type="range" min="0" max="100" step="5"></label>
+      </div>
       <button id="padbtn" class="tool" type="button" aria-pressed="false" title="Manette tactile"><span aria-hidden="true">🎮</span> <span class="lbl">Manette</span></button>
       <button id="fs" class="tool primary" type="button" title="Plein écran (F)"><span aria-hidden="true">⛶</span> <span class="lbl">Plein écran</span></button>
     </div>
