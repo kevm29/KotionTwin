@@ -1,5 +1,5 @@
 import { loadCatalog, STATUS, PLAN, styleOf, coverSrc, store, el, fmtScore, fmtDate, pseudoError } from './data.js';
-import { submitOnline, topOnline, onlineEnabled } from './online.js';
+import { submitOnline, onlineBoards, onlineEnabled } from './online.js';
 import { shelf, gameUrl, collectionUrl, sortGames, renderPlayerChip } from './ui.js';
 import { createGameAudio } from './game-audio.js';
 
@@ -129,28 +129,50 @@ function installScoreApi(g) {
 
 function renderScores(g) {
   const list = store.scores(g.id);
-  $('scores').replaceChildren(...list.map((s, i) => el('li', {},
-    el('span', { class: 'rank' }, i === 0 ? '🏆' : `${i + 1}.`),
-    el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, s.name || 'Anonyme')),
-    el('span', { class: 'muted small' }, fmtDate(s.date)))));
+  $('scores').replaceChildren(...list.map((s, i) => scoreRow(s, i, null, s.name || 'Anonyme', s.date)));
   $('scores-empty').hidden = list.length > 0;
+}
+
+const scoreRow = (s, i, me, name, date) => el('li', { class: me && name.toLowerCase() === me ? 'me' : null },
+  el('span', { class: 'rank' }, i === 0 ? '🏆' : `${i + 1}.`),
+  el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, name)),
+  el('span', { class: 'muted small' }, fmtDate(date)));
+
+// Onglets « Mes scores » / « Tous les joueurs » du bloc des meilleurs scores.
+function bindScoreTabs() {
+  const tabs = [$('tab-mine'), $('tab-all')];
+  const select = (t, focus) => {
+    for (const b of tabs) {
+      const on = b === t;
+      b.setAttribute('aria-selected', on); b.setAttribute('aria-pressed', on); b.tabIndex = on ? 0 : -1;
+      $(b.getAttribute('aria-controls')).hidden = !on;
+    }
+    if (focus) t.focus();
+  };
+  tabs.forEach((b, i) => {
+    b.addEventListener('click', () => select(b));
+    b.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); select(tabs[(i + 1) % 2], true); }
+    });
+  });
 }
 
 async function renderOnline(g) {
   if (!(await onlineEnabled())) return;
-  const panel = $('online-panel'), msg = $('online-msg');
+  const panel = $('online-panel'), msg = $('online-msg'), omsg = $('scores-others-msg');
   panel.hidden = false;
+  $('scores-tabs').hidden = false;
   try {
-    const rows = await topOnline(g.id, 10);
+    const { best, all } = await onlineBoards(g.id, 10);
     const me = store.pseudo.toLowerCase();
-    $('online').replaceChildren(...rows.map((s, i) => el('li', { class: s.pseudo.toLowerCase() === me ? 'me' : null },
-      el('span', { class: 'rank' }, i === 0 ? '🏆' : `${i + 1}.`),
-      el('span', { class: 'who' }, el('b', {}, fmtScore(s.score)), el('span', { class: 'pname' }, s.pseudo)),
-      el('span', { class: 'muted small' }, fmtDate(s.created_at)))));
-    msg.textContent = rows.length ? 'Meilleur score de chaque joueur, tous appareils confondus.' : 'Personne n\'a encore de score en ligne : à toi de jouer !';
+    $('online').replaceChildren(...best.map((s, i) => scoreRow(s, i, me, s.pseudo, s.created_at)));
+    $('scores-others').replaceChildren(...all.map((s, i) => scoreRow(s, i, me, s.pseudo, s.created_at)));
+    const none = 'Personne n\'a encore de score en ligne : à toi de jouer !';
+    msg.textContent = best.length ? 'Meilleur score de chaque joueur, tous appareils confondus.' : none;
+    omsg.textContent = all.length ? 'Les 10 meilleures parties, tous joueurs confondus.' : none;
   } catch (e) {
-    $('online').replaceChildren();
-    msg.textContent = 'Classement en ligne momentanément indisponible.';
+    $('online').replaceChildren(); $('scores-others').replaceChildren();
+    msg.textContent = omsg.textContent = 'Classement en ligne momentanément indisponible.';
   }
 }
 
@@ -373,6 +395,7 @@ async function main() {
 
   // Scores.
   installScoreApi(g);
+  bindScoreTabs();
   renderScores(g);
   if (g.status !== 'jouable') $('scores-panel').hidden = true;
   else renderOnline(g);

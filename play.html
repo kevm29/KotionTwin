@@ -68,20 +68,34 @@
   <p class="hint" id="hint" hidden></p>
 
   <div class="cols">
-    <section class="panel">
-      <h2>À propos</h2>
-      <p id="desc"></p>
-      <div id="controls"></div>
-    </section>
+    <div class="stack">
+      <section class="panel">
+        <h2>À propos</h2>
+        <p id="desc"></p>
+        <div id="controls"></div>
+      </section>
+      <section class="panel" id="online-panel" hidden>
+        <h2>Classement en ligne</h2>
+        <ol class="scores" id="online"></ol>
+        <p class="muted small" id="online-msg"></p>
+      </section>
+    </div>
     <section class="panel" id="scores-panel">
-      <h2>Mes meilleurs scores</h2>
-      <ol class="scores" id="scores"></ol>
-      <p class="muted small" id="scores-empty">Aucun score enregistré pour l'instant. Les scores restent sur cet appareil.</p>
-    </section>
-    <section class="panel" id="online-panel" hidden>
-      <h2>Classement en ligne</h2>
-      <ol class="scores" id="online"></ol>
-      <p class="muted small" id="online-msg"></p>
+      <div class="panel-head">
+        <h2 id="scores-title">Meilleurs scores</h2>
+        <div class="seg" id="scores-tabs" role="tablist" aria-labelledby="scores-title" hidden>
+          <button class="seg-btn" type="button" role="tab" id="tab-mine" aria-controls="scores-mine" aria-selected="true" aria-pressed="true">Mes scores</button>
+          <button class="seg-btn" type="button" role="tab" id="tab-all" aria-controls="scores-all" aria-selected="false" aria-pressed="false" tabindex="-1">Tous les joueurs</button>
+        </div>
+      </div>
+      <div id="scores-mine" role="tabpanel" aria-labelledby="tab-mine">
+        <ol class="scores" id="scores"></ol>
+        <p class="muted small" id="scores-empty">Aucun score enregistré pour l'instant. Les scores restent sur cet appareil.</p>
+      </div>
+      <div id="scores-all" role="tabpanel" aria-labelledby="tab-all" hidden>
+        <ol class="scores" id="scores-others"></ol>
+        <p class="muted small" id="scores-others-msg"></p>
+      </div>
     </section>
     <section class="panel span2">
       <h2>Fiche technique</h2>

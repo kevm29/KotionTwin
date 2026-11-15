@@ -26,19 +26,23 @@ export async function submitOnline(game, pseudo, score) {
   return r.ok;
 }
 
-// Meilleur score de chaque joueur pour un jeu, du plus haut au plus bas.
-export async function topOnline(game, limit = 10) {
+// Classements d'un jeu en une seule requête :
+//  - best : meilleur score de chaque joueur (un pseudo n'apparaît qu'une fois) ;
+//  - all  : meilleures parties tous joueurs confondus (un pseudo peut revenir plusieurs fois).
+export async function onlineBoards(game, limit = 10) {
   const c = await config();
   if (!c) return null;
   const q = new URLSearchParams({ game: `eq.${game}`, select: 'pseudo,score,created_at', order: 'score.desc', limit: '200' });
   const r = await fetch(`${c.url}/rest/v1/scores?${q}`, { headers: headers(c) });
   if (!r.ok) throw new Error(`classement indisponible (${r.status})`);
-  const seen = new Set(), out = [];
-  for (const row of await r.json()) {
+  const rows = await r.json();
+  const seen = new Set(), best = [];
+  for (const row of rows) {
     const k = row.pseudo.toLowerCase();
     if (seen.has(k)) continue;
-    seen.add(k); out.push(row);
-    if (out.length >= limit) break;
+    seen.add(k); best.push(row);
+    if (best.length >= limit) break;
   }
-  return out;
+  return { best, all: rows.slice(0, limit) };
 }
+
