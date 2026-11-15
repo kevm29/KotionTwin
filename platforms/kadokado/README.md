@@ -52,6 +52,19 @@ FlashVars :
    « Partie terminée » propose de rejouer.
 4. Le site peut écouter `window.KotionTwinKK(evenement, gid, score, record)` (`start`, `gameover`).
 
+## Sons ajoutés (jeux d'origine muets)
+
+Pour certains jeux, le loader enveloppe une méthode du jeu (noms obfusqués retrouvés avec
+`tools/swfdis.py` et `tools/avm1dec.py`) et prévient la page par `ExternalInterface.call("ktSnd", type, valeur)`.
+La page joue alors le son décrit dans `entry.sounds` de `data/games.json` (voir `assets/js/game-audio.js`),
+avec deux curseurs de volume (bruitages, musique) sous le jeu.
+
+| jeu | méthode enveloppée | son |
+|---|---|---|
+| Opalus 2 | `44{N.prototype["88rS("]` (une bulle éclate en débris) | `bulles`, 1 à 4 selon le nombre de bulles éclatées dans la même frame (1-3, 4-6, 7-11, 12+) |
+| Opalus 2 | `638J.prototype[" 1qEn"]` (le cadre recalcule sa taille) | `gelee` quand le cadre grandit (aucun fichier pour l'instant) |
+| Alchimie | `4FAK.prototype["5aiB)("]` (passage de l'état 0 à 1 de l'élément cible d'une fusion) | `element`, 1 à 12 selon le type fusionné |
+
 ## Reconstruire
 
 Aucun compilateur Flash n'est nécessaire : `build/avm1c.py` est un petit compilateur

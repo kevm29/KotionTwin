@@ -23,6 +23,10 @@ Alphabounce était muet à l'origine. Les bruitages (rebond de la balle, brique 
 musiques d'ambiance ajoutés par KotionTwin (`games/alphabounce/sons/`) sont des créations faites avec Suno ;
 ils ne viennent pas de l'archive Motion Twin.
 
+Opalus 2 et Alchimie (KadoKado) étaient muets eux aussi. Leurs bruitages (bulles qui éclatent, un son par
+élément d'Alchimie) ont été créés avec ElevenLabs et les trois musiques d'ambiance d'Alchimie avec Suno
+(`games/kk-opalus2/sons/`, `games/kk-alchimie/sons/`) ; ils ne viennent pas de l'archive Motion Twin.
+
 ## Outils tiers
 
 - [Ruffle](https://ruffle.rs) : émulateur Flash, licences MIT / Apache 2.0, chargé depuis jsDelivr (non inclus dans le dépôt).

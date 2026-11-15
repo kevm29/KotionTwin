@@ -1,6 +1,7 @@
 import { loadCatalog, STATUS, PLAN, styleOf, coverSrc, store, el, fmtScore, fmtDate, pseudoError } from './data.js';
 import { submitOnline, topOnline, onlineEnabled } from './online.js';
 import { shelf, gameUrl, collectionUrl, sortGames, renderPlayerChip } from './ui.js';
+import { createGameAudio } from './game-audio.js';
 
 // Version de Ruffle épinglée (voir README) ; un dossier vendor/ruffle local est utilisé s'il existe.
 const RUFFLE_CDN = 'https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@0.7.1/ruffle.js';
@@ -59,6 +60,7 @@ function mountHtml(stage, e) {
 
 // Adapte le lecteur à la place disponible en gardant les proportions d'origine.
 let currentNode, setPad;
+let gameAudio; // sons ajoutés par KotionTwin (g.entry.sounds), gardés d'une partie à l'autre
 let ctl; // listeners du lecteur courant (remplacés à chaque « Recommencer »)
 function fitter(node, e, sig) {
   const w = e.width || 800, h = e.height || 600;
@@ -273,6 +275,20 @@ async function start(g) {
     $('fs').querySelector('.lbl').textContent = document.fullscreenElement ? 'Quitter' : 'Plein écran';
   }, sig);
 
+  // Sons ajoutés (jeux d'origine muets) : le loader appelle ktSnd(type, valeur) ; curseurs de volume.
+  if (g.entry.sounds) {
+    gameAudio ||= createGameAudio(g.id, g.entry.sounds);
+    window.ktSnd = (kind, n) => gameAudio.play(kind, n);
+    gameAudio.mute($('mute').getAttribute('aria-pressed') === 'true');
+    $('volumes').hidden = false;
+    $('vol-music-l').hidden = !gameAudio.hasMusic;
+    for (const key of ['sfx', 'music']) {
+      const r = $('vol-' + key);
+      r.value = Math.round(gameAudio.get(key) * 100);
+      r.oninput = () => gameAudio.set(key, r.value / 100);
+    }
+  }
+
   // Son : volume de Ruffle (les iframes HTML5 gèrent leur propre son).
   const mute = $('mute');
   if (e.type === 'html') mute.hidden = true;
@@ -280,6 +296,7 @@ async function start(g) {
     const r = node.ruffle?.() ?? node;
     const on = mute.getAttribute('aria-pressed') !== 'true';
     try { r.volume = on ? 0 : 1; } catch { node.volume = on ? 0 : 1; }
+    gameAudio?.mute(on);
     mute.setAttribute('aria-pressed', String(on));
     mute.querySelector('.ico').textContent = on ? '🔇' : '🔊';
     mute.querySelector('.lbl').textContent = on ? 'Muet' : 'Son';

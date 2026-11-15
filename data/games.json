@@ -80,7 +80,7 @@
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine : KotionTwin ajoute un son par élément au moment de la transformation (ElevenLabs) et trois musiques d'ambiance enchaînées au hasard (Suno). Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -103,6 +103,34 @@
     "bgcolor": "#ffffff",
     "config": {
      "preferredRenderer": "wgpu-webgl"
+    },
+    "sounds": {
+     "base": "games/kk-alchimie/sons/",
+     "sfx": {
+      "element": [
+       "01-potion-verte.mp3",
+       "02-potion-jaune.mp3",
+       "03-potion-orange.mp3",
+       "04-potion-violette.mp3",
+       "05-feuille.mp3",
+       "06-buche.mp3",
+       "07-pierre.mp3",
+       "08-cristal.mp3",
+       "09-pomme.mp3",
+       "10-crane.mp3",
+       "11-oisillon.mp3",
+       "12-or.mp3"
+      ]
+     },
+     "volume": {
+      "element": 0.7
+     },
+     "music": [
+      "ambiance-1.mp3",
+      "ambiance-2.mp3",
+      "ambiance-3.mp3"
+     ],
+     "musicVolume": 0.4
     }
    },
    "thumb": "games/kk-alchimie/thumb.png",
@@ -1824,7 +1852,7 @@
    "tech": "MotionTypes/AS → Flash 6-8 (AVM1)",
    "plan": "ruffle-shim",
    "status": "jouable",
-   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
+   "notes": "SWF d'origine (MotionTypes, Flash 8) lancé par le loader KadoKado de KotionTwin, qui simule KKApi (score et record en local) et réinjecte la bibliothèque d'exécution MotionTypes du loader d'origine. Images vérifiées (toutes décodables et non vides). Le jeu n'avait ni musique ni bruitage à l'origine : KotionTwin ajoute un bruit de bulles qui éclatent (quatre variantes selon le nombre de bulles éclatées ensemble), créé avec ElevenLabs. Testé en partie automatique sans erreur ; la fin de partie n'a pas été atteinte par le test aléatoire.",
    "stats": {
     "swf": 3,
     "hx": 0,
@@ -1847,6 +1875,20 @@
     "bgcolor": "#ffffff",
     "config": {
      "preferredRenderer": "wgpu-webgl"
+    },
+    "sounds": {
+     "base": "games/kk-opalus2/sons/",
+     "sfx": {
+      "bulles": [
+       "bulles-1.mp3",
+       "bulles-2.mp3",
+       "bulles-3.mp3",
+       "bulles-4.mp3"
+      ]
+     },
+     "volume": {
+      "bulles": 0.7
+     }
     }
    },
    "thumb": "games/kk-opalus2/thumb.png",
