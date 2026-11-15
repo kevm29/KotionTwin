@@ -1,0 +1,80 @@
+:root {
+  --bg: #1d1410;
+  --wood: #3b2618;
+  --wood2: #4f3322;
+  --line: #6b4a33;
+  --text: #fbf1e4;
+  --muted: #cdb7a0;
+  --accent: #ffcc33;
+  --c0: #00e89c;
+  --c1: #d6370a;
+  font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: radial-gradient(700px 300px at 50% -80px, #6b3f22 0%, transparent 70%), var(--bg);
+  color: var(--text);
+}
+.cj { display: flex; flex-direction: column; gap: 8px; height: 100%; padding: 8px; max-width: 1280px; margin: 0 auto; }
+
+/* Bandeau des joueurs */
+.hud { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.pl { display: flex; align-items: center; gap: 8px; background: var(--wood); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; min-width: 0; transition: box-shadow .2s, border-color .2s; }
+.pl.right { justify-content: flex-end; }
+.pl .name { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl .dot { width: 14px; height: 14px; border-radius: 50%; flex: none; background: var(--c0); box-shadow: 0 0 0 2px rgba(0,0,0,.4); }
+#p1 .dot { background: var(--c1); }
+.pl .turn { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; background: var(--accent); color: #2a1d00; border-radius: 999px; padding: 1px 8px; font-weight: 800; visibility: hidden; }
+.pl.active { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), 0 0 18px rgba(255,204,51,.35); }
+.pl.active .turn { visibility: visible; }
+.vs { font-weight: 900; color: var(--muted); }
+
+.infos { min-height: 1.6em; text-align: center; color: var(--muted); font-size: .95rem; }
+.infos b, .infos strong { color: var(--text); }
+.infos p { margin: 2px 0; }
+/* boîte de score des jeux (setInfos) : <div class="score0"> et <div class="score1"> */
+.infos { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; }
+.infos .score0, .infos .score1 { font-weight: 800; color: var(--text); }
+.infos .score0 { color: var(--c0); } .infos .score1 { color: var(--c1); }
+.infos p { flex-basis: 100%; }
+
+/* Plateau(x) */
+.board { position: relative; flex: 1 1 auto; min-height: 240px; display: flex; justify-content: center; align-items: center; gap: 12px; }
+.seat { aspect-ratio: 1 / 1; height: 100%; max-width: 100%; max-height: 100%; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 0 3px var(--wood2); }
+.seat ruffle-player, .seat ruffle-object, .seat > * { width: 100% !important; height: 100% !important; display: block; }
+.seat.mine { box-shadow: 0 10px 30px rgba(0,0,0,.5), 0 0 0 3px var(--accent); }
+
+/* Mode chacun son tour : les deux lecteurs sont superposés, seul celui du joueur actif est visible */
+.mode-tour .board .seat, .mode-ia .board .seat { position: absolute; }
+.mode-tour .seat.hidden, .mode-ia .seat.hidden { opacity: 0; pointer-events: none; z-index: 0; }
+.mode-tour .seat.shown, .mode-ia .seat.shown { z-index: 1; }
+
+/* Mode côte à côte */
+.mode-cote .board .seat { position: relative; height: auto; width: calc(50% - 6px); }
+
+.overlay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; background: rgba(20,12,8,.72); backdrop-filter: blur(3px); }
+.overlay[hidden] { display: none; }
+.overlay .box { text-align: center; background: var(--wood); border: 2px solid var(--line); border-radius: 18px; padding: 18px 26px; box-shadow: 0 12px 40px rgba(0,0,0,.6); }
+.overlay .small { margin: 0; color: var(--muted); }
+.overlay .big { margin: 4px 0 14px; font-size: 1.6rem; font-weight: 900; }
+
+button { font: inherit; cursor: pointer; border-radius: 999px; border: 1px solid var(--line); padding: 7px 16px; background: var(--accent); color: #2a1d00; font-weight: 800; }
+button.ghost, .modes button { background: var(--wood); color: var(--text); font-weight: 600; }
+.modes button[aria-pressed="true"] { background: var(--accent); color: #2a1d00; border-color: var(--accent); font-weight: 800; }
+button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+.tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+.modes { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.log { font-size: .85rem; color: var(--muted); }
+.log summary { cursor: pointer; }
+.log ol { margin: 6px 0 0; padding-left: 20px; max-height: 140px; overflow: auto; }
+
+@media (max-width: 560px) {
+  .cj { padding: 6px; }
+  .pl { padding: 4px 8px; }
+  .mode-cote .board { flex-direction: column; }
+  .mode-cote .board .seat { width: auto; height: calc(50% - 6px); }
+}
